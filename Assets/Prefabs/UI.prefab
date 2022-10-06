@@ -1270,7 +1270,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 86ff5561894f11f45ad8df30a3ddd459, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0552707c58a215b4dbb055801ffb9fac, type: 3}
   m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3112,7 +3112,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 86ff5561894f11f45ad8df30a3ddd459, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0552707c58a215b4dbb055801ffb9fac, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3456,7 +3456,7 @@ MonoBehaviour:
   enemyNum: 0
   player: {fileID: 0}
   playerScript: {fileID: 0}
-  spawnPos: {fileID: 0}
+  spawnPos: {fileID: 2242117213075960545, guid: 4d7ecd1bf3990454a85a3625df373f93, type: 3}
   pauseMenu: {fileID: 3114547132050599999}
   playerDeadMenu: {fileID: 827673273130850444}
   winMenu: {fileID: 1697102752}
