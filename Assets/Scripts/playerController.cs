@@ -8,6 +8,9 @@ public class playerController : MonoBehaviour, IDamage
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
     [SerializeField] Camera playerCamera;
+    [SerializeField] AudioSource gunShot;
+    [SerializeField] AudioSource playerHurt;
+
 
     [Header("----- Player Stats -----")]
     [Range(1, 15)][SerializeField] int HP;
@@ -73,7 +76,7 @@ public class playerController : MonoBehaviour, IDamage
     IEnumerator aimDownSights()
     {
         //i'm gonna be honest, I (bernardo) don't like toggle aim so you gotta press n hold to zoom.
-        if (gunStat.Count > 0 && Input.GetButtonDown("Fire2"))
+        if (gunStat.Count > 0 && Input.GetButtonDown("Fire2") && !gameManager.instance.openedMenu)
         {
             if (playerCamera.fieldOfView != fovOriginal)
             {
@@ -99,6 +102,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             isShooting = true;
             RaycastHit hit;
+            gunShot.PlayOneShot(gunShot.clip, 0.2f);
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f,0.5f)),out hit, shootDist))
             {
                 //Instantiate(cube, hit.point, transform.rotation);
@@ -153,6 +157,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         HP -= dmg;
         updatePlayerHUD();
+        playerHurt.PlayOneShot(playerHurt.clip, 0.1f);
         StartCoroutine(gameManager.instance.playerDamage());
         if (HP <= 0)
         {
