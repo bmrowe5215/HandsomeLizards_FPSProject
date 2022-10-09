@@ -26,6 +26,7 @@ public class gameManager : MonoBehaviour
     public TextMeshProUGUI enemyCount;
 
     public bool isPaused;
+    public bool openedMenu;
     void Awake()
     {
         instance = this;
@@ -39,6 +40,8 @@ public class gameManager : MonoBehaviour
         if (Input.GetButtonDown("Cancel") && !playerDeadMenu.activeSelf && !winMenu.activeSelf)
         {
             isPaused = !isPaused;
+            openedMenu = true;
+            Debug.Log($"Opened menu = {openedMenu}");
             pauseMenu.SetActive(isPaused);
 
             if (isPaused)
@@ -53,6 +56,8 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
+        openedMenu = true;
+        
     }
 
     public void cursorUnlockUnpause()
@@ -60,6 +65,7 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        openedMenu = false;
     }
 
     public IEnumerator playerDamage()

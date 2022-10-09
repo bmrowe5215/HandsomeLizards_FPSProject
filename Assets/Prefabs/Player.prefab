@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 5518967026713895962}
+  playerCamera: {fileID: 5518967026464371059}
   HP: 5
   playerSpeed: 7
   jumpHeight: 6

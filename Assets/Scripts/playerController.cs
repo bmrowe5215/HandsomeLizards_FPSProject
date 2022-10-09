@@ -95,7 +95,7 @@ public class playerController : MonoBehaviour, IDamage
 
     IEnumerator shoot()
     {
-        if (gunStat.Count > 0 && Input.GetButton("Shoot") && !isShooting)
+        if (gunStat.Count > 0 && Input.GetButton("Shoot") && !isShooting && !gameManager.instance.openedMenu)
         {
             isShooting = true;
             RaycastHit hit;
