@@ -9,6 +9,7 @@ public class enemyAI : MonoBehaviour , IDamage
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] SphereCollider sightCollider;
+    [SerializeField] AudioSource enemyHurt;
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] int HP;
@@ -47,6 +48,7 @@ public class enemyAI : MonoBehaviour , IDamage
     public void takeDamage(int dmg) 
     {
         HP -= dmg;
+        enemyHurt.PlayOneShot(enemyHurt.clip,0.1f);
         StartCoroutine(flashDamage());
         if (HP <= 0)
         {
