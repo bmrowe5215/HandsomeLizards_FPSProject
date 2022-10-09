@@ -7,6 +7,7 @@ public class playerController : MonoBehaviour, IDamage
 {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
+    [SerializeField] Camera playerCamera;
 
     [Header("----- Player Stats -----")]
     [Range(1, 15)][SerializeField] int HP;
@@ -27,9 +28,11 @@ public class playerController : MonoBehaviour, IDamage
     bool isShooting;
     int selectGun;
     int HPOrig;
+    float fovOriginal;
 
     private void Start()
     {
+        fovOriginal = playerCamera.fieldOfView;
         HPOrig = HP;
         respawn();
     }
@@ -38,6 +41,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         movement();
         StartCoroutine(shoot());
+        StartCoroutine(aimDownSights());
         gunSelect();
     }
 
@@ -64,6 +68,29 @@ public class playerController : MonoBehaviour, IDamage
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+    }
+    //Simple FOV changer to simulate aiming down the sights
+    IEnumerator aimDownSights()
+    {
+        //i'm gonna be honest, I (bernardo) don't like toggle aim so you gotta press n hold to zoom.
+        if (gunStat.Count > 0 && Input.GetButtonDown("Fire2"))
+        {
+            if (playerCamera.fieldOfView != fovOriginal)
+            {
+                playerCamera.fieldOfView = fovOriginal;
+            }
+            else
+            {
+                playerCamera.fieldOfView = 15f;
+            }
+            //to make sure that i actually scripted this right
+            Debug.Log("ZOOM!");
+            yield return new WaitForSeconds(1);
+            //IT WORKS POGGERS
+            
+        }
+
+
     }
 
     IEnumerator shoot()
@@ -116,7 +143,7 @@ public class playerController : MonoBehaviour, IDamage
             gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunStat[selectGun].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
         }
     }
-
+  
     public void updatePlayerHUD()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / (float)HPOrig;
@@ -143,4 +170,6 @@ public class playerController : MonoBehaviour, IDamage
         controller.enabled = true;
         gameManager.instance.playerDeadMenu.SetActive(false);
     }
+
+    
 }

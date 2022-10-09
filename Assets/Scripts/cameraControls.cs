@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class cameraControls : MonoBehaviour
 {
+    
     [SerializeField] int sensHort;
     [SerializeField] int sensVert;
 
@@ -20,6 +21,7 @@ public class cameraControls : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        
     }
 
     // Update is called once per frame
@@ -44,5 +46,4 @@ public class cameraControls : MonoBehaviour
         transform.parent.Rotate(Vector3.up * mouseX);
     
     }
-
 }
