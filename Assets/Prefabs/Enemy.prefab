@@ -982,7 +982,7 @@ MonoBehaviour:
   enemyHurt: {fileID: 154896477}
   HP: 3
   facePlayerSpeed: 2
-  sightDist: 15
+  sightDist: 20
   damageFreeze: 0.25
   shootRate: 1
   bullet: {fileID: 8791136823394871425, guid: 72569965e96b97b4eb49841cc0a50ae1, type: 3}

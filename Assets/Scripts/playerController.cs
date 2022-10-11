@@ -13,7 +13,7 @@ public class playerController : MonoBehaviour, IDamage
 
 
     [Header("----- Player Stats -----")]
-    [Range(1, 15)][SerializeField] int HP;
+    [Range(1, 15)][SerializeField] public int HP;
     [Range(1,15)] [SerializeField] float playerSpeed;
     [Range(5,15)] [SerializeField] float jumpHeight;
     [SerializeField] float gravityValue;
@@ -30,7 +30,7 @@ public class playerController : MonoBehaviour, IDamage
     private int timesJumped;
     bool isShooting;
     int selectGun;
-    int HPOrig;
+    public int HPOrig;
     float fovOriginal;
 
     private void Start()
@@ -176,5 +176,9 @@ public class playerController : MonoBehaviour, IDamage
         gameManager.instance.playerDeadMenu.SetActive(false);
     }
 
+    public void heal()
+    {
+        HP = HPOrig;
+    }
     
 }
