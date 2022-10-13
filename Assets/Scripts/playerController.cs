@@ -80,11 +80,14 @@ public class playerController : MonoBehaviour, IDamage
         {
             if (playerCamera.fieldOfView != fovOriginal)
             {
-                playerCamera.fieldOfView = fovOriginal;
+                StartCoroutine(LerpFOV(false));
+                //playerCamera.fieldOfView = fovOriginal;
             }
             else
             {
-                playerCamera.fieldOfView = 15f;
+                //Transition the movement
+                StartCoroutine(LerpFOV(true));
+                //playerCamera.fieldOfView = 15f;
             }
             //to make sure that i actually scripted this right
             Debug.Log("ZOOM!");
@@ -94,6 +97,38 @@ public class playerController : MonoBehaviour, IDamage
         }
 
 
+    }
+
+    float lerpDuration = 0.2f;
+    //float startValue = 0;
+    float endValue = 15;
+    float valueToLerp;
+
+    IEnumerator LerpFOV(bool isAiming)
+    {
+        float timeElapsed = 0;
+        while (timeElapsed < lerpDuration)
+        {
+            if (isAiming)
+            {
+                playerCamera.fieldOfView = Mathf.Lerp(fovOriginal, endValue, timeElapsed / lerpDuration);
+            }
+            else
+            {
+                playerCamera.fieldOfView = Mathf.Lerp(endValue, fovOriginal, timeElapsed / lerpDuration);
+
+            }
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        if (isAiming)
+        {
+            playerCamera.fieldOfView = endValue;
+        }
+        else
+        {
+            playerCamera.fieldOfView = fovOriginal;
+        }
     }
 
     IEnumerator shoot()
@@ -111,7 +146,7 @@ public class playerController : MonoBehaviour, IDamage
             }
 
 
-            Debug.Log("Shoot!");
+           
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
         }
