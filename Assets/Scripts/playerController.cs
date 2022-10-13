@@ -15,7 +15,10 @@ public class playerController : MonoBehaviour, IDamage
     [Header("----- Player Stats -----")]
     [Range(1, 15)][SerializeField] public int HP;
     [Range(1,15)] [SerializeField] float playerSpeed;
+    [Range(1, 15)] [SerializeField] float playerSprintSpeed;
     [Range(5,15)] [SerializeField] float jumpHeight;
+    [SerializeField] float sprintFOV;
+    [SerializeField] float adsFOV;
     [SerializeField] float gravityValue;
     [SerializeField] int jumpsMax;
 
@@ -26,16 +29,26 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] GameObject gunModel;
     [SerializeField] List<gunStats> gunStat = new List<gunStats>();
 
+    [Header("----- Power Up Stats -----")]
+    [SerializeField] int jumpPadPower;
+    
+
     private Vector3 playerVelocity;
     private int timesJumped;
     bool isShooting;
+    bool isSprinting;
+    bool isAiming;
     int selectGun;
-    public int HPOrig;
+    int HPOrig;
+    float speedOrig;
     float fovOriginal;
+   
+   
 
     private void Start()
     {
         fovOriginal = playerCamera.fieldOfView;
+        speedOrig = playerSpeed;
         HPOrig = HP;
         respawn();
     }
@@ -46,6 +59,7 @@ public class playerController : MonoBehaviour, IDamage
         StartCoroutine(shoot());
         StartCoroutine(aimDownSights());
         gunSelect();
+
     }
 
     void movement()
@@ -59,15 +73,38 @@ public class playerController : MonoBehaviour, IDamage
         Vector3 move = (transform.right * Input.GetAxis("Horizontal")) +
                        (transform.forward * Input.GetAxis("Vertical"));
 
-
-        controller.Move(move * Time.deltaTime * playerSpeed);
-
-        // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && timesJumped < jumpsMax)
         {
             timesJumped++;
             playerVelocity.y = jumpHeight;
         }
+
+        // Sprinting, isgrounded check is to make sure you can't sprint in the air (plus it only runs when you move since its in update)
+        // BASE FOV: 60
+        if (Input.GetKey(KeyCode.LeftShift) && controller.isGrounded && !isAiming)
+        {
+            Debug.Log("Sprinting");
+            playerSpeed = playerSprintSpeed;
+            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, sprintFOV, Time.deltaTime * 10);
+            isSprinting = true;
+        }
+        else 
+        {
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                isSprinting = false;
+            }
+            if (!isSprinting && !isAiming)
+            {
+                playerSpeed = speedOrig;
+                playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, fovOriginal, Time.deltaTime * 10);
+            }
+        }
+       
+
+        controller.Move(move * Time.deltaTime * playerSpeed);
+
+        // Changes the height position of the player..
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
@@ -75,25 +112,28 @@ public class playerController : MonoBehaviour, IDamage
     //Simple FOV changer to simulate aiming down the sights
     IEnumerator aimDownSights()
     {
-        //i'm gonna be honest, I (bernardo) don't like toggle aim so you gotta press n hold to zoom.
-        if (gunStat.Count > 0 && Input.GetButtonDown("Fire2") && !gameManager.instance.openedMenu)
+        
+        // turns out it is toggle aim regardless lmao
+        if (gunStat.Count > 0 && Input.GetButtonDown("Fire2") && !gameManager.instance.openedMenu && !isSprinting)
         {
-            if (playerCamera.fieldOfView != fovOriginal)
+            //So when you rightclick, you aim down the sights and set isAiming to true;
+            isAiming = !isAiming;
+
+            if (!isAiming)
             {
-                playerCamera.fieldOfView = fovOriginal;
+                //This code says "huh if i'm not aiming, then the fov is gonna be normal (ish)
+                playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, fovOriginal, Time.deltaTime * 10);
             }
-            else
+            else if(isAiming)
             {
-                playerCamera.fieldOfView = 15f;
+                //this code says "IM GONNA ZOOM" and does so.
+                playerCamera.fieldOfView = Mathf.Lerp(adsFOV, playerCamera.fieldOfView,  Time.deltaTime * 5);
             }
             //to make sure that i actually scripted this right
             Debug.Log("ZOOM!");
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
             //IT WORKS POGGERS
-            
         }
-
-
     }
 
     IEnumerator shoot()
@@ -155,6 +195,7 @@ public class playerController : MonoBehaviour, IDamage
 
     public void takeDamage(int dmg)
     {
+        
         HP -= dmg;
         updatePlayerHUD();
         playerHurt.PlayOneShot(playerHurt.clip, 0.1f);
@@ -179,6 +220,14 @@ public class playerController : MonoBehaviour, IDamage
     public void heal()
     {
         HP = HPOrig;
+        updatePlayerHUD();
+    }
+
+    public void jumpPad()
+    {
+        playerVelocity.y = jumpHeight * jumpPadPower;
+        Debug.Log("Jumppad() Triggered");
+
     }
     
 }

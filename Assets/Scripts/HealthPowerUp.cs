@@ -10,7 +10,6 @@ public class HealthPowerUp : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             gameManager.instance.playerScript.heal();
-            gameManager.instance.playerScript.updatePlayerHUD();
             Destroy(gameObject);
         }
     }

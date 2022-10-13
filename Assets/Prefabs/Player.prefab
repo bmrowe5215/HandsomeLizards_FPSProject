@@ -413,9 +413,12 @@ MonoBehaviour:
   playerCamera: {fileID: 5518967026464371059}
   gunShot: {fileID: 2091274616}
   playerHurt: {fileID: 1894386755}
-  HP: 5
+  HP: 10
   playerSpeed: 7
+  playerSprintSpeed: 14
   jumpHeight: 6
+  sprintFOV: 75
+  adsFOV: 20
   gravityValue: -9.81
   jumpsMax: 3
   shootRate: 0.8
@@ -423,6 +426,7 @@ MonoBehaviour:
   shootDmg: 1
   gunModel: {fileID: 6906786816017483923}
   gunStat: []
+  jumpPadPower: 2
 --- !u!143 &5518967026713895962
 CharacterController:
   m_ObjectHideFlags: 0
