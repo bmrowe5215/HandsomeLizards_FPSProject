@@ -31,6 +31,7 @@ public class enemyAI : MonoBehaviour , IDamage
         gameManager.instance.enemyNum++;
         gameManager.instance.enemyCount.text = gameManager.instance.enemyNum.ToString("F0");
         sightCollider.radius = sightDist;
+        
     }
 
     // Update is called once per frame
@@ -67,11 +68,14 @@ public class enemyAI : MonoBehaviour , IDamage
 
     IEnumerator flashDamage()
     {
-        model.material.color = Color.red;
-        agent.enabled = false;
-        yield return new WaitForSeconds(damageFreeze);
-        model.material.color = Color.white;
-        agent.enabled = true;
+        if (agent.isActiveAndEnabled)
+        {
+            model.material.color = Color.red;
+            agent.enabled = false;
+            yield return new WaitForSeconds(damageFreeze);
+            model.material.color = Color.white;
+            agent.enabled = true;
+        }
     }
 
     void OnTriggerEnter(Collider other)

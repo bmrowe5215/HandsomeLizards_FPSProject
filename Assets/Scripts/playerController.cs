@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class playerController : MonoBehaviour, IDamage
 {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
     [SerializeField] Camera playerCamera;
+    [SerializeField] Collider groundPoundRadius;
     [SerializeField] AudioSource gunShot;
     [SerializeField] AudioSource playerHurt;
 
@@ -16,7 +18,9 @@ public class playerController : MonoBehaviour, IDamage
     [Range(1, 15)][SerializeField] public int HP;
     [Range(1,15)] [SerializeField] float playerSpeed;
     [Range(1, 15)] [SerializeField] float playerSprintSpeed;
-    [Range(5,15)] [SerializeField] float jumpHeight;
+    [Range(5,15)] [SerializeField] public float jumpHeight;
+    [Range(5, 25)] [SerializeField] float slamSpeed;
+    [Range(5, 25)] [SerializeField] float slamHeight;
     [SerializeField] float sprintFOV;
     [SerializeField] float adsFOV;
     [SerializeField] float gravityValue;
@@ -35,12 +39,16 @@ public class playerController : MonoBehaviour, IDamage
 
     private Vector3 playerVelocity;
     private int timesJumped;
+    List<GameObject> groundPoundable;
+    Rigidbody rb;
     bool isShooting;
     bool isSprinting;
     bool isAiming;
+    bool onGround;
     int selectGun;
     int HPOrig;
     float speedOrig;
+    float gravOrig;
     float fovOriginal;
    
    
@@ -48,6 +56,7 @@ public class playerController : MonoBehaviour, IDamage
     private void Start()
     {
         fovOriginal = playerCamera.fieldOfView;
+        gravOrig = gravityValue;
         speedOrig = playerSpeed;
         HPOrig = HP;
         respawn();
@@ -58,6 +67,7 @@ public class playerController : MonoBehaviour, IDamage
         movement();
         StartCoroutine(shoot());
         StartCoroutine(aimDownSights());
+        StartCoroutine(groundPound());
         gunSelect();
 
     }
@@ -66,8 +76,13 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (controller.isGrounded && playerVelocity.y < 0)
         {
+            onGround = true;
             playerVelocity.y = 0f;
             timesJumped = 0;
+        }
+        else
+        {
+            onGround = false;
         }
 
         Vector3 move = (transform.right * Input.GetAxis("Horizontal")) +
@@ -85,6 +100,9 @@ public class playerController : MonoBehaviour, IDamage
         {
             Debug.Log("Sprinting");
             playerSpeed = playerSprintSpeed;
+            // Slower technically, but who cares
+            // Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, sprintFOV, Time.deltaTime * 10);
+
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, sprintFOV, Time.deltaTime * 10);
             isSprinting = true;
         }
@@ -100,8 +118,6 @@ public class playerController : MonoBehaviour, IDamage
                 playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, fovOriginal, Time.deltaTime * 10);
             }
         }
-       
-
         controller.Move(move * Time.deltaTime * playerSpeed);
 
         // Changes the height position of the player..
@@ -157,6 +173,47 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
+    IEnumerator groundPound()
+    {
+        if (!onGround && Input.GetButtonDown("Crouch"))
+        {
+            //this sends the player flying downward.
+            playerVelocity.y = -jumpHeight * slamSpeed;
+            //This only fires if crouch is pressed while in the air. or it should? idk its weird.
+            Debug.Log("GroundPound;");
+
+            //creates an array of colliders, we then filter through the colliders that contain the enemy tag, then apply physics to them.
+            Collider[] enemyCol = Physics.OverlapSphere(groundPoundRadius.transform.position, 7.5f, LayerMask.GetMask("Enemy"), QueryTriggerInteraction.Ignore);
+            foreach (Collider item in enemyCol)
+            {
+                Debug.Log(item.ToString());
+                if (item.CompareTag("Enemy"))
+                {
+                    // slight bug, shooting an enemy while they ARENT in the air sends them fucking flying.
+                    // OH, ITS CONSTANTLY BUILDING SPEED DOWNWARD OHHHHH.
+                    //
+                    float currentPos = item.transform.position.y;
+                    Debug.Log("and SLAM!");
+                    Rigidbody rb = item.GetComponent<Rigidbody>();
+                    NavMeshAgent nv = item.GetComponent<NavMeshAgent>();
+
+                    //patchwork solution maybe???? so the rigid body is constantly gaining a -y velocity due to gravity, so
+                    // if I disable gravity on the rigid body before launching it, it should fix the instant transmission jutsu bug.
+                    rb.useGravity = true;
+                    
+                    nv.enabled = false;
+                    rb.velocity = new Vector3(0, slamHeight, 0);
+                    yield return new WaitForSeconds(2);
+                    if (rb.transform.position.y <= currentPos)
+                    {
+                        rb.useGravity = false;
+                        nv.enabled = true;
+                    }
+                }
+            }
+        }
+        
+    }
     public void gunPickup(gunStats stats)
     {
         shootRate = stats.shootRate;
@@ -220,7 +277,8 @@ public class playerController : MonoBehaviour, IDamage
     public void heal()
     {
         HP = HPOrig;
-        updatePlayerHUD();
+        //updatePlayerHUD();
+        StartCoroutine(gameManager.instance.playerHeal());
     }
 
     public void jumpPad()

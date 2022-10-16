@@ -22,6 +22,7 @@ public class gameManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject menuCurrentlyOpen;
     public GameObject playerDamageFlash;
+    public GameObject playerHealthFlash;
     public Image playerHPBar;
     public TextMeshProUGUI enemyCount;
 
@@ -73,6 +74,14 @@ public class gameManager : MonoBehaviour
         playerDamageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         playerDamageFlash.SetActive(false);
+    }
+
+    public IEnumerator playerHeal()
+    {
+        gameManager.instance.playerScript.updatePlayerHUD();
+        playerHealthFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        playerHealthFlash.SetActive(false);
     }
 
     public void checkEnemyTotal()
