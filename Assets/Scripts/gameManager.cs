@@ -13,9 +13,11 @@ public class gameManager : MonoBehaviour
 
     [Header("----- Player Stuff -----")]
     public GameObject player;
-    public playerController playerScript;
     public GameObject spawnPos;
+    public playerController playerScript;
 
+    [Header("----- Prop Handler -----")]
+    public ParticleSystem explosion;
     [Header("----- UI -----")]
     public GameObject pauseMenu;
     public GameObject playerDeadMenu;
