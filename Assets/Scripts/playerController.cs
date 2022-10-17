@@ -319,7 +319,6 @@ public class playerController : MonoBehaviour, IDamage
     {
         playerVelocity.y = jumpHeight * jumpPadPower;
         Debug.Log("Jumppad() Triggered");
-
     }
     
 

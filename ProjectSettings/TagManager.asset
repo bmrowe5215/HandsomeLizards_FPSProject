@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Spawn Position
   - Enemy
+  - Prop
+  - Win
   layers:
   - Default
   - TransparentFX

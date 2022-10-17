@@ -18,6 +18,7 @@ public class gameManager : MonoBehaviour
 
     [Header("----- Prop Handler -----")]
     public ParticleSystem explosion;
+
     [Header("----- UI -----")]
     public GameObject pauseMenu;
     public GameObject playerDeadMenu;
@@ -25,17 +26,33 @@ public class gameManager : MonoBehaviour
     public GameObject menuCurrentlyOpen;
     public GameObject playerDamageFlash;
     public GameObject playerHealthFlash;
+    public GameObject victoryBanner;
     public Image playerHPBar;
     public TextMeshProUGUI enemyCount;
+    public bool killCheckToggle;
 
     public bool isPaused;
     public bool openedMenu;
+
+
     void Awake()
     {
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<playerController>();
         spawnPos = GameObject.FindGameObjectWithTag("Spawn Position");
+        victoryBanner = GameObject.FindGameObjectWithTag("Win");
+
+        if (victoryBanner == null)
+        {
+            killCheckToggle = true;
+            gameManager.instance.enemyCount.enabled = killCheckToggle;
+        }
+        else
+        {
+            killCheckToggle = false;
+            gameManager.instance.enemyCount.enabled = killCheckToggle;
+        }
     }
 
     void Update()
@@ -87,13 +104,16 @@ public class gameManager : MonoBehaviour
     }
 
     public void checkEnemyTotal()
-    {
-        enemyNum--;
-        gameManager.instance.enemyCount.text = gameManager.instance.enemyNum.ToString("F0");
-        if (enemyNum <= 0)
+    {            
+        if (killCheckToggle == true)
         {
-            winMenu.SetActive(true);
-            cursorLockPause();
+            enemyNum--;
+            gameManager.instance.enemyCount.text = gameManager.instance.enemyNum.ToString("F0");
+            if (enemyNum <= 0)
+            {
+                winMenu.SetActive(true);
+                cursorLockPause();
+            }
         }
     }
 }

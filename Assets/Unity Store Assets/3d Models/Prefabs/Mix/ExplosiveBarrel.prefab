@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 4
   explosionDamage: 6
+  explosion: {fileID: 7020009046315469215}
   barrelSource: {fileID: 1879184590843416468}
   barrelExplosion:
   - {fileID: 8300000, guid: c7e572b255e311b479005985ed7f4ba2, type: 3}
@@ -335,10 +336,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explosion Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8727167006661425085, guid: 9898c8d057e637b4294862896eadb0bc, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727167006661425085, guid: 9898c8d057e637b4294862896eadb0bc, type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727167006661425085, guid: 9898c8d057e637b4294862896eadb0bc, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9898c8d057e637b4294862896eadb0bc, type: 3}
 --- !u!4 &2320025065126783950 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4054180498406888940, guid: 9898c8d057e637b4294862896eadb0bc, type: 3}
+  m_PrefabInstance: {fileID: 1761247408919526946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7020009046315469215 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8727167006661425085, guid: 9898c8d057e637b4294862896eadb0bc, type: 3}
   m_PrefabInstance: {fileID: 1761247408919526946}
   m_PrefabAsset: {fileID: 0}
