@@ -35,12 +35,10 @@ public class playerController : MonoBehaviour, IDamage
 
     [Header("----- Power Up Stats -----")]
     [SerializeField] int jumpPadPower;
-    
 
+    Rigidbody[] rbs;
     private Vector3 playerVelocity;
     private int timesJumped;
-    List<GameObject> groundPoundable;
-    Rigidbody rb;
     bool isShooting;
     bool isSprinting;
     bool isAiming;
@@ -199,12 +197,14 @@ public class playerController : MonoBehaviour, IDamage
 
                     //patchwork solution maybe???? so the rigid body is constantly gaining a -y velocity due to gravity, so
                     // if I disable gravity on the rigid body before launching it, it should fix the instant transmission jutsu bug.
-                    rb.useGravity = true;
-                    
-                    nv.enabled = false;
-                    rb.velocity = new Vector3(0, slamHeight, 0);
+                    if (rb != null)
+                    {
+                        rb.useGravity = true;
+                        nv.enabled = false;
+                        rb.velocity = new Vector3(0, slamHeight, 0);
+                    }
                     yield return new WaitForSeconds(2);
-                    if (rb.transform.position.y <= currentPos)
+                    if (rb != null && rb.transform.position.y <= currentPos)
                     {
                         rb.useGravity = false;
                         nv.enabled = true;
@@ -212,9 +212,43 @@ public class playerController : MonoBehaviour, IDamage
                 }
             }
         }
-        
     }
-    public void gunPickup(gunStats stats)
+
+        //}
+        //IEnumerator groundPound()
+        //{
+        //    if (!onGround && Input.GetButtonDown("Crouch"))
+        //    {
+        //        //this sends the player flying downward.
+        //        playerVelocity.y = -jumpHeight * slamSpeed;
+        //        //This only fires if crouch is pressed while in the air. or it should? idk its weird.
+        //        enemyGroundPoundCheck(groundPoundRadius);
+        //        Debug.Log("GroundPound;");
+        //    }
+        //        yield return new WaitForSeconds(1);
+
+        //}
+        //public void enemyGroundPoundCheck(Collider other)
+        //{
+        //    if (other.CompareTag("Enemy"))
+        //    {
+        //        Debug.Log("Enemy in Groundpound");
+        //        foreach (var item in rbs)
+        //        {
+        //            item.useGravity = true;
+        //            item.GetComponent<NavMeshAgent>().enabled = false;
+        //            item.AddForce(0, 10, 0, ForceMode.Impulse);
+        //            if (item.transform.position.y != currentPos)
+        //            {
+
+        //            }
+        //            item.useGravity = false;
+        //            item.GetComponent<NavMeshAgent>().enabled = true;
+        //        }
+        //    }
+        //}
+
+        public void gunPickup(gunStats stats)
     {
         shootRate = stats.shootRate;
         shootDist = stats.shootDist;
@@ -288,4 +322,5 @@ public class playerController : MonoBehaviour, IDamage
 
     }
     
+
 }
