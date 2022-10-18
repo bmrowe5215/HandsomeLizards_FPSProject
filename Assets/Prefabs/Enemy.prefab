@@ -981,9 +981,16 @@ MonoBehaviour:
   model: {fileID: 1248391279952587278}
   sightCollider: {fileID: 743845554}
   enemyHurt: {fileID: 154896477}
+  anim: {fileID: 1248391279948403918}
+  col: {fileID: 1248391279948403919}
   HP: 3
+  speedChase: 5
   facePlayerSpeed: 2
+  animLerpSpeed: 3
   sightDist: 20
+  roamDist: 15
+  viewAngle: 0
+  headPos: {fileID: 1248391279957796616}
   damageFreeze: 0.25
   shootRate: 1
   bullet: {fileID: 8791136823394871425, guid: 72569965e96b97b4eb49841cc0a50ae1, type: 3}
@@ -1021,7 +1028,7 @@ Animator:
   m_GameObject: {fileID: 1248391279957796730}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: c6acf3f29c109e4439950c8f6a85cb2b, type: 3}
-  m_Controller: {fileID: 9100000, guid: 8f6623b1ba8c819448f304763a7c5543, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5681ca354a9da0347aa2414334c56bdd, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
