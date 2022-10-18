@@ -23,11 +23,11 @@ public class ExplosiveBarrel : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             barrelSource.PlayOneShot(barrelExplosion[Random.Range(0, barrelExplosion.Length - 1)], 1);
-            blowUp();
-            
-            gameObject.GetComponent<MeshCollider>().enabled = false;
             //gameObject.GetComponent<MeshFilter>().
+            gameObject.GetComponent<MeshCollider>().enabled = false;
             gameObject.GetComponent<MeshRenderer>().enabled = false;
+            blowUp();
+            Debug.Log("BOOM");
             Destroy(gameObject,1.5f);
         }
     }

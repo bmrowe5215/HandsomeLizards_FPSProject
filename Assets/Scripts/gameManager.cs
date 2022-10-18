@@ -57,6 +57,7 @@ public class gameManager : MonoBehaviour
             killCheckToggle = false;
             gameManager.instance.enemyCount.enabled = killCheckToggle;
         }
+
     }
 
     void Update()

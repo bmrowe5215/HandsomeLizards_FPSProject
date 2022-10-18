@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6464858051730413362}
+  barrelDamageToggle: 0
   speed: 25
   damage: 2
   destroyTime: 3

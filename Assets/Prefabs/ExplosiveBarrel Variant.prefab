@@ -9,11 +9,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 154992, guid: 1d523bb39a3424c4e94effd4cbd98051, type: 3}
       propertyPath: m_Name
-      value: ExplosiveBarrel
+      value: ExplosiveBarrel (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 154992, guid: 1d523bb39a3424c4e94effd4cbd98051, type: 3}
+      propertyPath: m_TagString
+      value: Prop
       objectReference: {fileID: 0}
     - target: {fileID: 431828, guid: 1d523bb39a3424c4e94effd4cbd98051, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431828, guid: 1d523bb39a3424c4e94effd4cbd98051, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.11673
+      objectReference: {fileID: 0}
+    - target: {fileID: 431828, guid: 1d523bb39a3424c4e94effd4cbd98051, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.11673
+      objectReference: {fileID: 0}
+    - target: {fileID: 431828, guid: 1d523bb39a3424c4e94effd4cbd98051, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.11673
       objectReference: {fileID: 0}
     - target: {fileID: 431828, guid: 1d523bb39a3424c4e94effd4cbd98051, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21,11 +37,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 431828, guid: 1d523bb39a3424c4e94effd4cbd98051, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000009536743
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 431828, guid: 1d523bb39a3424c4e94effd4cbd98051, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 42.64
+      value: 41.98
       objectReference: {fileID: 0}
     - target: {fileID: 431828, guid: 1d523bb39a3424c4e94effd4cbd98051, type: 3}
       propertyPath: m_LocalRotation.w
@@ -55,5 +71,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4816838589018278763, guid: 1d523bb39a3424c4e94effd4cbd98051, type: 3}
+      propertyPath: barrelPos
+      value: 
+      objectReference: {fileID: 3211791997921783780}
+    - target: {fileID: 4816838589018278763, guid: 1d523bb39a3424c4e94effd4cbd98051, type: 3}
+      propertyPath: explosionRadius
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d523bb39a3424c4e94effd4cbd98051, type: 3}
+--- !u!64 &3211791997921783780 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 1822092521, guid: 1d523bb39a3424c4e94effd4cbd98051, type: 3}
+  m_PrefabInstance: {fileID: 3211791998382703373}
+  m_PrefabAsset: {fileID: 0}

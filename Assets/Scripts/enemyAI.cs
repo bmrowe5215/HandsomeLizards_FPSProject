@@ -33,8 +33,8 @@ public class enemyAI : MonoBehaviour , IDamage
     bool isDamaged;
     public bool playerInRange;
     Vector3 playerDir;
-    float stoppingDistOrig;
     Vector3 startingPos;
+    float stoppingDistOrig;
     float angle;
     float speedPatrol;
 
@@ -56,7 +56,7 @@ public class enemyAI : MonoBehaviour , IDamage
         {
             anim.SetFloat("Blend", Mathf.Lerp(anim.GetFloat("Speed"), agent.velocity.normalized.magnitude, Time.deltaTime * animLerpSpeed));
 
-            Debug.Log(angle);
+            //Debug.Log(angle);
             if (agent.enabled)
             {
                 if (playerInRange)
@@ -145,15 +145,18 @@ public class enemyAI : MonoBehaviour , IDamage
 
     IEnumerator flashDamage()
     {
-        isDamaged = true;
-        anim.SetTrigger("Damage");
-        model.material.color = Color.red;
-        agent.enabled = false;
-        yield return new WaitForSeconds(damageFreeze);
-        model.material.color = Color.white;
-        agent.enabled = true;
-        agent.SetDestination(gameManager.instance.player.transform.position);
-        isDamaged = false;
+        if (agent.isActiveAndEnabled)
+        {
+           isDamaged = true;
+           anim.SetTrigger("Damage");
+           model.material.color = Color.red;
+           agent.enabled = false;
+           yield return new WaitForSeconds(damageFreeze);
+           model.material.color = Color.white;
+           agent.enabled = true;
+           agent.SetDestination(gameManager.instance.player.transform.position);
+           isDamaged = false;
+        }
     }
 
     void OnTriggerEnter(Collider other)
