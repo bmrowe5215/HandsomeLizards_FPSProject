@@ -16,6 +16,7 @@ public class buttonFunctions : MonoBehaviour
     {
         gameManager.instance.cursorUnlockUnpause();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameManager.instance.resetTimer();
     }
 
     public void quit()

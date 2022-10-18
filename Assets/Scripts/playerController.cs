@@ -33,8 +33,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] GameObject gunModel;
     [SerializeField] List<gunStats> gunStat = new List<gunStats>();
 
-    [Header("----- Power Up Stats -----")]
-    [SerializeField] int jumpPadPower;
+    
 
     Rigidbody[] rbs;
     private Vector3 playerVelocity;
@@ -315,11 +314,9 @@ public class playerController : MonoBehaviour, IDamage
         StartCoroutine(gameManager.instance.playerHeal());
     }
 
-    public void jumpPad()
+    public void jumpPad(float jumpPadPower)
     {
         playerVelocity.y = jumpHeight * jumpPadPower;
         Debug.Log("Jumppad() Triggered");
     }
-    
-
 }

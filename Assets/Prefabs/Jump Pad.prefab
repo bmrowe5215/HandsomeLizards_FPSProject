@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4893885403193570639}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.26, y: 0.0000009536743, z: 9.69}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.82, y: 0.82, z: 0.82}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9982dbd0462c04eba5a28fd8d81469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpPadPower: 2
   warp: {fileID: 4893885403184170636}
   pad: {fileID: 4893885403193570639}
 --- !u!33 &4893885403194566991

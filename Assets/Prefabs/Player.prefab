@@ -625,7 +625,6 @@ MonoBehaviour:
   shootDmg: 1
   gunModel: {fileID: 6906786816017483923}
   gunStat: []
-  jumpPadPower: 2
 --- !u!143 &5518967026713895962
 CharacterController:
   m_ObjectHideFlags: 0

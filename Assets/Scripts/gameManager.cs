@@ -29,7 +29,10 @@ public class gameManager : MonoBehaviour
     public GameObject victoryBanner;
     public Image playerHPBar;
     public TextMeshProUGUI enemyCount;
+    public TextMeshProUGUI timerText;
     public bool killCheckToggle;
+    public bool pauseTimer;
+    public float timer;
 
     public bool isPaused;
     public bool openedMenu;
@@ -37,6 +40,7 @@ public class gameManager : MonoBehaviour
 
     void Awake()
     {
+        timer = 0;
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<playerController>();
@@ -57,6 +61,11 @@ public class gameManager : MonoBehaviour
 
     void Update()
     {
+        if (!pauseTimer)
+        {
+            timer += Time.deltaTime;
+            speedruntimer(timer);
+        }
         if (Input.GetButtonDown("Cancel") && !playerDeadMenu.activeSelf && !winMenu.activeSelf)
         {
             isPaused = !isPaused;
@@ -77,7 +86,7 @@ public class gameManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         openedMenu = true;
-        
+        pauseTimer = true;
     }
 
     public void cursorUnlockUnpause()
@@ -86,6 +95,7 @@ public class gameManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         openedMenu = false;
+        pauseTimer = false;
     }
 
     public IEnumerator playerDamage()
@@ -108,12 +118,25 @@ public class gameManager : MonoBehaviour
         if (killCheckToggle == true)
         {
             enemyNum--;
-            gameManager.instance.enemyCount.text = gameManager.instance.enemyNum.ToString("F0");
+            enemyCount.text = gameManager.instance.enemyNum.ToString("F0");
             if (enemyNum <= 0)
             {
                 winMenu.SetActive(true);
                 cursorLockPause();
             }
         }
+    }
+
+    public void speedruntimer(float time)
+    {
+        time += 1;
+        float minutes = Mathf.FloorToInt(time / 60);
+        float seconds = Mathf.FloorToInt(time % 60);
+        timerText.text = "Time: " + string.Format("{0:00}:{1:00}",minutes,seconds);
+        
+    }
+    public void resetTimer()
+    {
+        timer = 0;
     }
 }

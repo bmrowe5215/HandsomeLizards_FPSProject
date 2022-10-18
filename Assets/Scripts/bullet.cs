@@ -20,7 +20,7 @@ public class bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Prop"))
         {
             gameManager.instance.playerScript.takeDamage(damage);
             Destroy(gameObject);
