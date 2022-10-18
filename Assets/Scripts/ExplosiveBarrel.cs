@@ -7,10 +7,11 @@ public class ExplosiveBarrel : MonoBehaviour, IDamage
     [Header("----- Barrel Stats -----")]
     [SerializeField] int HP;
     [SerializeField] int explosionDamage;
+    [SerializeField] float explosionRadius;
     [SerializeField] ParticleSystem explosion;
     [SerializeField] AudioSource barrelSource;
     [SerializeField] AudioClip[] barrelExplosion;
-    [SerializeField] Collider explosionRadius;
+    [SerializeField] Collider barrelPos;
     Collider[] nearEntitys;
 
    
@@ -34,7 +35,7 @@ public class ExplosiveBarrel : MonoBehaviour, IDamage
     void blowUp()
     {
         explosion.Play();
-        nearEntitys = Physics.OverlapSphere(explosionRadius.transform.position, 15f, LayerMask.GetMask("Enemy", "Player"), QueryTriggerInteraction.Ignore);
+        nearEntitys = Physics.OverlapSphere(barrelPos.transform.position, explosionRadius, LayerMask.GetMask("Enemy", "Player"), QueryTriggerInteraction.Ignore);
         foreach (var item in nearEntitys)
         {
             item.GetComponent<IDamage>().takeDamage(explosionDamage);

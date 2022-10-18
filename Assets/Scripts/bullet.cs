@@ -6,7 +6,7 @@ public class bullet : MonoBehaviour
 {
 
     [SerializeField] Rigidbody rb;
-
+    [SerializeField] bool barrelDamageToggle;
     [SerializeField] int speed;
     [SerializeField] int damage;
     [SerializeField] int destroyTime;
@@ -20,11 +20,15 @@ public class bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Prop"))
+        if (other.CompareTag("Player"))
         {
             gameManager.instance.playerScript.takeDamage(damage);
             Destroy(gameObject);
 
+        }
+        if (other.CompareTag("Prop") && barrelDamageToggle == true)
+        {
+            other.gameObject.GetComponent<IDamage>().takeDamage(damage);
         }
     }
 }
