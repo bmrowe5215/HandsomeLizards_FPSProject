@@ -989,7 +989,7 @@ MonoBehaviour:
   animLerpSpeed: 3
   sightDist: 20
   roamDist: 15
-  viewAngle: 0
+  viewAngle: 50
   headPos: {fileID: 1248391279957796616}
   damageFreeze: 0.25
   shootRate: 1

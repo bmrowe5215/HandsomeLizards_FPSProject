@@ -509,10 +509,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2434378852801751364, guid: b57ef3dc10b855e4b924750773baaeb8, type: 3}
-      propertyPath: playerScript
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8088231872502135957, guid: b57ef3dc10b855e4b924750773baaeb8, type: 3}
       propertyPath: m_Name
       value: UI
@@ -724,10 +720,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1248391279948403920, guid: 34221bf457f20ce43b77720b0e5411e8, type: 3}
-      propertyPath: viewAngle
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 1248391279957768986, guid: 34221bf457f20ce43b77720b0e5411e8, type: 3}
       propertyPath: m_RootOrder
       value: 7
