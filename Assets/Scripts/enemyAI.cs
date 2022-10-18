@@ -41,6 +41,7 @@ public class enemyAI : MonoBehaviour , IDamage
     // Start is called before the first frame update
     void Start()
     {
+        gameManager.instance.enemyNum++;
         gameManager.instance.enemyCount.text = gameManager.instance.enemyNum.ToString("F0");
         stoppingDistOrig = agent.stoppingDistance;
         startingPos = transform.position;
