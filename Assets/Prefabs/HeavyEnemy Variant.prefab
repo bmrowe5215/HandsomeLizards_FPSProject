@@ -33,7 +33,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1248391279948403920, guid: 34221bf457f20ce43b77720b0e5411e8, type: 3}
       propertyPath: viewAngle
-      value: 50
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 1248391279948403920, guid: 34221bf457f20ce43b77720b0e5411e8, type: 3}
       propertyPath: damageFreeze

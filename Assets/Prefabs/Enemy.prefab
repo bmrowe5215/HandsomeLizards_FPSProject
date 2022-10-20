@@ -1031,11 +1031,11 @@ MonoBehaviour:
   col: {fileID: 1248391279948403919}
   HP: 3
   speedChase: 5
-  facePlayerSpeed: 2
+  facePlayerSpeed: 5
   animLerpSpeed: 3
   sightDist: 20
   roamDist: 15
-  viewAngle: 45
+  viewAngle: 65
   headPos: {fileID: 1248391279957796616}
   damageFreeze: 0.25
   shootRate: 1
