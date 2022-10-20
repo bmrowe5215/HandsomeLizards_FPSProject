@@ -28,5 +28,6 @@ public class buttonFunctions : MonoBehaviour
     {
         gameManager.instance.playerScript.respawn();
         gameManager.instance.cursorUnlockUnpause();
+        gameManager.instance.lava.GetComponent<lavaRising>().LavaReset();
     }
 }

@@ -12,17 +12,13 @@ public class VictoryBannerScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //gameManager.instance.killCheckToggle = !flagCheckToggle;
-
         //so if the flag check toggle is TRUE, kill check toggle is FALSE. and vice versa.
-        // actually it isn't that deep and I don't need to do that, just check if this flag is in the level already
+        //actually it isn't that deep and I don't need to do that, just check if this flag is in the level already
         //and toggle between kill goal and "reach the flag" goal
         if (other.CompareTag("Player"))
         {
            gameManager.instance.winMenu.SetActive(true);
            gameManager.instance.cursorLockPause();
-
-        }
-        
+        }       
     }
-
 }

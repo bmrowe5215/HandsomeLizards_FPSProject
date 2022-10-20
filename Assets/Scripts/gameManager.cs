@@ -27,6 +27,7 @@ public class gameManager : MonoBehaviour
     public GameObject playerDamageFlash;
     public GameObject playerHealthFlash;
     public GameObject victoryBanner;
+    public GameObject lava;
     public Image playerHPBar;
     public TextMeshProUGUI enemyCount;
     public TextMeshProUGUI timerText;
@@ -42,6 +43,7 @@ public class gameManager : MonoBehaviour
     {
         timer = 0;
         instance = this;
+        
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<playerController>();
         spawnPos = GameObject.FindGameObjectWithTag("Spawn Position");

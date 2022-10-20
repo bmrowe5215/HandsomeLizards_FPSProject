@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Prop
   - Win
+  - Lava
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Player
   - Enemy
   - Enemy Bullet
-  - 
+  - Lava
   - 
   - 
   - 

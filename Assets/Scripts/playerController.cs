@@ -125,7 +125,7 @@ public class playerController : MonoBehaviour, IDamage
     //Simple FOV changer to simulate aiming down the sights
     IEnumerator aimDownSights()
     {
-        
+
         // turns out it is toggle aim regardless lmao
         if (gunStat.Count > 0 && Input.GetButtonDown("Fire2") && !gameManager.instance.openedMenu && !isSprinting)
         {
@@ -134,18 +134,55 @@ public class playerController : MonoBehaviour, IDamage
 
             if (!isAiming)
             {
-                //This code says "huh if i'm not aiming, then the fov is gonna be normal (ish)
-                playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, fovOriginal, Time.deltaTime * 10);
+
+                StartCoroutine(LerpFOV(false));
+                //playerCamera.fieldOfView = fovOriginal;
+
             }
-            else if(isAiming)
+            else if (isAiming)
             {
-                //this code says "IM GONNA ZOOM" and does so.
-                playerCamera.fieldOfView = Mathf.Lerp(adsFOV, playerCamera.fieldOfView,  Time.deltaTime * 5);
+
+                //Transition the movement
+                StartCoroutine(LerpFOV(true));
+                //playerCamera.fieldOfView = 15f;
+
             }
             //to make sure that i actually scripted this right
             Debug.Log("ZOOM!");
             yield return new WaitForSeconds(2);
             //IT WORKS POGGERS
+        }
+    }
+
+    float lerpDuration = 0.2f;
+    //float startValue = 0;
+    float endValue = 15;
+    float valueToLerp;
+
+    IEnumerator LerpFOV(bool isAiming)
+    {
+        float timeElapsed = 0;
+        while (timeElapsed < lerpDuration)
+        {
+            if (isAiming)
+            {
+                playerCamera.fieldOfView = Mathf.Lerp(fovOriginal, endValue, timeElapsed / lerpDuration);
+            }
+            else
+            {
+                playerCamera.fieldOfView = Mathf.Lerp(endValue, fovOriginal, timeElapsed / lerpDuration);
+
+            }
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        if (isAiming)
+        {
+            playerCamera.fieldOfView = endValue;
+        }
+        else
+        {
+            playerCamera.fieldOfView = fovOriginal;
         }
     }
 
@@ -198,6 +235,7 @@ public class playerController : MonoBehaviour, IDamage
                     // if I disable gravity on the rigid body before launching it, it should fix the instant transmission jutsu bug.
                     if (rb != null)
                     {
+                        //rb.freezeRotation = true;
                         rb.useGravity = true;
                         nv.enabled = false;
                         rb.velocity = new Vector3(0, slamHeight, 0);
@@ -205,6 +243,7 @@ public class playerController : MonoBehaviour, IDamage
                     yield return new WaitForSeconds(2);
                     if (rb != null && rb.transform.position.y <= currentPos)
                     {
+                        //rb.freezeRotation = false;
                         rb.useGravity = false;
                         nv.enabled = true;
                     }
