@@ -7,7 +7,7 @@ public class droneAI : MonoBehaviour, IDamage
 {
     [Header("----- Components -----")]
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Renderer model;
+    [SerializeField] Renderer[] model;
     [SerializeField] SphereCollider sightCollider;
     [SerializeField] AudioSource enemyHurt;
 
@@ -70,10 +70,16 @@ public class droneAI : MonoBehaviour, IDamage
     {
         if (agent.isActiveAndEnabled)
         {
-            model.material.color = Color.red;
+            foreach (Renderer rend in model)
+            {
+                rend.material.color = Color.red;
+            }
             agent.enabled = false;
             yield return new WaitForSeconds(damageFreeze);
-            model.material.color = Color.white;
+            foreach (Renderer rend in model)
+            {
+                rend.material.color = Color.white;
+            }
             agent.enabled = true;
         }
     }
