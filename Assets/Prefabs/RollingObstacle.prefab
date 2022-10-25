@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 7066718844352800385}
   - component: {fileID: 230684287}
   - component: {fileID: 230684288}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RollingObstacle
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,7 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   log: {fileID: 8178736762472991308}
-  destroyTime: 15
+  HP: 10
+  destroyTime: 20
 --- !u!33 &8100893596035738783
 MeshFilter:
   m_ObjectHideFlags: 0

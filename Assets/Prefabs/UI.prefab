@@ -3188,8 +3188,8 @@ RectTransform:
   m_GameObject: {fileID: 8088231872552514915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 17.26, y: 17.26, z: 17.26}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8088231872502135961}
   m_RootOrder: 0
@@ -3227,7 +3227,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 27244c2cca6edb24081b924642eb577f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3678,6 +3678,7 @@ MonoBehaviour:
   playerDamageFlash: {fileID: 696799948392254907}
   playerHealthFlash: {fileID: 29043779}
   victoryBanner: {fileID: 0}
+  lava: {fileID: 0}
   playerHPBar: {fileID: 4470971358534037885}
   enemyCount: {fileID: 1765660808}
   timerText: {fileID: 960084026}

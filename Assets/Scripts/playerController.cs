@@ -31,6 +31,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int shootDist;
     [SerializeField] int shootDmg;
     [SerializeField] GameObject gunModel;
+    [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] List<gunStats> gunStat = new List<gunStats>();
 
     
@@ -192,6 +193,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             isShooting = true;
             RaycastHit hit;
+            muzzleFlash.Play();
             gunShot.PlayOneShot(gunShot.clip, 0.2f);
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f,0.5f)),out hit, shootDist))
             {

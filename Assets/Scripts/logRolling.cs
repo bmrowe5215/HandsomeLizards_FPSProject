@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class logRolling : MonoBehaviour
+public class logRolling : MonoBehaviour, IDamage
 {
     //[SerializeField] GameObject trigger;
     [SerializeField] GameObject log;
+    [SerializeField] float HP;
     [SerializeField] int destroyTime;
     //[SerializeField] GameObject logSpawn;
     //Vector3 spawnPos;
@@ -22,4 +23,13 @@ public class logRolling : MonoBehaviour
         }
     }
 
+    public void takeDamage(int dmg)
+    {
+        HP -= dmg;
+        if (HP <= 0)
+        { 
+            Debug.Log("BOOM");
+            Destroy(gameObject, 1.5f);
+        }
+    }
 }

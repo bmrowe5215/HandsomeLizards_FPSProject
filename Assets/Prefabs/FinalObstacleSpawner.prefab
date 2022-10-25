@@ -56,9 +56,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec0ade06c3f5f94cbe20a1fe289bea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trigger: {fileID: 0}
-  log: {fileID: 0}
-  logSpawn: {fileID: 0}
+  trigger: {fileID: 2810924561944098923}
+  log: {fileID: 8178736762472991308, guid: 99cd11b06bd386d4783dd4d2e01f344a, type: 3}
+  logSpawn: {fileID: 2810924562872526147}
 --- !u!23 &2810924561944098921
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -112,8 +112,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.732834, y: 27.440346, z: 88.47094}
-  m_Center: {x: 2.366417, y: -13.220173, z: -15.571064}
+  m_Size: {x: 14.56695, y: 27.440346, z: 88.47094}
+  m_Center: {x: 6.783475, y: -13.220173, z: -15.571064}
 --- !u!1 &2810924562872526147
 GameObject:
   m_ObjectHideFlags: 0
