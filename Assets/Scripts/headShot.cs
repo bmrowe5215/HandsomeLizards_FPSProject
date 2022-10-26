@@ -13,8 +13,12 @@ public class headShot : MonoBehaviour, IDamage
     private void Start()
     {
         Parent = gameObject.transform.parent.gameObject;
-        gameObject.transform.position = headBone.transform.position;
+        //gameObject.transform.position = headBone.transform.position;
 
+    }
+    public void Update()
+    {
+        gameObject.transform.position = headBone.transform.position;
     }
     public void takeDamage(int dmg)
     {

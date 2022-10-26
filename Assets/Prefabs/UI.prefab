@@ -4179,6 +4179,10 @@ MonoBehaviour:
   victoryBanner: {fileID: 0}
   lava: {fileID: 0}
   playerHPBar: {fileID: 4470971358534037885}
+  jumpBars:
+  - {fileID: 958426003}
+  - {fileID: 1071563440}
+  - {fileID: 1457087710}
   enemyCount: {fileID: 1765660808}
   timerText: {fileID: 960084026}
   killCheckToggle: 0

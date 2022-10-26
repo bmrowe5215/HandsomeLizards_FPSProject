@@ -158,7 +158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214465513}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.51, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6454324, y: 0.6454324, z: 0.6454324}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccef51e76d83fa64eb42bde74e3643b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headBone: {fileID: 1248391279957796618}
+  headBone: {fileID: 1248391279957796616}
   critEffect: {fileID: 214465520}
   critSource: {fileID: 154896477}
   critSound: {fileID: 8300000, guid: 5ba88d3d02069a242b41b94690266132, type: 3}

@@ -12,6 +12,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] Collider groundPoundRadius;
     [SerializeField] AudioSource gunShot;
     [SerializeField] AudioSource playerHurt;
+    [SerializeField] ParticleSystem groundPoundParticles;
 
 
     [Header("----- Player Stats -----")]
@@ -38,7 +39,7 @@ public class playerController : MonoBehaviour, IDamage
 
     Rigidbody[] rbs;
     private Vector3 playerVelocity;
-    int timesJumped;
+    public int timesJumped;
     bool isShooting;
     bool isSprinting;
     bool isAiming;
@@ -195,6 +196,7 @@ public class playerController : MonoBehaviour, IDamage
             RaycastHit hit;
             muzzleFlash.Play();
             gunShot.PlayOneShot(gunShot.clip, 0.2f);
+            
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f,0.5f)),out hit, shootDist))
             {
                 //Instantiate(cube, hit.point, transform.rotation);
@@ -216,10 +218,58 @@ public class playerController : MonoBehaviour, IDamage
 
             Debug.Log("Shoot!");
             yield return new WaitForSeconds(shootRate);
+            muzzleFlash.Stop();
             isShooting = false;
         }
     }
 
+    //IEnumerator groundPound()
+    //{
+    //    if (!onGround && Input.GetButtonDown("Crouch"))
+    //    {
+    //        //this sends the player flying downward.
+    //        playerVelocity.y = -jumpHeight * slamSpeed;
+    //        //This only fires if crouch is pressed while in the air. or it should? idk its weird.
+    //        Debug.Log("GroundPound;");
+    //        //
+    //        //creates an array of colliders, we then filter through the colliders that contain the enemy tag, then apply physics to them.
+    //        Collider[] enemyCol = Physics.OverlapSphere(groundPoundRadius.transform.position, 7.5f, LayerMask.GetMask("Enemy"), QueryTriggerInteraction.Ignore);
+    //        foreach (Collider item in enemyCol)
+    //        {
+    //            Debug.Log(item.ToString());
+    //            if (item.CompareTag("Enemy"))
+    //            {
+    //                // slight bug, shooting an enemy while they ARENT in the air sends them fucking flying.
+    //                // OH, ITS CONSTANTLY BUILDING SPEED DOWNWARD OHHHHH.
+    //                float currentPos = item.transform.position.y;
+    //                Debug.Log("and SLAM!");
+    //                Rigidbody rb = item.GetComponent<Rigidbody>();
+    //                NavMeshAgent nv = item.GetComponent<NavMeshAgent>();
+    //                enemyAnim = item.GetComponent<Animator>();
+    //                //patchwork solution maybe???? so the rigid body is constantly gaining a -y velocity due to gravity, so
+    //                // if I disable gravity on the rigid body before launching it, it should fix the instant transmission jutsu bug.
+    //                if (rb != null)
+    //                {
+    //                    //rb.freezeRotation = true;
+    //                    rb.useGravity = true;
+    //                    nv.enabled = false;
+    //                    rb.velocity = new Vector3(0, slamHeight, 0);
+    //                    enemyAnim.SetBool("KnockUp",true);
+    //                    yield return new WaitForSeconds(2);
+    //                    //Setting Velocity to 0 when they land will prevent any weird shit from happening, like the instant transmission jutsu bug.
+    //                    rb.velocity = new Vector3(0, 0, 0);
+    //                    //rb.freezeRotation = false;
+    //                    rb.useGravity = false;
+    //                    nv.enabled = true;
+    //                    enemyAnim.SetBool("KnockUp", false);
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
+
+
+    //Holy shit this is way more optimized than whatever crazy shit i was doing earlier. LOOK AT HOW CLEAN THAT IS
     IEnumerator groundPound()
     {
         if (!onGround && Input.GetButtonDown("Crouch"))
@@ -228,79 +278,42 @@ public class playerController : MonoBehaviour, IDamage
             playerVelocity.y = -jumpHeight * slamSpeed;
             //This only fires if crouch is pressed while in the air. or it should? idk its weird.
             Debug.Log("GroundPound;");
-
+            //
             //creates an array of colliders, we then filter through the colliders that contain the enemy tag, then apply physics to them.
             Collider[] enemyCol = Physics.OverlapSphere(groundPoundRadius.transform.position, 7.5f, LayerMask.GetMask("Enemy"), QueryTriggerInteraction.Ignore);
+           
             foreach (Collider item in enemyCol)
             {
-                Debug.Log(item.ToString());
                 if (item.CompareTag("Enemy"))
                 {
-                    // slight bug, shooting an enemy while they ARENT in the air sends them fucking flying.
-                    // OH, ITS CONSTANTLY BUILDING SPEED DOWNWARD OHHHHH.
-                    //
-                    float currentPos = item.transform.position.y;
-                    Debug.Log("and SLAM!");
-                    Rigidbody rb = item.GetComponent<Rigidbody>();
-                    NavMeshAgent nv = item.GetComponent<NavMeshAgent>();
-
-                    //patchwork solution maybe???? so the rigid body is constantly gaining a -y velocity due to gravity, so
-                    // if I disable gravity on the rigid body before launching it, it should fix the instant transmission jutsu bug.
-                    if (rb != null)
-                    {
-                        //rb.freezeRotation = true;
-                        rb.useGravity = true;
-                        nv.enabled = false;
-                        rb.velocity = new Vector3(0, slamHeight, 0);
-                        
-                    }
-                    yield return new WaitForSeconds(2);
-                    if (rb != null && rb.transform.position.y <= currentPos)
-                    {
-                        //rb.freezeRotation = false;
-                        rb.useGravity = false;
-                        nv.enabled = true;
-                    }
+                    item.GetComponent<Animator>().SetBool("KnockUp", true);
+                    Debug.Log("Slam");
+                    item.GetComponent<Rigidbody>().useGravity = true;
+                    item.GetComponent<Rigidbody>().freezeRotation = true;
+                    item.GetComponent<NavMeshAgent>().enabled = false;
+                    item.GetComponent<Rigidbody>().AddForce(new Vector3(0, 10, 0),ForceMode.Impulse);
+                    //enemyAnim.SetBool("KnockUp", true);
+                }
+            }
+            yield return new WaitForSeconds(2.1f);
+            foreach (var item in enemyCol)
+            {
+                if (item.CompareTag("Enemy"))
+                {
+                    item.GetComponent<Animator>().SetBool("KnockUp", false);
+                    item.GetComponent<Rigidbody>().freezeRotation = false;
+                    item.GetComponent<Rigidbody>().useGravity = false;
+                    item.GetComponent<NavMeshAgent>().enabled = true;
+                    item.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                    
                 }
             }
         }
     }
+    
+    
 
-        //}
-        //IEnumerator groundPound()
-        //{
-        //    if (!onGround && Input.GetButtonDown("Crouch"))
-        //    {
-        //        //this sends the player flying downward.
-        //        playerVelocity.y = -jumpHeight * slamSpeed;
-        //        //This only fires if crouch is pressed while in the air. or it should? idk its weird.
-        //        enemyGroundPoundCheck(groundPoundRadius);
-        //        Debug.Log("GroundPound;");
-        //    }
-        //        yield return new WaitForSeconds(1);
-
-        //}
-        //public void enemyGroundPoundCheck(Collider other)
-        //{
-        //    if (other.CompareTag("Enemy"))
-        //    {
-        //        Debug.Log("Enemy in Groundpound");
-        //        foreach (var item in rbs)
-        //        {
-        //            item.useGravity = true;
-        //            item.GetComponent<NavMeshAgent>().enabled = false;
-        //            item.AddForce(0, 10, 0, ForceMode.Impulse);
-        //            if (item.transform.position.y != currentPos)
-        //            {
-
-        //            }
-        //            item.useGravity = false;
-        //            item.GetComponent<NavMeshAgent>().enabled = true;
-        //        }
-        //    }
-        //}
-
-        public void gunPickup(gunStats stats)
+    public void gunPickup(gunStats stats)
     {
         shootRate = stats.shootRate;
         shootDist = stats.shootDist;
