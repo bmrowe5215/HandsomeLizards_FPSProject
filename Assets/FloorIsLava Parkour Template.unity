@@ -1324,11 +1324,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2b7ba730adc55d449241283fa35fad6, type: 3}
---- !u!1 &443524689 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2810924562872526147, guid: 47edb6d05fa3b2345887be8365e1bdfc, type: 3}
-  m_PrefabInstance: {fileID: 605522416}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &465441784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1672,11 +1667,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 365045ddc61e38541bc585ba6f7ccc0e, type: 3}
---- !u!1 &503620316 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2810924561944098923, guid: 47edb6d05fa3b2345887be8365e1bdfc, type: 3}
-  m_PrefabInstance: {fileID: 605522416}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &511179618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2154,18 +2144,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2810924561944098902, guid: 47edb6d05fa3b2345887be8365e1bdfc, type: 3}
-      propertyPath: log
-      value: 
-      objectReference: {fileID: 8178736762472991308, guid: 99cd11b06bd386d4783dd4d2e01f344a, type: 3}
-    - target: {fileID: 2810924561944098902, guid: 47edb6d05fa3b2345887be8365e1bdfc, type: 3}
-      propertyPath: trigger
-      value: 
-      objectReference: {fileID: 503620316}
-    - target: {fileID: 2810924561944098902, guid: 47edb6d05fa3b2345887be8365e1bdfc, type: 3}
-      propertyPath: logSpawn
-      value: 
-      objectReference: {fileID: 443524689}
     - target: {fileID: 2810924561944098903, guid: 47edb6d05fa3b2345887be8365e1bdfc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2209,14 +2187,6 @@ PrefabInstance:
     - target: {fileID: 2810924561944098903, guid: 47edb6d05fa3b2345887be8365e1bdfc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2810924561944098922, guid: 47edb6d05fa3b2345887be8365e1bdfc, type: 3}
-      propertyPath: m_Size.x
-      value: 14.56695
-      objectReference: {fileID: 0}
-    - target: {fileID: 2810924561944098922, guid: 47edb6d05fa3b2345887be8365e1bdfc, type: 3}
-      propertyPath: m_Center.x
-      value: 6.783475
       objectReference: {fileID: 0}
     - target: {fileID: 2810924561944098923, guid: 47edb6d05fa3b2345887be8365e1bdfc, type: 3}
       propertyPath: m_Name

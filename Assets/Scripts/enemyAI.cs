@@ -9,9 +9,12 @@ public class enemyAI : MonoBehaviour , IDamage
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] SphereCollider sightCollider;
+    //[SerializeField] GameObject headHitbox;
+    // ignore this this was cringe.
     [SerializeField] AudioSource enemyHurt;
     [SerializeField] Animator anim;
     [SerializeField] Collider col;
+    [SerializeField] Collider head;
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] int HP;
@@ -126,6 +129,7 @@ public class enemyAI : MonoBehaviour , IDamage
         {
             col.enabled = false;
             agent.enabled = false;
+            head.enabled = false;
             gameManager.instance.checkEnemyTotal();
             anim.SetBool("Dead", true);
         }

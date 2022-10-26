@@ -9,6 +9,7 @@ TagManager:
   - Prop
   - Win
   - Lava
+  - weakPoint
   layers:
   - Default
   - TransparentFX
