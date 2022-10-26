@@ -29,6 +29,7 @@ public class gameManager : MonoBehaviour
     public GameObject victoryBanner;
     public GameObject lava;
     public Image playerHPBar;
+    public Image[] jumpBars;
     public TextMeshProUGUI enemyCount;
     public TextMeshProUGUI timerText;
     public bool killCheckToggle;
