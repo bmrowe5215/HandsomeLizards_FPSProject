@@ -10,10 +10,6 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController controller;
     [SerializeField] Camera playerCamera;
     [SerializeField] Collider groundPoundRadius;
-    [SerializeField] AudioSource gunShot;
-    [SerializeField] AudioSource playerHurt;
-    [SerializeField] ParticleSystem groundPoundParticles;
-
 
     [Header("----- Player Stats -----")]
     [Range(1, 15)][SerializeField] public int HP;
@@ -35,8 +31,18 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] List<gunStats> gunStat = new List<gunStats>();
 
-    
+    [Header("----- Audio -----")]
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip[] playerHurtAud;
+    [Range(0, 1)][SerializeField] float playerHurtAudVol;
+    [SerializeField] AudioClip[] playerStepsAud;
+    [Range(0, 1)][SerializeField] float playerStepsAudVol;
+    [SerializeField] AudioClip[] playerJumpAud;
+    [Range(0, 1)][SerializeField] float playerJumpAudVol;
 
+    Vector3 move;
+    bool playingSteps;
+    bool playingJump;
     Rigidbody[] rbs;
     private Vector3 playerVelocity;
     public int timesJumped;
@@ -64,6 +70,7 @@ public class playerController : MonoBehaviour, IDamage
     void Update()
     {
         movement();
+        StartCoroutine(playSteps());
         StartCoroutine(shoot());
         StartCoroutine(aimDownSights());
         StartCoroutine(groundPound());
@@ -84,11 +91,12 @@ public class playerController : MonoBehaviour, IDamage
             onGround = false;
         }
 
-        Vector3 move = (transform.right * Input.GetAxis("Horizontal")) +
+        move = (transform.right * Input.GetAxis("Horizontal")) +
                        (transform.forward * Input.GetAxis("Vertical"));
 
         if (Input.GetButtonDown("Jump") && timesJumped < jumpsMax)
         {
+            StartCoroutine(playJump());
             timesJumped++;
             playerVelocity.y = jumpHeight;
         }
@@ -188,6 +196,32 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
+    IEnumerator playSteps()
+    {
+        if (move.magnitude > 0.2f)
+        {
+            if (!playingSteps && controller.isGrounded)
+            {
+                playingSteps = true;
+                aud.PlayOneShot(playerStepsAud[Random.Range(0, playerStepsAud.Length - 1)], playerStepsAudVol);
+                if (isSprinting)
+                    yield return new WaitForSeconds(0.2f);
+                else
+                    yield return new WaitForSeconds(0.3f);
+                playingSteps = false;
+            }
+        }
+    }
+    IEnumerator playJump()
+    {
+        if (!playingJump)
+        {
+            playingJump = true;
+            aud.PlayOneShot(playerJumpAud[Random.Range(0, playerJumpAud.Length - 1)], playerJumpAudVol);
+            yield return new WaitForSeconds(0.2f);
+            playingJump = false;
+        }
+    }
     IEnumerator shoot()
     {
         if (gunStat.Count > 0 && Input.GetButton("Shoot") && !isShooting && !gameManager.instance.openedMenu)
@@ -195,8 +229,6 @@ public class playerController : MonoBehaviour, IDamage
             isShooting = true;
             RaycastHit hit;
             muzzleFlash.Play();
-            gunShot.PlayOneShot(gunShot.clip, 0.2f);
-            
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f,0.5f)),out hit, shootDist))
             {
                 //Instantiate(cube, hit.point, transform.rotation);
@@ -364,7 +396,7 @@ public class playerController : MonoBehaviour, IDamage
         
         HP -= dmg;
         updatePlayerHUD();
-        playerHurt.PlayOneShot(playerHurt.clip, 0.1f);
+        aud.PlayOneShot(playerHurtAud[Random.Range(0, playerHurtAud.Length - 1)], playerHurtAudVol);
         StartCoroutine(gameManager.instance.playerDamage());
         if (HP <= 0)
         {
