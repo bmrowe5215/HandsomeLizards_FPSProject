@@ -38,7 +38,7 @@ public class playerController : MonoBehaviour, IDamage
 
     Rigidbody[] rbs;
     private Vector3 playerVelocity;
-    private int timesJumped;
+    int timesJumped;
     bool isShooting;
     bool isSprinting;
     bool isAiming;
@@ -91,7 +91,7 @@ public class playerController : MonoBehaviour, IDamage
             timesJumped++;
             playerVelocity.y = jumpHeight;
         }
-
+        updateJumpHUD();
         // Sprinting, isgrounded check is to make sure you can't sprint in the air (plus it only runs when you move since its in update)
         // BASE FOV: 60
         if (Input.GetKey(KeyCode.LeftShift) && controller.isGrounded && !isAiming)
@@ -324,6 +324,16 @@ public class playerController : MonoBehaviour, IDamage
         gameManager.instance.playerHPBar.fillAmount = (float)HP / (float)HPOrig;
     }
 
+    public void updateJumpHUD()
+    {
+        if (onGround)
+            foreach (var item in gameManager.instance.jumpBars)
+                item.enabled = true;
+        else
+            for (int i = timesJumped - 1; i >= 0; i--)
+                gameManager.instance.jumpBars[i].enabled = false;
+    }
+
     public void takeDamage(int dmg)
     {
         
@@ -359,5 +369,9 @@ public class playerController : MonoBehaviour, IDamage
     {
         playerVelocity.y = jumpHeight * jumpPadPower;
         Debug.Log("Jumppad() Triggered");
+        timesJumped = 0;
+        onGround = true;
+        updateJumpHUD();
+        onGround = false;
     }
 }
