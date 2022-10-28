@@ -28,6 +28,8 @@ public class gameManager : MonoBehaviour
     public GameObject playerHealthFlash;
     public GameObject victoryBanner;
     public GameObject lava;
+    public Image popUpWindow;
+    public Animator popUpAnim;
     public Image playerHPBar;
     public Image[] jumpBars;
     public TextMeshProUGUI enemyCount;

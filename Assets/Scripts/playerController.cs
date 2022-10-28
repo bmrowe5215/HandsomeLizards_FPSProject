@@ -304,6 +304,8 @@ public class playerController : MonoBehaviour, IDamage
     //Holy shit this is way more optimized than whatever crazy shit i was doing earlier. LOOK AT HOW CLEAN THAT IS
     IEnumerator groundPound()
     {
+        bool isFlying = false;
+
         if (!onGround && Input.GetButtonDown("Crouch"))
         {
             //this sends the player flying downward.
@@ -316,7 +318,7 @@ public class playerController : MonoBehaviour, IDamage
            
             foreach (Collider item in enemyCol)
             {
-                if (item.CompareTag("Enemy"))
+                if (item.CompareTag("Enemy") && isFlying == false)
                 {
                     item.GetComponent<Animator>().SetBool("KnockUp", true);
                     Debug.Log("Slam");
@@ -327,6 +329,7 @@ public class playerController : MonoBehaviour, IDamage
                     //enemyAnim.SetBool("KnockUp", true);
                 }
             }
+            isFlying = true;
             yield return new WaitForSeconds(2.1f);
             foreach (var item in enemyCol)
             {
