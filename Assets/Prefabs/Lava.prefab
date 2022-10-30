@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 4931194214899837333}
   - component: {fileID: 4931194214899837338}
   - component: {fileID: 4931194214899837334}
-  m_Layer: 0
+  - component: {fileID: 704869693}
+  m_Layer: 9
   m_Name: Lava
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,8 +51,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yPos: 0
   yPosMax: 75
-  resetValue: 0
-  riseRate: 0.025
+  resetValue: 25
+  riseRate: 0.03
+  lavaToggle: 1
+  lrfStartPos: 25
+  lrfMaxPos: 50
 --- !u!33 &4931194214899837332
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -80,7 +84,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c5b6432eb5c5ecd41a1c5065d2686911, type: 2}
+  - {fileID: 2100000, guid: 836d84ffaa131b64c8e4e1334059b07a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -178,3 +182,17 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &704869693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4931194214899837339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d28cb150ad86f4a8100312a4aea7a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uvAnimationRate: {x: 0.01, y: 0}
+  textureName: _MainTex

@@ -10,12 +10,28 @@ public class lavaRising : MonoBehaviour
     [SerializeField] float yPosMax;
     [SerializeField] float resetValue;
     [SerializeField] float riseRate;
+    [Header("Toggles between the rise and fall and rise only modes.")]
+    [SerializeField] bool lavaToggle;
+
+    //Lava RiseFall Settings
+    [SerializeField] float lrfStartPos;
+    [SerializeField] float lrfMaxPos;
+
+
 
     void Start()
     {
         lavaPos = gameObject.transform.position;
         startPos = lavaPos;
-        StartCoroutine(lavaRise());
+        //true = lava rising 
+        if (lavaToggle)
+        {
+            StartCoroutine(lavaRise());
+        }
+        else
+        {
+            StartCoroutine(lavaRiseLower());
+        }
     }
 
     // Update is called once per frame
@@ -24,11 +40,12 @@ public class lavaRising : MonoBehaviour
         yPos = gameObject.transform.position.y;
     }
 
-    public void OnTriggerEnter(Collider other)
+    IEnumerator OnTriggerEnter(Collider other)
     {
         // Kills both enemies and players.
         if (other.gameObject.tag == "Player" || other.CompareTag("Enemy"))
         {
+            yield return new WaitForSeconds(0.5f);
             if (other.GetComponent<IDamage>() != null)
             {
                 other.GetComponent<IDamage>().takeDamage(9999);
@@ -56,6 +73,23 @@ public class lavaRising : MonoBehaviour
             yield return null;
         }
         gameObject.transform.position = lavaPos;
+    }
+
+    // lerpDuration  -  riseRate
+    // startValue    -  yPos
+    // 
+    // endValue      -  yPosMax
+    // valueToLerp   -  lavaPos.y
+    IEnumerator lavaRiseLower()
+    {
+        while (true)
+        {
+            lavaPos.y = Mathf.Lerp(lrfStartPos, lrfMaxPos, Mathf.PingPong(Time.time*riseRate,1));
+            gameObject.transform.position = lavaPos;
+                //Vector3.Lerp(new Vector3(0, lrfStartPos, 0), new Vector3(0,lrfMaxPos,0), (Mathf.Sin(riseRate*Time.deltaTime)+1.0f)/2.0f);
+            yield return null;
+        }
+
     }
 
     public void LavaReset()
