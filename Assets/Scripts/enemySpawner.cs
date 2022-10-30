@@ -32,6 +32,7 @@ public class enemySpawner : MonoBehaviour
             {
                 gameManager.instance.enemyNum++;
                 StartCoroutine(spawnEnemy());
+                gameManager.instance.enemyCount.text = gameManager.instance.enemyNum.ToString("F0");
             }
             spawned = true;
         }
@@ -39,10 +40,10 @@ public class enemySpawner : MonoBehaviour
 
     IEnumerator spawnEnemy()
     {
-        yield return new WaitForSeconds(1);
         xPos = Random.Range(minRadius, maxRadius);
         zPos = Random.Range(minRadius, maxRadius);
         // TL;DR spawns enemy within a range that can be set around the trigger's game object location.
         Instantiate(enemy, new Vector3(gameObject.transform.position.x+xPos, gameObject.transform.position.y,gameObject.transform.position.z+zPos), gameObject.transform.rotation);
+        yield return new WaitForSeconds(1);
     }
 }
