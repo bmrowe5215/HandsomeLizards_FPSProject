@@ -10,6 +10,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController controller;
     [SerializeField] Camera playerCamera;
     [SerializeField] Collider groundPoundRadius;
+    [SerializeField] Animator anim;
 
     [Header("----- Player Stats -----")]
     [Range(1, 15)][SerializeField] public int HP;
@@ -18,6 +19,7 @@ public class playerController : MonoBehaviour, IDamage
     [Range(5,15)] [SerializeField] public float jumpHeight;
     [Range(5, 25)] [SerializeField] float slamSpeed;
     [Range(5, 25)] [SerializeField] float slamHeight;
+    [SerializeField] int animLerpSpeed;
     [SerializeField] float sprintFOV;
     [SerializeField] float adsFOV;
     [SerializeField] float gravityValue;
@@ -80,6 +82,7 @@ public class playerController : MonoBehaviour, IDamage
 
     void movement()
     {
+        anim.SetFloat("Blend", Mathf.Lerp(anim.GetFloat("Blend"), move.normalized.magnitude, Time.deltaTime * animLerpSpeed));
         if (controller.isGrounded && playerVelocity.y < 0)
         {
             onGround = true;
