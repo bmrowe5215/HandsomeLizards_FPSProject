@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class playerController : MonoBehaviour, IDamage
 {
@@ -80,6 +81,14 @@ public class playerController : MonoBehaviour, IDamage
 
     void movement()
     {
+        // Debug Level Loader
+        if (Input.GetKeyDown("[+]"))
+        {
+            SceneManager.LoadScene((int)gameManager.levelID.debug);
+        }
+
+
+
         if (controller.isGrounded && playerVelocity.y < 0)
         {
             onGround = true;
