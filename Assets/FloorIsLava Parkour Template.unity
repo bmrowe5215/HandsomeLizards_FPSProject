@@ -339,6 +339,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7427307812866843265, guid: 0cddce69aecaaaa40a7a76b7bd422ce1, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 1297055995}
     - target: {fileID: 7427307812866843266, guid: 0cddce69aecaaaa40a7a76b7bd422ce1, type: 3}
       propertyPath: m_Name
       value: Checkpoint (1)
@@ -942,6 +946,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2434378852801751364, guid: b57ef3dc10b855e4b924750773baaeb8, type: 3}
+      propertyPath: spawnPos
+      value: 
+      objectReference: {fileID: 1297055995}
     - target: {fileID: 8088231872502135957, guid: b57ef3dc10b855e4b924750773baaeb8, type: 3}
       propertyPath: m_Name
       value: UI
@@ -5282,6 +5290,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4931194214899837329, guid: 876644922ea347e4db85c68a188b6580, type: 3}
+      propertyPath: lavaToggle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4931194214899837335, guid: 876644922ea347e4db85c68a188b6580, type: 3}
       propertyPath: m_RootOrder
       value: 58

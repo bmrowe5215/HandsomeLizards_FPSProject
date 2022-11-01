@@ -25,6 +25,7 @@ public class checkPoint : MonoBehaviour
             gameManager.instance.popUpAnim.SetTrigger("trigger");
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))

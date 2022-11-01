@@ -10,12 +10,38 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.cursorUnlockUnpause();
         gameManager.instance.isPaused = false;
         gameManager.instance.pauseMenu.SetActive(false);
+        gameManager.instance.menuUIAudio.PlayOneShot(gameManager.instance.debugBruh);
+
+    }
+
+    public void playGame()
+    {
+        SceneManager.LoadScene((int)gameManager.levelID.tutorial);
+        gameManager.instance.menuUIAudio.PlayOneShot(gameManager.instance.debugBruh);
+
+    }
+
+    public void options()
+    {
+        gameManager.instance.mainMenuSubmenu.SetActive(false);
+        gameManager.instance.optionsMenu.SetActive(true);
+        gameManager.instance.menuUIAudio.PlayOneShot(gameManager.instance.debugBruh);
+
+    }
+
+    public void goBack()
+    {
+        gameManager.instance.optionsMenu.SetActive(false);
+        gameManager.instance.mainMenuSubmenu.SetActive(true);
+        gameManager.instance.menuUIAudio.PlayOneShot(gameManager.instance.debugBruh);
+
     }
 
     public void restart()
     {
         gameManager.instance.cursorUnlockUnpause();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameManager.instance.menuUIAudio.PlayOneShot(gameManager.instance.debugBruh);
         gameManager.instance.resetTimer();
     }
 
@@ -26,6 +52,7 @@ public class buttonFunctions : MonoBehaviour
 
     public void respawn()
     {
+        gameManager.instance.menuUIAudio.PlayOneShot(gameManager.instance.debugBruh);
         gameManager.instance.playerScript.respawn();
         gameManager.instance.cursorUnlockUnpause();
         gameManager.instance.lava.GetComponent<lavaRising>().LavaReset();

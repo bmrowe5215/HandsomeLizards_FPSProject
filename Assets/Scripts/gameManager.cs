@@ -11,6 +11,19 @@ public class gameManager : MonoBehaviour
 
     public int enemyNum;
 
+    //Enum system of loading things, you can expand as you add more scenes to the UI menu and load scenes using the game manager.
+    public enum levelID
+    {
+        //unity uses an index based/string based scene system. its easier to do index and enums.
+        //main menu is 0 since we want that to be the first thing the player sees.
+        mainmenu = 0,
+        tutorial,
+        lavarise,
+        toybox,
+        debug
+
+    }
+    
     [Header("----- Player Stuff -----")]
     public GameObject player;
     public GameObject spawnPos;
@@ -20,9 +33,19 @@ public class gameManager : MonoBehaviour
     public ParticleSystem explosion;
 
     [Header("----- UI -----")]
+    //the sound we play on ui button presses.
+    public AudioSource menuUIAudio;
+    public AudioSource menuSFXAudio;
+    public AudioSource menuMusicAudio;
+    public AudioClip debugBruh;
+    public AudioClip debugGun;
+   //
     public GameObject pauseMenu;
     public GameObject playerDeadMenu;
     public GameObject winMenu;
+    public GameObject mainMenu;
+    public GameObject optionsMenu;
+    public GameObject mainMenuSubmenu;
     public GameObject menuCurrentlyOpen;
     public GameObject playerDamageFlash;
     public GameObject playerHealthFlash;
@@ -48,9 +71,18 @@ public class gameManager : MonoBehaviour
         instance = this;
         
         player = GameObject.FindGameObjectWithTag("Player");
-        playerScript = player.GetComponent<playerController>();
+        //playerScript = player.GetComponent<playerController>();
         spawnPos = GameObject.FindGameObjectWithTag("Spawn Position");
         victoryBanner = GameObject.FindGameObjectWithTag("Win");
+
+        if (player == null)
+        {
+            playerScript = null;
+        }
+        else
+        {
+            playerScript = player.GetComponent<playerController>();
+        }
 
         if (victoryBanner == null)
         {
