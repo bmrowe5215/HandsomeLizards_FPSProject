@@ -74,6 +74,8 @@ public class gameManager : MonoBehaviour
         //playerScript = player.GetComponent<playerController>();
         spawnPos = GameObject.FindGameObjectWithTag("Spawn Position");
         victoryBanner = GameObject.FindGameObjectWithTag("Win");
+        lava = GameObject.FindGameObjectWithTag("Lava");
+        //
 
         if (player == null)
         {

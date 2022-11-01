@@ -24,20 +24,28 @@ public class lavaRising : MonoBehaviour
         lavaPos = gameObject.transform.position;
         startPos = lavaPos;
         //true = lava rising 
-        if (lavaToggle)
-        {
-            StartCoroutine(lavaRise());
-        }
-        else
-        {
-            StartCoroutine(lavaRiseLower());
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    private void FixedUpdate()
+    {
         yPos = gameObject.transform.position.y;
+        if (lavaToggle)
+        {
+            lavaPos.y = Mathf.Lerp(lavaPos.y, yPosMax, riseRate * Time.deltaTime);
+            gameObject.transform.position = lavaPos;
+        }
+        else
+        {
+            lavaPos.y = Mathf.Lerp(lrfStartPos, lrfMaxPos, Mathf.PingPong(Time.time * riseRate, 1));
+            gameObject.transform.position = lavaPos;
+        }
+        gameObject.transform.position = lavaPos;
     }
 
     IEnumerator OnTriggerEnter(Collider other)
@@ -45,7 +53,7 @@ public class lavaRising : MonoBehaviour
         // Kills both enemies and players.
         if (other.gameObject.tag == "Player" || other.CompareTag("Enemy"))
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
             if (other.GetComponent<IDamage>() != null)
             {
                 other.GetComponent<IDamage>().takeDamage(9999);
@@ -58,43 +66,45 @@ public class lavaRising : MonoBehaviour
     // endValue      -  yPosMax
     // valueToLerp   -  lavaPos.y
 
-    IEnumerator lavaRise()
-    {
-        //float lerpDur;
-        //float timeElapsed = 0;
-        while (lavaPos.y < yPosMax)
-        {
-            lavaPos.y = Mathf.Lerp(lavaPos.y, yPosMax, riseRate * Time.deltaTime);
+    //IEnumerator lavaRise()
+    //{
+    //    //float lerpDur;
+    //    //float timeElapsed = 0;
+    //    while (lavaPos.y < yPosMax)
+    //    {
+    //        lavaPos.y = Mathf.Lerp(lavaPos.y, yPosMax, riseRate * Time.deltaTime);
 
-            gameObject.transform.position = lavaPos;
+    //        gameObject.transform.position = lavaPos;
 
-            //timeElapsed += Time.deltaTime;
+    //        //timeElapsed += Time.deltaTime;
 
-            yield return null;
-        }
-        gameObject.transform.position = lavaPos;
-    }
+    //        yield return null;
+    //    }
+    //    gameObject.transform.position = lavaPos;
+    //}
 
     // lerpDuration  -  riseRate
     // startValue    -  yPos
     // 
     // endValue      -  yPosMax
     // valueToLerp   -  lavaPos.y
-    IEnumerator lavaRiseLower()
-    {
-        while (true)
-        {
-            lavaPos.y = Mathf.Lerp(lrfStartPos, lrfMaxPos, Mathf.PingPong(Time.time*riseRate,1));
-            gameObject.transform.position = lavaPos;
-                //Vector3.Lerp(new Vector3(0, lrfStartPos, 0), new Vector3(0,lrfMaxPos,0), (Mathf.Sin(riseRate*Time.deltaTime)+1.0f)/2.0f);
-            yield return null;
-        }
+    //IEnumerator lavaRiseLower()
+    //{
+    //    while (true)
+    //    {
+    //        lavaPos.y = Mathf.Lerp(lrfStartPos, lrfMaxPos, Mathf.PingPong(Time.time*riseRate,1));
+    //        gameObject.transform.position = lavaPos;
+    //            //Vector3.Lerp(new Vector3(0, lrfStartPos, 0), new Vector3(0,lrfMaxPos,0), (Mathf.Sin(riseRate*Time.deltaTime)+1.0f)/2.0f);
+    //        yield return null;
+    //    }
 
-    }
+    //}
 
     public void LavaReset()
     {
         //sets the position of the lava below the checkpoint.
+        Debug.Log("Lava Reset");
         lavaPos.y = gameManager.instance.spawnPos.transform.position.y - resetValue;
+        Debug.Log("Lava position is now: " + lavaPos);
     }
 }

@@ -16,26 +16,32 @@ public class movingPlatform : MonoBehaviour
         currentPos = gameObject.transform.position;
         endpos = point.transform.position;
         startPos = currentPos;
-        StartCoroutine(sinMoving());
+        //StartCoroutine(sinMoving());
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-
+        
     }
-    IEnumerator sinMoving()
+    private void FixedUpdate()
     {
-        //this moves it in like a sin wave motion, but I couldn't get sin waves to work so I use pingpong instead because again im cringe;
-        // WELP, I didn't realize that having an object as a child means that it will move WITH the object. I am dumb.
-        while (true)
-        {
-            currentPos = Vector3.Lerp(startPos, endpos, Mathf.PingPong(Time.time * speed, 1));
-            gameObject.transform.position = currentPos;
-            yield return null;
-        }
+        currentPos = Vector3.Lerp(startPos, endpos, Mathf.PingPong(Time.time * speed, 1));
+        gameObject.transform.position = currentPos;
     }
+    //IEnumerator sinMoving()
+    //{
+    //    //this moves it in like a sin wave motion, but I couldn't get sin waves to work so I use pingpong instead because again im cringe;
+    //    // WELP, I didn't realize that having an object as a child means that it will move WITH the object. I am dumb.
+
+    //    //while (true)
+    //    //{
+    //    //    currentPos = Vector3.Lerp(startPos, endpos, Mathf.PingPong(Time.time * speed, 1));
+    //    //    gameObject.transform.position = currentPos;
+    //    //    yield return null;
+    //    //}
+    //}
+    //
 
     private void OnTriggerEnter(Collider other)
     {
