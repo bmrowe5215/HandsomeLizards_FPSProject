@@ -5986,7 +5986,7 @@ MonoBehaviour:
   head: {fileID: 214465515}
   HP: 3
   speedChase: 5
-  facePlayerSpeed: 10
+  facePlayerSpeed: 6
   animLerpSpeed: 3
   sightDist: 25
   roamDist: 30
@@ -5997,6 +5997,7 @@ MonoBehaviour:
   bullet: {fileID: 8791136823394871425, guid: 72569965e96b97b4eb49841cc0a50ae1, type: 3}
   shootPos: {fileID: 1248391279957796728}
   playerInRange: 0
+  aggro: 0
 --- !u!195 &1248391279948403921
 NavMeshAgent:
   m_ObjectHideFlags: 0
