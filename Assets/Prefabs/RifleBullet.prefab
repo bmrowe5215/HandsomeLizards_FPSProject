@@ -52,7 +52,7 @@ MonoBehaviour:
   rb: {fileID: 6464858051730413362}
   barrelDamageToggle: 0
   speed: 100
-  damage: 1
+  damage: 6
   destroyTime: 15
 --- !u!33 &3521625222709706561
 MeshFilter:

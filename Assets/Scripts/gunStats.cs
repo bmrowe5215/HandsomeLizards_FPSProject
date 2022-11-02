@@ -22,5 +22,5 @@ public class gunStats : ScriptableObject
     public ParticleSystem bulletEffect;
     public Animation recoilAnimation;
     public Animation reloadAnimation;
-    
+
 }

@@ -16,10 +16,10 @@ MonoBehaviour:
   shootDist: 35
   shootDmg: 1
   ammoCount: 10
-  ammoTracker: 10
+  ammoTracker: 7
   slotNum: 0
   reloadTime: 0.5
-  bullet: {fileID: 0}
+  bullet: {fileID: 8791136823394871425, guid: b27484733f3adc14886b5409640ae26d, type: 3}
   gunModel: {fileID: 919132149155446097, guid: 534ffd38fe9985046af15c688fdd7a41, type: 3}
   gunClip: {fileID: 8300000, guid: 5ff5bd936a30a904da907f35c8dd382e, type: 3}
   reloadClip: {fileID: 8300000, guid: f84a2bf3a6b43994a970dab1c4bc6fe8, type: 3}

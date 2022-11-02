@@ -264,13 +264,13 @@ public class playerController : MonoBehaviour, IDamage
             if (ammoTracker > 0)
             {
                 isShooting = true;
-                RaycastHit hit;
                 aud.PlayOneShot(gunClip, playerGunAudVol);
                 muzzleFlash.Play();
                 --ammoTracker;
                 Debug.Log(ammoTracker);
 
                 Instantiate(bullet, shootPos.transform.position, shootPos.transform.rotation);
+                StartCoroutine(gunSlots[selectGun].GetComponent<recoil>().Recoil());
                 //if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
                 //{
                 //    //Instantiate(cube, hit.point, transform.rotation);
@@ -288,6 +288,7 @@ public class playerController : MonoBehaviour, IDamage
                 //        hit.collider.GetComponent<IDamage>().takeDamage(shootDmg);
                 //    }
                 //}
+
                 yield return new WaitForSeconds(shootRate);
                 muzzleFlash.Stop();
                 
@@ -423,7 +424,8 @@ public class playerController : MonoBehaviour, IDamage
         ammoCount = stats.ammoCount;
         ammoTracker = stats.ammoCount;
         reloadTime = stats.reloadTime;
-        
+        bullet = stats.bullet;
+
         selectGun = slotNum;
         gunSlots[selectGun].SetActive(true);
         gunStat.Add(stats);
@@ -457,6 +459,7 @@ public class playerController : MonoBehaviour, IDamage
             reloadClip = gunStat[selectGun].reloadClip;
             ammoCount = gunStat[selectGun].ammoCount;
             reloadTime = gunStat[selectGun].reloadTime;
+            bullet = gunStat[selectGun].bullet;
             gunSlots[slotNum].SetActive(true);
         }
         updateAmmoText();

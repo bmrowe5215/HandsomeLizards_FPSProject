@@ -51,9 +51,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 6464858051730413362}
   barrelDamageToggle: 0
-  speed: 30
+  speed: 80
   damage: 1
-  destroyTime: 4
+  destroyTime: 3
 --- !u!33 &3521625222709706561
 MeshFilter:
   m_ObjectHideFlags: 0
