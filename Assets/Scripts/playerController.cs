@@ -13,6 +13,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] Camera playerCamera;
     [SerializeField] Collider groundPoundRadius;
     [SerializeField] Animator anim;
+    [SerializeField] GameObject shootPos;
 
     [Header("----- Player Stats -----")]
     [Range(1, 15)][SerializeField] public int HP;
@@ -38,6 +39,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] GameObject[] gunSlots;
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] List<gunStats> gunStat = new List<gunStats>();
+    [SerializeField] GameObject bullet;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioSource aud;
@@ -267,23 +269,25 @@ public class playerController : MonoBehaviour, IDamage
                 muzzleFlash.Play();
                 --ammoTracker;
                 Debug.Log(ammoTracker);
-                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
-                {
-                    //Instantiate(cube, hit.point, transform.rotation);
-                    if (hit.collider.GetComponent<IDamage>() != null && !hit.collider.CompareTag("weakPoint"))
-                    {
-                        //raycast hits a collider, checks if it has IDamage, and if it ISNT a weakpoint, and if it is then do normal damage.
-                        hit.collider.GetComponent<IDamage>().takeDamage(shootDmg);
-                    }
-                    else if (hit.collider.GetComponent<IDamage>() != null && hit.collider.CompareTag("weakPoint"))
-                    {
-                        //ok so this adjustment to the shoot code should allow us to implement weakpoints on ANY enemy, and allow us to check if we hit a collider
-                        //listed as a weakPoint, and do double damage to it, and it scales off of weapon damage.
-                        //raycast hits a collider, checks for idamage, then do critical damage.
-                        //I want to add feedback to headshots, like a critical headshot kill makes their head explode or something.
-                        hit.collider.GetComponent<IDamage>().takeDamage(shootDmg);
-                    }
-                }
+
+                Instantiate(bullet, shootPos.transform.position, shootPos.transform.rotation);
+                //if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
+                //{
+                //    //Instantiate(cube, hit.point, transform.rotation);
+                //    if (hit.collider.GetComponent<IDamage>() != null && !hit.collider.CompareTag("weakPoint"))
+                //    {
+                //        //raycast hits a collider, checks if it has IDamage, and if it ISNT a weakpoint, and if it is then do normal damage.
+                //        hit.collider.GetComponent<IDamage>().takeDamage(shootDmg);
+                //    }
+                //    else if (hit.collider.GetComponent<IDamage>() != null && hit.collider.CompareTag("weakPoint"))
+                //    {
+                //        //ok so this adjustment to the shoot code should allow us to implement weakpoints on ANY enemy, and allow us to check if we hit a collider
+                //        //listed as a weakPoint, and do double damage to it, and it scales off of weapon damage.
+                //        //raycast hits a collider, checks for idamage, then do critical damage.
+                //        //I want to add feedback to headshots, like a critical headshot kill makes their head explode or something.
+                //        hit.collider.GetComponent<IDamage>().takeDamage(shootDmg);
+                //    }
+                //}
                 yield return new WaitForSeconds(shootRate);
                 muzzleFlash.Stop();
                 

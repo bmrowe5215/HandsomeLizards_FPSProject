@@ -13,6 +13,7 @@ public class cameraControls : MonoBehaviour
     [SerializeField] int lockVertMax;
 
     [SerializeField] bool invert;
+    [SerializeField] GameObject bulletPos;
 
     float xRotation;
 
@@ -41,6 +42,7 @@ public class cameraControls : MonoBehaviour
         
         //rotate the camera on the X-Axis
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        //bulletPos.transform.rotation = Quaternion.Euler(xRotation, 0, 0);
 
         //rotate the player
         transform.parent.Rotate(Vector3.up * mouseX);
