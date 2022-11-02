@@ -57,7 +57,7 @@ public class enemyAI : MonoBehaviour , IDamage
     {
         if (HP > 0)
         {
-            anim.SetFloat("Blend", Mathf.Lerp(anim.GetFloat("Speed"), agent.velocity.normalized.magnitude, Time.deltaTime * animLerpSpeed));
+            anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agent.velocity.normalized.magnitude, Time.deltaTime * animLerpSpeed));
 
             //Debug.Log(angle);
             if (agent.enabled)
@@ -135,7 +135,7 @@ public class enemyAI : MonoBehaviour , IDamage
         }
         else
             if (!isDamaged)
-            StartCoroutine(flashDamage());
+                StartCoroutine(flashDamage());
     }
 
     IEnumerator shoot()
