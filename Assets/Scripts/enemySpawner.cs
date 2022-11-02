@@ -11,6 +11,7 @@ public class enemySpawner : MonoBehaviour
     [SerializeField] float maxRadius;
      float xPos;
      float zPos;
+    private bool spawned = false;
 
     void Start()
     {
@@ -26,7 +27,6 @@ public class enemySpawner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        bool spawned = false;
         if (other.CompareTag("Player") && spawned == false)
         {
             for (int i = 0; i < enemyCount; i++)

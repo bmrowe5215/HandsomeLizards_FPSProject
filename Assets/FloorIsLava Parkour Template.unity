@@ -2104,6 +2104,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 520859073099407138, guid: ea2a13e843a465d4b8068842dafe25ad, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 8791136823394871425, guid: b27484733f3adc14886b5409640ae26d, type: 3}
     - target: {fileID: 896680584507639195, guid: ea2a13e843a465d4b8068842dafe25ad, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2146,6 +2150,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 896680584507639195, guid: ea2a13e843a465d4b8068842dafe25ad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5445849438038623218, guid: ea2a13e843a465d4b8068842dafe25ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6209684955942403157, guid: ea2a13e843a465d4b8068842dafe25ad, type: 3}
+      propertyPath: recoilTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6209684955942403157, guid: ea2a13e843a465d4b8068842dafe25ad, type: 3}
+      propertyPath: upRecoil.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6209684955942403157, guid: ea2a13e843a465d4b8068842dafe25ad, type: 3}
+      propertyPath: upRecoil.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6209684955942403157, guid: ea2a13e843a465d4b8068842dafe25ad, type: 3}
+      propertyPath: upRecoil.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343684335772610249, guid: ea2a13e843a465d4b8068842dafe25ad, type: 3}
+      propertyPath: recoilTime
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343684335772610249, guid: ea2a13e843a465d4b8068842dafe25ad, type: 3}
+      propertyPath: upRecoil.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343684335772610249, guid: ea2a13e843a465d4b8068842dafe25ad, type: 3}
+      propertyPath: upRecoil.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035901509237622738, guid: ea2a13e843a465d4b8068842dafe25ad, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
