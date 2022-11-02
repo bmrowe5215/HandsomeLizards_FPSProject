@@ -52,7 +52,7 @@ public class buttonFunctions : MonoBehaviour
 
     public void respawn()
     {
-        gameManager.instance.menuUIAudio.PlayOneShot(gameManager.instance.debugBruh);
+        //gameManager.instance.menuUIAudio.PlayOneShot(gameManager.instance.debugBruh);
         gameManager.instance.playerScript.respawn();
         gameManager.instance.cursorUnlockUnpause();
         gameManager.instance.lava.GetComponent<lavaRising>().LavaReset();

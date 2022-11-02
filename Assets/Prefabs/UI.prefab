@@ -4679,8 +4679,8 @@ MonoBehaviour:
   menuUIAudio: {fileID: 0}
   menuSFXAudio: {fileID: 0}
   menuMusicAudio: {fileID: 0}
-  debugBruh: {fileID: 0}
-  debugGun: {fileID: 0}
+  debugBruh: {fileID: 8300000, guid: ad79e46d88371064288f1cc5bf390acb, type: 3}
+  debugGun: {fileID: 8300000, guid: 5ff5bd936a30a904da907f35c8dd382e, type: 3}
   pauseMenu: {fileID: 3114547132050599999}
   playerDeadMenu: {fileID: 827673273130850444}
   winMenu: {fileID: 1697102752}

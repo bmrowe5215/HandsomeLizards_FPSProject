@@ -131,6 +131,11 @@ public class gameManager : MonoBehaviour
         pauseTimer = true;
     }
 
+    public void updateSpawn()
+    {
+        spawnPos = GameObject.FindGameObjectWithTag("Spawn Position");
+    }
+
     public void cursorUnlockUnpause()
     {
         Time.timeScale = 1;

@@ -22,6 +22,7 @@ public class checkPoint : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             spawnPoint.transform.position = gameObject.transform.position;
+            gameManager.instance.updateSpawn();
             gameManager.instance.popUpAnim.SetTrigger("trigger");
         }
     }
