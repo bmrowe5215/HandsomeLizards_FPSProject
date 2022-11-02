@@ -132,10 +132,17 @@ public class enemyAI : MonoBehaviour , IDamage
             head.enabled = false;
             gameManager.instance.checkEnemyTotal();
             anim.SetBool("Dead", true);
+            StartCoroutine(DespawnBody());
         }
         else
             if (!isDamaged)
                 StartCoroutine(flashDamage());
+    }
+
+    IEnumerator DespawnBody()
+    {
+        yield return new WaitForSeconds(10);
+        Destroy(gameObject);
     }
 
     IEnumerator shoot()

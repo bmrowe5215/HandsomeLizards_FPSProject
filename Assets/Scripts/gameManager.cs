@@ -57,9 +57,11 @@ public class gameManager : MonoBehaviour
     public Image[] jumpBars;
     public TextMeshProUGUI enemyCount;
     public TextMeshProUGUI timerText;
+    public TextMeshProUGUI ammoText;
     public bool killCheckToggle;
     public bool pauseTimer;
     public float timer;
+    public float ammoCounter;
 
     public bool isPaused;
     public bool openedMenu;
@@ -175,6 +177,7 @@ public class gameManager : MonoBehaviour
         timerText.text = "Time: " + string.Format("{0:00}:{1:00}",minutes,seconds);
         
     }
+
     public void resetTimer()
     {
         timer = 0;

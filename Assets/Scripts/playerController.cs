@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -136,7 +137,7 @@ public class playerController : MonoBehaviour, IDamage
         updateJumpHUD();
         // Sprinting, isgrounded check is to make sure you can't sprint in the air (plus it only runs when you move since its in update)
         // BASE FOV: 60
-        if (Input.GetKey(KeyCode.LeftShift) && controller.isGrounded && !isAiming)
+        if (Input.GetKey(KeyCode.LeftShift) && !isAiming)
         {
             playerSpeed = playerSprintSpeed;
             // Slower technically, but who cares
@@ -293,6 +294,7 @@ public class playerController : MonoBehaviour, IDamage
                 aud.PlayOneShot(emptyClip, playerGunAudVol);
                 yield return new WaitForSeconds(0.05f);
             }
+            updateAmmoText();
         }
     }
 
@@ -307,6 +309,7 @@ public class playerController : MonoBehaviour, IDamage
             Debug.Log("Reload");
             Debug.Log(ammoTracker);
             isReloading = false;
+            updateAmmoText();
         }
     }
     //IEnumerator groundPound()
@@ -414,12 +417,13 @@ public class playerController : MonoBehaviour, IDamage
         emptyClip = stats.emptyClip;
         reloadClip = stats.reloadClip;
         ammoCount = stats.ammoCount;
-        ammoTracker = stats.ammoTracker;
+        ammoTracker = stats.ammoCount;
         reloadTime = stats.reloadTime;
         
         selectGun = slotNum;
         gunSlots[selectGun].SetActive(true);
         gunStat.Add(stats);
+        updateAmmoText();
     }
 
     void gunSelect()
@@ -451,11 +455,17 @@ public class playerController : MonoBehaviour, IDamage
             reloadTime = gunStat[selectGun].reloadTime;
             gunSlots[slotNum].SetActive(true);
         }
+        updateAmmoText();
     }
   
     public void updatePlayerHUD()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / (float)HPOrig;
+    }
+
+    public void updateAmmoText()
+    {
+        gameManager.instance.ammoText.text = "Ammo: " + ammoTracker + "/" + ammoCount;
     }
 
     public void updateJumpHUD()

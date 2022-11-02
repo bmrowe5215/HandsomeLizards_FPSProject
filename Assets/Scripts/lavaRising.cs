@@ -51,12 +51,15 @@ public class lavaRising : MonoBehaviour
     IEnumerator OnTriggerEnter(Collider other)
     {
         // Kills both enemies and players.
-        if (other.gameObject.tag == "Player" || other.CompareTag("Enemy"))
+        if (!other.isTrigger)
         {
-            yield return new WaitForSeconds(0.2f);
-            if (other.GetComponent<IDamage>() != null)
+            if (other.gameObject.tag == "Player" || other.CompareTag("Enemy"))
             {
-                other.GetComponent<IDamage>().takeDamage(9999);
+                yield return new WaitForSeconds(0.2f);
+                if (other.GetComponent<IDamage>() != null)
+                {
+                    other.GetComponent<IDamage>().takeDamage(9999);
+                }
             }
         }
     }
