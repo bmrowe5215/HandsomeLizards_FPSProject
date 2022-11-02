@@ -29,7 +29,11 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] float shootRate;
     [SerializeField] int shootDist;
     [SerializeField] int shootDmg;
-    [SerializeField] GameObject gunModel;
+    [SerializeField] int slotNum;
+    [SerializeField] int ammoCount;
+    [SerializeField] int ammoTracker;
+    [SerializeField] float reloadTime;
+    [SerializeField] GameObject[] gunSlots;
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] List<gunStats> gunStat = new List<gunStats>();
 
@@ -41,6 +45,10 @@ public class playerController : MonoBehaviour, IDamage
     [Range(0, 1)][SerializeField] float playerStepsAudVol;
     [SerializeField] AudioClip[] playerJumpAud;
     [Range(0, 1)][SerializeField] float playerJumpAudVol;
+    [SerializeField] AudioClip gunClip;
+    [SerializeField] AudioClip reloadClip;
+    [SerializeField] AudioClip emptyClip;
+    [Range(0, 1)][SerializeField] float playerGunAudVol;
 
     Vector3 move;
     bool playingSteps;
@@ -50,6 +58,7 @@ public class playerController : MonoBehaviour, IDamage
     public int timesJumped;
     bool isShooting;
     bool isSprinting;
+    bool isReloading;
     bool isAiming;
     bool onGround;
     int selectGun;
@@ -57,6 +66,11 @@ public class playerController : MonoBehaviour, IDamage
     float speedOrig;
     float gravOrig;
     float fovOriginal;
+
+    //Coyote Time value and counter
+    //Useful, but niche since we have multiple jumps for the player. also buffers ground pound spam.
+    private float coyoteBuffer = 0.15f;
+    private float coyoteCounter;
    
    
 
@@ -74,6 +88,7 @@ public class playerController : MonoBehaviour, IDamage
         movement();
         StartCoroutine(playSteps());
         StartCoroutine(shoot());
+        StartCoroutine(reload());
         StartCoroutine(aimDownSights());
         StartCoroutine(groundPound());
         gunSelect();
@@ -82,17 +97,24 @@ public class playerController : MonoBehaviour, IDamage
 
     void movement()
     {
-        anim.SetFloat("Blend", Mathf.Lerp(anim.GetFloat("Blend"), move.normalized.magnitude, Time.deltaTime * animLerpSpeed));
+        
         if (controller.isGrounded && playerVelocity.y < 0)
         {
+            anim.SetFloat("Blend", Mathf.Lerp(anim.GetFloat("Blend"), move.normalized.magnitude, Time.deltaTime * animLerpSpeed));
             onGround = true;
             playerVelocity.y = 0f;
             timesJumped = 0;
+            coyoteCounter = coyoteBuffer;
         }
         else
         {
-            onGround = false;
+            anim.SetFloat("Blend", Mathf.Lerp(anim.GetFloat("Blend"), 0, Time.deltaTime * animLerpSpeed));
+            coyoteCounter -= Time.deltaTime;
+            if (coyoteCounter > 0)
+                onGround = false;
         }
+
+        
 
         move = (transform.right * Input.GetAxis("Horizontal")) +
                        (transform.forward * Input.GetAxis("Vertical"));
@@ -108,7 +130,6 @@ public class playerController : MonoBehaviour, IDamage
         // BASE FOV: 60
         if (Input.GetKey(KeyCode.LeftShift) && controller.isGrounded && !isAiming)
         {
-            Debug.Log("Sprinting");
             playerSpeed = playerSprintSpeed;
             // Slower technically, but who cares
             // Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, sprintFOV, Time.deltaTime * 10);
@@ -227,37 +248,59 @@ public class playerController : MonoBehaviour, IDamage
     }
     IEnumerator shoot()
     {
-        if (gunStat.Count > 0 && Input.GetButton("Shoot") && !isShooting && !gameManager.instance.openedMenu)
+        if (gunStat.Count > 0 && Input.GetButton("Shoot") && !isShooting && !isReloading && !gameManager.instance.openedMenu)
         {
-            isShooting = true;
-            RaycastHit hit;
-            muzzleFlash.Play();
-            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f,0.5f)),out hit, shootDist))
+            if (ammoTracker > 0)
             {
-                //Instantiate(cube, hit.point, transform.rotation);
-                if (hit.collider.GetComponent<IDamage>() != null && !hit.collider.CompareTag("weakPoint"))
+                isShooting = true;
+                RaycastHit hit;
+                aud.PlayOneShot(gunClip, playerGunAudVol);
+                muzzleFlash.Play();
+                --ammoTracker;
+                Debug.Log(ammoTracker);
+                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
                 {
-                    //raycast hits a collider, checks if it has IDamage, and if it ISNT a weakpoint, and if it is then do normal damage.
-                    hit.collider.GetComponent<IDamage>().takeDamage(shootDmg);
+                    //Instantiate(cube, hit.point, transform.rotation);
+                    if (hit.collider.GetComponent<IDamage>() != null && !hit.collider.CompareTag("weakPoint"))
+                    {
+                        //raycast hits a collider, checks if it has IDamage, and if it ISNT a weakpoint, and if it is then do normal damage.
+                        hit.collider.GetComponent<IDamage>().takeDamage(shootDmg);
+                    }
+                    else if (hit.collider.GetComponent<IDamage>() != null && hit.collider.CompareTag("weakPoint"))
+                    {
+                        //ok so this adjustment to the shoot code should allow us to implement weakpoints on ANY enemy, and allow us to check if we hit a collider
+                        //listed as a weakPoint, and do double damage to it, and it scales off of weapon damage.
+                        //raycast hits a collider, checks for idamage, then do critical damage.
+                        //I want to add feedback to headshots, like a critical headshot kill makes their head explode or something.
+                        hit.collider.GetComponent<IDamage>().takeDamage(shootDmg);
+                    }
                 }
-                else if (hit.collider.GetComponent<IDamage>() != null && hit.collider.CompareTag("weakPoint"))
-                {
-                    //ok so this adjustment to the shoot code should allow us to implement weakpoints on ANY enemy, and allow us to check if we hit a collider
-                    //listed as a weakPoint, and do double damage to it, and it scales off of weapon damage.
-                    //raycast hits a collider, checks for idamage, then do critical damage.
-                    //I want to add feedback to headshots, like a critical headshot kill makes their head explode or something.
-                    hit.collider.GetComponent<IDamage>().takeDamage(shootDmg);
-                }
+                yield return new WaitForSeconds(shootRate);
+                muzzleFlash.Stop();
+                
+                isShooting = false;
             }
-
-
-            Debug.Log("Shoot!");
-            yield return new WaitForSeconds(shootRate);
-            muzzleFlash.Stop();
-            isShooting = false;
+            else if (ammoTracker <= 0) 
+            {
+                aud.PlayOneShot(emptyClip, playerGunAudVol);
+                yield return new WaitForSeconds(0.05f);
+            }
         }
     }
 
+    IEnumerator reload()
+    {
+        if (gunStat.Count > 0 && Input.GetButton("Reload") && !isShooting && !isReloading)
+        {
+            isReloading = true;
+            aud.PlayOneShot(reloadClip, playerGunAudVol);
+            yield return new WaitForSeconds(reloadTime);
+            ammoTracker = ammoCount;
+            Debug.Log("Reload");
+            Debug.Log(ammoTracker);
+            isReloading = false;
+        }
+    }
     //IEnumerator groundPound()
     //{
     //    if (!onGround && Input.GetButtonDown("Crouch"))
@@ -353,11 +396,21 @@ public class playerController : MonoBehaviour, IDamage
 
     public void gunPickup(gunStats stats)
     {
+        //Restart saves the current ammotracker count, but it works fine otherwise. Will fix in beta sprint
+        gunSlots[selectGun].SetActive(false);
         shootRate = stats.shootRate;
         shootDist = stats.shootDist;
         shootDmg = stats.shootDmg;
-        gunModel.GetComponent<MeshFilter>().sharedMesh = stats.gunModel.GetComponent<MeshFilter>().sharedMesh;
-        gunModel.GetComponent<MeshRenderer>().sharedMaterial = stats.gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+        slotNum = stats.slotNum;
+        gunClip = stats.gunClip;
+        emptyClip = stats.emptyClip;
+        reloadClip = stats.reloadClip;
+        ammoCount = stats.ammoCount;
+        ammoTracker = stats.ammoTracker;
+        reloadTime = stats.reloadTime;
+        
+        selectGun = slotNum;
+        gunSlots[selectGun].SetActive(true);
         gunStat.Add(stats);
     }
 
@@ -367,18 +420,28 @@ public class playerController : MonoBehaviour, IDamage
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectGun < gunStat.Count-1) 
             {
+                gunSlots[selectGun].SetActive(false);
+                gunStat[selectGun].ammoTracker = ammoTracker;
                 selectGun++;
+                ammoTracker = gunStat[selectGun].ammoTracker;
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectGun > 0)
             {
+                gunSlots[selectGun].SetActive(false);
+                gunStat[selectGun].ammoTracker = ammoTracker;
                 selectGun--;
+                ammoTracker = gunStat[selectGun].ammoTracker;
             }
-
             shootRate = gunStat[selectGun].shootRate;
             shootDist = gunStat[selectGun].shootDist;
             shootDmg = gunStat[selectGun].shootDmg;
-            gunModel.GetComponent<MeshFilter>().sharedMesh = gunStat[selectGun].gunModel.GetComponent<MeshFilter>().sharedMesh;
-            gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunStat[selectGun].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+            slotNum = gunStat[selectGun].slotNum;
+            gunClip = gunStat[selectGun].gunClip;
+            emptyClip = gunStat[selectGun].emptyClip;
+            reloadClip = gunStat[selectGun].reloadClip;
+            ammoCount = gunStat[selectGun].ammoCount;
+            reloadTime = gunStat[selectGun].reloadTime;
+            gunSlots[slotNum].SetActive(true);
         }
     }
   

@@ -558,7 +558,7 @@ ModelImporter:
       - path: RobotArmature/Body/Torso/Chest/Neck/Head
         weight: 1
       - path: RobotArmature/Body/Torso/Chest/Neck/Shoulder.L
-        weight: 0
+        weight: 1
       - path: RobotArmature/Body/Torso/Chest/Neck/Shoulder.L/UpperArm.L
         weight: 0
       - path: RobotArmature/Body/Torso/Chest/Neck/Shoulder.L/UpperArm.L/LowerArm.L
