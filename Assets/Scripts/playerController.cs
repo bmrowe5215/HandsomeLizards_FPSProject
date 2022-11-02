@@ -111,7 +111,7 @@ public class playerController : MonoBehaviour, IDamage
 
         if (controller.isGrounded && playerVelocity.y < 0)
         {
-            anim.SetFloat("Blend", Mathf.Lerp(anim.GetFloat("Blend"), move.normalized.magnitude, Time.deltaTime * animLerpSpeed));
+            anim.SetFloat("Blend", Mathf.Lerp(anim.GetFloat("Blend"), move.normalized.magnitude * 2, Time.deltaTime * animLerpSpeed));
             onGround = true;
             playerVelocity.y = 0f;
             timesJumped = 0;
