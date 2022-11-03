@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &267144325 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7583959013455882865, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+  m_PrefabInstance: {fileID: 3182804403040773253}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &572920190
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +228,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &818429104 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7583959013632763862, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+  m_PrefabInstance: {fileID: 3182804403040773253}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1174869797 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7583959014961888928, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+  m_PrefabInstance: {fileID: 3182804403040773253}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1511328100 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7583959013614090995, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+  m_PrefabInstance: {fileID: 3182804403040773253}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1832636755
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,6 +492,22 @@ PrefabInstance:
       propertyPath: m_enableWordWrapping
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7583959013455882866, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: UISlider
+      value: 
+      objectReference: {fileID: 818429104}
+    - target: {fileID: 7583959013455882866, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: SFXSlider
+      value: 
+      objectReference: {fileID: 1174869797}
+    - target: {fileID: 7583959013455882866, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: MusicSlider
+      value: 
+      objectReference: {fileID: 267144325}
+    - target: {fileID: 7583959013455882866, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: MasterSlider
+      value: 
+      objectReference: {fileID: 1511328100}
     - target: {fileID: 7583959013456805497, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.7
@@ -468,6 +528,38 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7583959013614090996, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: UISlider
+      value: 
+      objectReference: {fileID: 818429104}
+    - target: {fileID: 7583959013614090996, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: SFXSlider
+      value: 
+      objectReference: {fileID: 1174869797}
+    - target: {fileID: 7583959013614090996, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: MusicSlider
+      value: 
+      objectReference: {fileID: 267144325}
+    - target: {fileID: 7583959013614090996, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: MasterSlider
+      value: 
+      objectReference: {fileID: 1511328100}
+    - target: {fileID: 7583959013632763861, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: UISlider
+      value: 
+      objectReference: {fileID: 818429104}
+    - target: {fileID: 7583959013632763861, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: SFXSlider
+      value: 
+      objectReference: {fileID: 1174869797}
+    - target: {fileID: 7583959013632763861, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: MusicSlider
+      value: 
+      objectReference: {fileID: 267144325}
+    - target: {fileID: 7583959013632763861, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: MasterSlider
+      value: 
+      objectReference: {fileID: 1511328100}
     - target: {fileID: 7583959013839983751, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
       propertyPath: m_Color.a
       value: 0
@@ -664,6 +756,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7583959014961888929, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: UISlider
+      value: 
+      objectReference: {fileID: 818429104}
+    - target: {fileID: 7583959014961888929, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: SFXSlider
+      value: 
+      objectReference: {fileID: 1174869797}
+    - target: {fileID: 7583959014961888929, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: MusicSlider
+      value: 
+      objectReference: {fileID: 267144325}
+    - target: {fileID: 7583959014961888929, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
+      propertyPath: MasterSlider
+      value: 
+      objectReference: {fileID: 1511328100}
     - target: {fileID: 7583959015241959679, guid: 330e4aa74c3ab454cad85892536549d3, type: 3}
       propertyPath: m_fontSize
       value: 15.8

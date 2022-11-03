@@ -31,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 8791136823394871425}
   m_LocalRotation: {x: 0.17437495, y: 0.6975692, z: -0.67754275, w: 0.15468171}
   m_LocalPosition: {x: 14.2429, y: 1.2412666, z: 4.9808}
-  m_LocalScale: {x: 0.07, y: 0.07, z: 0.07}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   barrelDamageToggle: 0
   speed: 80
   damage: 1
-  destroyTime: 3
+  destroyTime: 5
 --- !u!33 &3521625222709706561
 MeshFilter:
   m_ObjectHideFlags: 0

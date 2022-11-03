@@ -21,16 +21,15 @@ public class playerBullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.isTrigger)
-        {
-            if (other.CompareTag("Enemy"))
+        { 
+        
+            if (other.GetComponent<IDamage>() != null && !other.CompareTag("weakPoint"))
             {
-                other.gameObject.GetComponent<enemyAI>().takeDamage(damage);
-                Destroy(gameObject);
-
+                other.GetComponent<IDamage>().takeDamage(damage);
             }
-            if (other.CompareTag("Prop") && barrelDamageToggle == true)
+            else if (other.GetComponent<IDamage>() != null && other.CompareTag("weakPoint"))
             {
-                other.gameObject.GetComponent<IDamage>().takeDamage(damage);
+                other.GetComponent<IDamage>().takeDamage(damage);
             }
         }
     }
