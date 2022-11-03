@@ -35,6 +35,7 @@ public class enemyAI : MonoBehaviour , IDamage
     bool isShooting;
     bool isDamaged;
     public bool playerInRange;
+    public bool aggro;
     Vector3 playerDir;
     Vector3 startingPos;
     float stoppingDistOrig;
@@ -68,6 +69,8 @@ public class enemyAI : MonoBehaviour , IDamage
                     angle = Vector3.Angle(playerDir, transform.forward);
                     canSeePlayer();
                 }
+                else
+                    aggro = false;
                 if (agent.remainingDistance < 0.1f && agent.destination != gameManager.instance.player.transform.position)
                     roam();
             }
@@ -83,11 +86,13 @@ public class enemyAI : MonoBehaviour , IDamage
         randomDir += startingPos;
 
         NavMeshHit hit;
-        NavMesh.SamplePosition(randomDir, out hit, 1, 1);
-        NavMeshPath path = new NavMeshPath();
+        if(NavMesh.SamplePosition(randomDir, out hit, 1, 1))
+        {
+            NavMeshPath path = new NavMeshPath();
 
-        agent.CalculatePath(hit.position, path);
-        agent.SetPath(path);
+            agent.CalculatePath(hit.position, path);
+            agent.SetPath(path);
+        }
     }
 
     void canSeePlayer()
@@ -97,8 +102,9 @@ public class enemyAI : MonoBehaviour , IDamage
         {
             Debug.DrawRay(headPos.transform.position, playerDir);
 
-            if (hit.collider.CompareTag("Player") && angle <= viewAngle)
+            if ((hit.collider.CompareTag("Player") && angle <= viewAngle) || aggro == true)
             {
+                aggro = true;
                 agent.speed = speedChase;
                 agent.stoppingDistance = stoppingDistOrig;
                 agent.SetDestination(gameManager.instance.player.transform.position);
