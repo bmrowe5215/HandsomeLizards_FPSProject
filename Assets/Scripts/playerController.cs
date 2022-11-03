@@ -371,7 +371,7 @@ public class playerController : MonoBehaviour, IDamage
             Debug.Log("GroundPound;");
             //
             //creates an array of colliders, we then filter through the colliders that contain the enemy tag, then apply physics to them.
-            Collider[] enemyCol = Physics.OverlapSphere(groundPoundRadius.transform.position, 7.5f, LayerMask.GetMask("Enemy"), QueryTriggerInteraction.Ignore);
+            Collider[] enemyCol = Physics.OverlapSphere(gameObject.transform.position, 7.5f, LayerMask.GetMask("Enemy"), QueryTriggerInteraction.Ignore);
            
             foreach (Collider item in enemyCol)
             {

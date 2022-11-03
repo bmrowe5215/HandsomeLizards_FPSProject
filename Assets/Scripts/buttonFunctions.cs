@@ -18,6 +18,7 @@ public class buttonFunctions : MonoBehaviour
     {
         SceneManager.LoadScene((int)gameManager.levelID.tutorial);
         gameManager.instance.menuUIAudio.PlayOneShot(gameManager.instance.debugBruh);
+        gameManager.instance.cursorUnlockUnpause();
 
     }
 
@@ -49,7 +50,11 @@ public class buttonFunctions : MonoBehaviour
     {
         Application.Quit();
     }
-
+    public void quitToMenu()
+    {
+        //this should just take you to the main menu scene *hopefully*
+       SceneManager.LoadScene((int)gameManager.levelID.mainmenu);
+    }
     public void respawn()
     {
         //gameManager.instance.menuUIAudio.PlayOneShot(gameManager.instance.debugBruh);
