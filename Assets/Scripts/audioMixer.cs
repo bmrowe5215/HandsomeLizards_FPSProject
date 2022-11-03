@@ -12,14 +12,17 @@ public class audioMixer : MonoBehaviour
     [SerializeField] AudioMixerGroup sfxMixer;
     [SerializeField] AudioMixerGroup uiMixer;
 
-    public Slider slider;
+    public Slider MasterSlider;
+    public Slider MusicSlider;
+    public Slider SFXSlider;
+    public Slider UISlider;
 
     private void Start()
     {
-        slider.value = PlayerPrefs.GetFloat("Master", 1f);
-        slider.value = PlayerPrefs.GetFloat("Music", 1f);
-        slider.value = PlayerPrefs.GetFloat("Sound Effects", 1f);
-        slider.value = PlayerPrefs.GetFloat("UI", 1f);
+        MasterSlider.value = PlayerPrefs.GetFloat("Master", 1f);
+        MusicSlider.value = PlayerPrefs.GetFloat("Music", 1f);
+        SFXSlider.value = PlayerPrefs.GetFloat("Sound Effects", 1f);
+        UISlider.value = PlayerPrefs.GetFloat("UI", 1f);
 
     }
 
