@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class checkPoint : MonoBehaviour
 {
-    [SerializeField] GameObject spawnPoint;
+    public GameObject spawnPoint;
     // Start is called before the first frame update
     void Start()
     {
-        
+        spawnPoint = gameManager.instance.spawnPos;
     }
 
     // Update is called once per frame
