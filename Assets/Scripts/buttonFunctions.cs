@@ -26,13 +26,14 @@ public class buttonFunctions : MonoBehaviour
     {
         gameManager.instance.mainMenuSubmenu.SetActive(false);
         gameManager.instance.optionsMenu.SetActive(true);
+        gameManager.instance.menuCurrentlyOpen = gameManager.instance.optionsMenu;
         gameManager.instance.menuUIAudio.PlayOneShot(gameManager.instance.debugBruh);
 
     }
 
     public void goBack()
     {
-        gameManager.instance.optionsMenu.SetActive(false);
+        gameManager.instance.menuCurrentlyOpen.SetActive(false);
         gameManager.instance.mainMenuSubmenu.SetActive(true);
         gameManager.instance.menuUIAudio.PlayOneShot(gameManager.instance.debugBruh);
 
@@ -54,6 +55,14 @@ public class buttonFunctions : MonoBehaviour
     {
         //this should just take you to the main menu scene *hopefully*
        SceneManager.LoadScene((int)gameManager.levelID.mainmenu);
+    }
+
+    public void credits()
+    {
+        gameManager.instance.menuCurrentlyOpen = gameManager.instance.creditsMenu;
+        gameManager.instance.mainMenuSubmenu.SetActive(false);
+        gameManager.instance.creditsMenu.SetActive(true);
+        
     }
     public void respawn()
     {
