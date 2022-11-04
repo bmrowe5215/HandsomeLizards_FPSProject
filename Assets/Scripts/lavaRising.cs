@@ -10,6 +10,7 @@ public class lavaRising : MonoBehaviour
     [SerializeField] float yPosMax;
     [SerializeField] float resetValue;
     [SerializeField] float riseRate;
+    [Range(0, 2)][SerializeField] int lavaVariant;
     [Header("Toggles between the rise and fall and rise only modes.")]
     [SerializeField] bool lavaToggle;
 
@@ -34,18 +35,39 @@ public class lavaRising : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // 0: Still Lava.
+        // 1: Rising Lava.
+        // 2: Rise Fall Lava.
+        //This is such a cool method for level design i'm patting myself on the back for how fuckin sick this kinda is.
+
         yPos = gameObject.transform.position.y;
-        if (lavaToggle)
+        switch (lavaVariant)
         {
-            lavaPos.y = Mathf.Lerp(lavaPos.y, yPosMax, riseRate * Time.deltaTime);
-            gameObject.transform.position = lavaPos;
-        }
-        else
-        {
-            lavaPos.y = Mathf.Lerp(lrfStartPos, lrfMaxPos, Mathf.PingPong(Time.time * riseRate, 1));
-            gameObject.transform.position = lavaPos;
+            case 0:
+                gameObject.transform.position = lavaPos;
+                break;
+            case 1:
+                lavaPos.y = Mathf.Lerp(lavaPos.y, yPosMax, riseRate * Time.deltaTime);
+                gameObject.transform.position = lavaPos;
+                break;
+            case 2:
+                lavaPos.y = Mathf.Lerp(lrfStartPos, lrfMaxPos, Mathf.PingPong(Time.time * riseRate, 1));
+                gameObject.transform.position = lavaPos;
+                break;
         }
         gameObject.transform.position = lavaPos;
+
+        
+        //if (lavaToggle)
+        //{
+        //    lavaPos.y = Mathf.Lerp(lavaPos.y, yPosMax, riseRate * Time.deltaTime);
+        //    gameObject.transform.position = lavaPos;
+        //}
+        //else
+        //{
+        //    lavaPos.y = Mathf.Lerp(lrfStartPos, lrfMaxPos, Mathf.PingPong(Time.time * riseRate, 1));
+        //    gameObject.transform.position = lavaPos;
+        //}
     }
 
     IEnumerator OnTriggerEnter(Collider other)
