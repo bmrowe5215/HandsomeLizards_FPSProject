@@ -13,6 +13,7 @@ public class gunStats : ScriptableObject
     public int ammoTracker;
     public int slotNum;
     public float reloadTime;
+    public float gunFOV;
     public GameObject bullet;
     public GameObject gunModel;
     public AudioClip gunClip;

@@ -36,6 +36,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int ammoCount;
     [SerializeField] int ammoTracker;
     [SerializeField] float reloadTime;
+    [SerializeField] float gunFOV;
     [SerializeField] GameObject[] gunSlots;
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] List<gunStats> gunStat = new List<gunStats>();
@@ -211,11 +212,11 @@ public class playerController : MonoBehaviour, IDamage
         {
             if (isAiming)
             {
-                playerCamera.fieldOfView = Mathf.Lerp(fovOriginal, endValue, timeElapsed / lerpDuration);
+                playerCamera.fieldOfView = Mathf.Lerp(fovOriginal, gunFOV, timeElapsed / lerpDuration);
             }
             else
             {
-                playerCamera.fieldOfView = Mathf.Lerp(endValue, fovOriginal, timeElapsed / lerpDuration);
+                playerCamera.fieldOfView = Mathf.Lerp(gunFOV, fovOriginal, timeElapsed / lerpDuration);
 
             }
             timeElapsed += Time.deltaTime;
@@ -223,7 +224,7 @@ public class playerController : MonoBehaviour, IDamage
         }
         if (isAiming)
         {
-            playerCamera.fieldOfView = endValue;
+            playerCamera.fieldOfView = gunFOV;
         }
         else
         {
@@ -425,6 +426,7 @@ public class playerController : MonoBehaviour, IDamage
         ammoTracker = stats.ammoCount;
         reloadTime = stats.reloadTime;
         bullet = stats.bullet;
+        gunFOV = stats.gunFOV;
 
         selectGun = slotNum;
         gunSlots[selectGun].SetActive(true);
@@ -460,6 +462,7 @@ public class playerController : MonoBehaviour, IDamage
             ammoCount = gunStat[selectGun].ammoCount;
             reloadTime = gunStat[selectGun].reloadTime;
             bullet = gunStat[selectGun].bullet;
+            gunFOV = gunStat[selectGun].gunFOV;
             gunSlots[slotNum].SetActive(true);
         }
         updateAmmoText();
