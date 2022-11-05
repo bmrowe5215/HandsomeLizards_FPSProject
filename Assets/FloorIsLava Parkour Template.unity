@@ -5435,6 +5435,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4931194214899837329, guid: 876644922ea347e4db85c68a188b6580, type: 3}
+      propertyPath: lavaVariant
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4931194214899837335, guid: 876644922ea347e4db85c68a188b6580, type: 3}
       propertyPath: m_RootOrder
       value: 29

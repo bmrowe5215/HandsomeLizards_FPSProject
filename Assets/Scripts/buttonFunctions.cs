@@ -54,8 +54,15 @@ public class buttonFunctions : MonoBehaviour
     public void quitToMenu()
     {
         //this should just take you to the main menu scene *hopefully*
-       SceneManager.LoadScene((int)gameManager.levelID.mainmenu);
+        SceneManager.LoadScene((int)gameManager.levelID.mainmenu);
     }
+
+    public void continueButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        gameManager.instance.cursorUnlockUnpause();
+    }
+        
 
     public void credits()
     {

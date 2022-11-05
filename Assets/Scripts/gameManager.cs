@@ -18,8 +18,8 @@ public class gameManager : MonoBehaviour
         //main menu is 0 since we want that to be the first thing the player sees.
         mainmenu = 0,
         tutorial,
-        debug,
         lavarise,
+        debug,
         toybox,
 
     }
