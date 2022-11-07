@@ -508,6 +508,7 @@ public class playerController : MonoBehaviour, IDamage
         HP = HPOrig;
         updatePlayerHUD();
         gameManager.instance.updateSpawn();
+        transform.parent = null;
         transform.position = gameManager.instance.spawnPos.transform.position;
         controller.enabled = true;
         gameManager.instance.playerDeadMenu.SetActive(false);
