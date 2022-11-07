@@ -62,7 +62,44 @@ public class buttonFunctions : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         gameManager.instance.cursorUnlockUnpause();
     }
-        
+    
+    public void levelSelect()
+    {
+        gameManager.instance.mainMenuSubmenu.SetActive(false);
+        gameManager.instance.levelselectMenu.SetActive(true);
+        gameManager.instance.menuCurrentlyOpen = gameManager.instance.levelselectMenu;
+        gameManager.instance.menuUIAudio.PlayOneShot(gameManager.instance.debugBruh);
+    }
+
+    public void tutorialLevel()
+    {
+        SceneManager.LoadScene((int)gameManager.levelID.tutorial);
+        gameManager.instance.cursorUnlockUnpause();
+    }
+
+    public void stillLevel()
+    {
+        SceneManager.LoadScene((int)gameManager.levelID.toybox);
+        gameManager.instance.cursorUnlockUnpause();
+    }
+
+    public void riseLevel()
+    {
+        SceneManager.LoadScene((int)gameManager.levelID.lavarise);
+        gameManager.instance.cursorUnlockUnpause();
+    }
+
+    public void risefallLevel()
+    {
+        SceneManager.LoadScene((int)gameManager.levelID.tutorial);
+        gameManager.instance.cursorUnlockUnpause();
+    }
+
+    public void debugLevel()
+    {
+        SceneManager.LoadScene((int)gameManager.levelID.debug);
+        gameManager.instance.cursorUnlockUnpause();
+    }
 
     public void credits()
     {

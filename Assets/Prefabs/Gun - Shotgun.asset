@@ -19,6 +19,7 @@ MonoBehaviour:
   ammoTracker: 10
   slotNum: 2
   reloadTime: 0
+  gunFOV: 45
   bullet: {fileID: 0}
   gunModel: {fileID: 919132149155446097, guid: 726e329e1719c8f42949342e6a5b42e3, type: 3}
   gunClip: {fileID: 0}

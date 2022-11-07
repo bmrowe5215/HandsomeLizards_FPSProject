@@ -46,6 +46,7 @@ public class gameManager : MonoBehaviour
     public GameObject mainMenu;
     public GameObject optionsMenu;
     public GameObject mainMenuSubmenu;
+    public GameObject levelselectMenu;
     public GameObject creditsMenu;
     public GameObject menuCurrentlyOpen;
     public GameObject playerDamageFlash;
