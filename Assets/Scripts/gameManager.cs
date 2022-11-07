@@ -51,6 +51,7 @@ public class gameManager : MonoBehaviour
     public GameObject menuCurrentlyOpen;
     public GameObject playerDamageFlash;
     public GameObject playerHealthFlash;
+    public GameObject playerLavaFlash;
     public GameObject victoryBanner;
     public GameObject lava;
     public Image popUpWindow;

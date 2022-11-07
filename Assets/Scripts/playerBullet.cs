@@ -26,10 +26,12 @@ public class playerBullet : MonoBehaviour
             if (other.GetComponent<IDamage>() != null && !other.CompareTag("weakPoint"))
             {
                 other.GetComponent<IDamage>().takeDamage(damage);
+                Destroy(gameObject);
             }
             else if (other.GetComponent<IDamage>() != null && other.CompareTag("weakPoint"))
             {
                 other.GetComponent<IDamage>().takeDamage(damage);
+                Destroy(gameObject);
             }
         }
     }

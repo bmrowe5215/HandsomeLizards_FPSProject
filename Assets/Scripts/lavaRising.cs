@@ -81,6 +81,7 @@ public class lavaRising : MonoBehaviour
                 if (other.GetComponent<IDamage>() != null)
                 {
                     other.GetComponent<IDamage>().takeDamage(9999);
+                    gameManager.instance.playerLavaFlash.SetActive(true);
                 }
             }
         }

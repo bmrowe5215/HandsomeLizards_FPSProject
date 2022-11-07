@@ -202,8 +202,8 @@ public class playerController : MonoBehaviour, IDamage
 
     float lerpDuration = 0.2f;
     //float startValue = 0;
-    float endValue = 15;
-    float valueToLerp;
+    //float endValue = 15;
+    //float valueToLerp;
 
     IEnumerator LerpFOV(bool isAiming)
     {
@@ -309,7 +309,7 @@ public class playerController : MonoBehaviour, IDamage
         if (gunStat.Count > 0 && Input.GetButton("Reload") && !isShooting && !isReloading)
         {
             isReloading = true;
-            aud.PlayOneShot(reloadClip, playerGunAudVol);
+            aud.PlayOneShot(reloadClip, playerGunAudVol);           
             yield return new WaitForSeconds(reloadTime);
             ammoTracker = ammoCount;
             Debug.Log("Reload");
@@ -508,6 +508,7 @@ public class playerController : MonoBehaviour, IDamage
         HP = HPOrig;
         updatePlayerHUD();
         gameManager.instance.updateSpawn();
+        gameManager.instance.playerLavaFlash.SetActive(false);
         transform.parent = null;
         transform.position = gameManager.instance.spawnPos.transform.position;
         controller.enabled = true;
