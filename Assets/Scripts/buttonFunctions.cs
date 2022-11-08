@@ -79,7 +79,7 @@ public class buttonFunctions : MonoBehaviour
 
     public void stillLevel()
     {
-        SceneManager.LoadScene((int)gameManager.levelID.toybox);
+        SceneManager.LoadScene((int)gameManager.levelID.stillBedroom);
         gameManager.instance.cursorUnlockUnpause();
     }
 

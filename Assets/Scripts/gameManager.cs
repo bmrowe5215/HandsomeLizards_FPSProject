@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class gameManager : MonoBehaviour
@@ -20,8 +21,8 @@ public class gameManager : MonoBehaviour
         tutorial,
         stillBedroom,
         lavarise,
-        toybox,
         debug,
+        toybox,
 
     }
     
@@ -35,7 +36,7 @@ public class gameManager : MonoBehaviour
 
     [Header("----- Level Music -----")]
     public AudioClip[] levelMusic;
-
+    public AudioClip victorySound;
 
     [Header("----- UI -----")]
     //the sound we play on ui button presses.
@@ -70,7 +71,7 @@ public class gameManager : MonoBehaviour
     public bool pauseTimer;
     public float timer;
     public float ammoCounter;
-
+    public int currentLevelID;
     public bool isPaused;
     public bool openedMenu;
 
@@ -79,7 +80,7 @@ public class gameManager : MonoBehaviour
     {
         timer = 0;
         instance = this;
-        
+        currentLevelID = SceneManager.GetActiveScene().buildIndex;
         player = GameObject.FindGameObjectWithTag("Player");
         //playerScript = player.GetComponent<playerController>();
         spawnPos = GameObject.FindGameObjectWithTag("Spawn Position");
@@ -106,7 +107,12 @@ public class gameManager : MonoBehaviour
             killCheckToggle = false;
             gameManager.instance.enemyCount.enabled = killCheckToggle;
         }
-
+        //Check to see if there even is any music in the array.
+        //Then find the song corresponding to the array's index in the level index.
+        if (levelMusic[currentLevelID] != null)
+        {
+            menuMusicAudio.PlayOneShot(levelMusic[currentLevelID]);
+        }
     }
 
     void Update()
@@ -178,22 +184,12 @@ public class gameManager : MonoBehaviour
             {
                 winMenu.SetActive(true);
                 popUpAnim.SetBool("Win", true);
-                StartCoroutine(winDelay());
+                menuSFXAudio.PlayOneShot(victorySound);
                 //cursorLockPause();
             }
         }
     }
 
-    public IEnumerator winDelay()
-    {
-        if (popUpAnim.GetBool("Win"))
-        {
-            yield return new WaitForSeconds(1.6f);
-            cursorLockPause();
-        }
-        //yield return new WaitForSeconds(2f);
-        //cursorLockPause();
-    }
     public void speedruntimer(float time)
     {
         time += 1;

@@ -12,7 +12,7 @@ public class lavaRising : MonoBehaviour
     [SerializeField] float riseRate;
     [Range(0, 2)][SerializeField] int lavaVariant;
     [Header("Toggles between the rise and fall and rise only modes.")]
-    [SerializeField] bool lavaToggle;
+    //[SerializeField] bool lavaToggle;
 
     //Lava RiseFall Settings
     [SerializeField] float lrfStartPos;

@@ -19,7 +19,10 @@ public class VictoryBannerScript : MonoBehaviour
         {
            gameManager.instance.winMenu.SetActive(true);
             gameManager.instance.popUpAnim.SetBool("Win", true);
-            StartCoroutine(gameManager.instance.winDelay());
-        }       
+            gameManager.instance.menuSFXAudio.PlayOneShot(gameManager.instance.victorySound);
+            // gameManager.instance.playerWon = true;  
+            //StartCoroutine(gameManager.instance.winAnimation());
+
+        }
     }
 }
