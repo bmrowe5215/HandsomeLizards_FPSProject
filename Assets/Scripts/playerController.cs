@@ -65,7 +65,7 @@ public class playerController : MonoBehaviour, IDamage
     bool isSprinting;
     bool isReloading;
     bool isAiming;
-    bool onGround;
+    public bool onGround;
     int selectGun;
     int HPOrig;
     float speedOrig;
@@ -110,7 +110,7 @@ public class playerController : MonoBehaviour, IDamage
 
 
 
-        if (controller.isGrounded && playerVelocity.y < 0)
+        if (controller.isGrounded && playerVelocity.y < 0.1f)
         {
             anim.SetFloat("Blend", Mathf.Lerp(anim.GetFloat("Blend"), move.normalized.magnitude * 2, Time.deltaTime * animLerpSpeed));
             onGround = true;
@@ -118,7 +118,7 @@ public class playerController : MonoBehaviour, IDamage
             timesJumped = 0;
             coyoteCounter = coyoteBuffer;
         }
-        else
+        else if (playerVelocity.y > 0.1f)
         {
             anim.SetFloat("Blend", Mathf.Lerp(anim.GetFloat("Blend"), 0, Time.deltaTime * animLerpSpeed));
             coyoteCounter -= Time.deltaTime;
