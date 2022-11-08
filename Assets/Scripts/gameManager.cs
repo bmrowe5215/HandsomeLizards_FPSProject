@@ -19,8 +19,8 @@ public class gameManager : MonoBehaviour
         mainmenu = 0,
         tutorial,
         stillBedroom,
-        LavaRiseOutSide,
-        RiseFallKitchen,
+        lavarise,
+        toybox,
         debug,
 
     }
