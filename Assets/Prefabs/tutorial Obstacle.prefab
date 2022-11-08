@@ -52,6 +52,7 @@ MonoBehaviour:
   log: {fileID: 6333212883509658708}
   HP: 10
   destroyTime: 20
+  enemyKillToggle: 0
 --- !u!33 &6199351803358126727
 MeshFilter:
   m_ObjectHideFlags: 0

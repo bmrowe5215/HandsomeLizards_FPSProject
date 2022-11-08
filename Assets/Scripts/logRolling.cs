@@ -8,6 +8,7 @@ public class logRolling : MonoBehaviour, IDamage
     [SerializeField] GameObject log;
     [SerializeField] float HP;
     [SerializeField] int destroyTime;
+    [SerializeField] bool enemyKillToggle;
     //[SerializeField] GameObject logSpawn;
     //Vector3 spawnPos;
     // Start is called before the first frame update
@@ -17,7 +18,12 @@ public class logRolling : MonoBehaviour, IDamage
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") )
+        {
+            other.GetComponent<IDamage>().takeDamage(99);
+        }
+
+        if (enemyKillToggle && other.CompareTag("Enemy"))
         {
             other.GetComponent<IDamage>().takeDamage(99);
         }

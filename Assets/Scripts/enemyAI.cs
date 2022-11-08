@@ -34,6 +34,7 @@ public class enemyAI : MonoBehaviour , IDamage
 
     bool isShooting;
     bool isDamaged;
+    bool isDead;
     public bool playerInRange;
     public bool aggro;
     Vector3 playerDir;
@@ -131,13 +132,14 @@ public class enemyAI : MonoBehaviour , IDamage
     {
         HP -= dmg;
 
-        if (HP <= 0)
+        if (HP <= 0 && isDead == false)
         {
             col.enabled = false;
             agent.enabled = false;
             head.enabled = false;
             gameManager.instance.checkEnemyTotal();
             anim.SetBool("Dead", true);
+            isDead = true;
             StartCoroutine(DespawnBody());
         }
         else

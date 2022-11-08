@@ -18,9 +18,10 @@ public class gameManager : MonoBehaviour
         //main menu is 0 since we want that to be the first thing the player sees.
         mainmenu = 0,
         tutorial,
-        lavarise,
+        stillBedroom,
+        LavaRiseOutSide,
+        RiseFallKitchen,
         debug,
-        toybox,
 
     }
     
@@ -31,6 +32,10 @@ public class gameManager : MonoBehaviour
 
     [Header("----- Prop Handler -----")]
     public ParticleSystem explosion;
+
+    [Header("----- Level Music -----")]
+    public AudioClip[] levelMusic;
+
 
     [Header("----- UI -----")]
     //the sound we play on ui button presses.
@@ -172,11 +177,23 @@ public class gameManager : MonoBehaviour
             if (enemyNum <= 0)
             {
                 winMenu.SetActive(true);
-                cursorLockPause();
+                popUpAnim.SetBool("Win", true);
+                StartCoroutine(winDelay());
+                //cursorLockPause();
             }
         }
     }
 
+    public IEnumerator winDelay()
+    {
+        if (popUpAnim.GetBool("Win"))
+        {
+            yield return new WaitForSeconds(1.6f);
+            cursorLockPause();
+        }
+        //yield return new WaitForSeconds(2f);
+        //cursorLockPause();
+    }
     public void speedruntimer(float time)
     {
         time += 1;

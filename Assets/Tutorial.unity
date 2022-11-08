@@ -248,6 +248,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 268781665333481820, guid: 10270d78792b38b459225570102e1302, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 268781665333481820, guid: 10270d78792b38b459225570102e1302, type: 3}
       propertyPath: m_Name
       value: Jump Pad Tutorial
       objectReference: {fileID: 0}
@@ -1184,6 +1188,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 268781665333481820, guid: 10270d78792b38b459225570102e1302, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 268781665333481820, guid: 10270d78792b38b459225570102e1302, type: 3}
       propertyPath: m_Name
       value: Enemy Tutorial
       objectReference: {fileID: 0}
@@ -1740,6 +1748,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 268781665333481820, guid: 10270d78792b38b459225570102e1302, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 268781665333481820, guid: 10270d78792b38b459225570102e1302, type: 3}
       propertyPath: m_Name
       value: Ground Pound Tutorial
@@ -2971,6 +2983,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 268781665333481820, guid: 10270d78792b38b459225570102e1302, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 268781665333481820, guid: 10270d78792b38b459225570102e1302, type: 3}
       propertyPath: m_Name
       value: Trap Tutorial
@@ -4642,6 +4658,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 268781665333481820, guid: 10270d78792b38b459225570102e1302, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 268781665333481820, guid: 10270d78792b38b459225570102e1302, type: 3}
       propertyPath: m_Name
       value: Movment Tutorial

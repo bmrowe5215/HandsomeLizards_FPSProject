@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Tutorial.unity
     guid: a8ad51433226fc5479a27d6194c7c6e7
   - enabled: 1
+    path: Assets/StillBedroom.unity
+    guid: 4d123003473179c48baaf3d1847014f6
+  - enabled: 1
     path: Assets/FloorIsLava Parkour Template.unity
     guid: 81598c748818b0a4cb7cb1ea131eed60
   - enabled: 1

@@ -18,7 +18,8 @@ public class VictoryBannerScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
            gameManager.instance.winMenu.SetActive(true);
-           gameManager.instance.cursorLockPause();
+            gameManager.instance.popUpAnim.SetBool("Win", true);
+            StartCoroutine(gameManager.instance.winDelay());
         }       
     }
 }

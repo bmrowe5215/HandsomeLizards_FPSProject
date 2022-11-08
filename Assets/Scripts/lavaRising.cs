@@ -75,7 +75,7 @@ public class lavaRising : MonoBehaviour
         // Kills both enemies and players.
         if (!other.isTrigger)
         {
-            if (other.gameObject.tag == "Player" || other.CompareTag("Enemy"))
+            if (other.gameObject.tag == "Player")
             {
                 yield return new WaitForSeconds(0.2f);
                 if (other.GetComponent<IDamage>() != null)
@@ -83,6 +83,10 @@ public class lavaRising : MonoBehaviour
                     other.GetComponent<IDamage>().takeDamage(9999);
                     gameManager.instance.playerLavaFlash.SetActive(true);
                 }
+            }
+            else if (other.CompareTag("Enemy"))
+            {
+                other.GetComponent<IDamage>().takeDamage(9999);
             }
         }
     }
@@ -130,7 +134,10 @@ public class lavaRising : MonoBehaviour
     {
         //sets the position of the lava below the checkpoint.
         Debug.Log("Lava Reset");
-        lavaPos.y = gameManager.instance.spawnPos.transform.position.y - resetValue;
+        if (lavaVariant != 0)
+        {
+            lavaPos.y = gameManager.instance.spawnPos.transform.position.y - resetValue;
+        }
         Debug.Log("Lava position is now: " + lavaPos);
     }
 }
