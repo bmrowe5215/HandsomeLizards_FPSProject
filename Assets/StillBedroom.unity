@@ -1493,6 +1493,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5445849438038623218, guid: ea2a13e843a465d4b8068842dafe25ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035901509237622738, guid: ea2a13e843a465d4b8068842dafe25ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea2a13e843a465d4b8068842dafe25ad, type: 3}
 --- !u!1 &822785734 stripped
@@ -2953,8 +2961,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Banner Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 2089029064995047167, guid: 79b7589a298f4d84fad38beef2fe9763, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 3694288113163973837, guid: 79b7589a298f4d84fad38beef2fe9763, type: 3}
+      propertyPath: flagCheckToggle
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

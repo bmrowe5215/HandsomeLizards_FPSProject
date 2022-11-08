@@ -97,7 +97,7 @@ public class gameManager : MonoBehaviour
             playerScript = player.GetComponent<playerController>();
         }
 
-        if (victoryBanner == null)
+        if (victoryBanner.GetComponent<VictoryBannerScript>().flagCheckToggle == false)
         {
             killCheckToggle = true;
             gameManager.instance.enemyCount.enabled = killCheckToggle;
