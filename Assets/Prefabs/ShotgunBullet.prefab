@@ -9,14 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8145064352459056266}
-  - component: {fileID: 4055323031323573760}
+  - component: {fileID: 7350628589589304822}
   - component: {fileID: 3521625222709706561}
   - component: {fileID: 8555912983932452718}
   - component: {fileID: 5979922208442830457}
   - component: {fileID: 6464858051730413362}
   - component: {fileID: 3898978710924022958}
   m_Layer: 10
-  m_Name: PistolBullet
+  m_Name: ShotgunBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,13 +31,13 @@ Transform:
   m_GameObject: {fileID: 8791136823394871425}
   m_LocalRotation: {x: 0.17437495, y: 0.6975692, z: -0.67754275, w: 0.15468171}
   m_LocalPosition: {x: 14.2429, y: 1.2412666, z: 4.9808}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 92.276, y: 31.061996, z: -122.022995}
---- !u!114 &4055323031323573760
+--- !u!114 &7350628589589304822
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53,7 +53,7 @@ MonoBehaviour:
   barrelDamageToggle: 0
   speed: 80
   damage: 1
-  destroyTime: 3
+  destroyTime: 5
 --- !u!33 &3521625222709706561
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -175,7 +175,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.5
+  m_Time: 0.8
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
