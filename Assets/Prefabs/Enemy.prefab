@@ -5992,7 +5992,7 @@ MonoBehaviour:
   roamDist: 30
   viewAngle: 70
   headPos: {fileID: 1248391279957796616}
-  damageFreeze: 0
+  damageFreeze: 0.1
   shootRate: 1
   bullet: {fileID: 8791136823394871425, guid: 72569965e96b97b4eb49841cc0a50ae1, type: 3}
   shootPos: {fileID: 1248391279957796728}

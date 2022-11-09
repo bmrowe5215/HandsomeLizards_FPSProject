@@ -414,7 +414,10 @@ public class playerController : MonoBehaviour, IDamage
     public void gunPickup(gunStats stats)
     {
         //Restart saves the current ammotracker count, but it works fine otherwise. Will fix in beta sprint
-        gunSlots[selectGun].SetActive(false);
+        foreach (GameObject slot in gunSlots)
+        {
+            slot.SetActive(false);
+        }
         shootRate = stats.shootRate;
         shootDist = stats.shootDist;
         shootDmg = stats.shootDmg;
@@ -429,7 +432,7 @@ public class playerController : MonoBehaviour, IDamage
         gunFOV = stats.gunFOV;
 
         selectGun = slotNum;
-        gunSlots[selectGun].SetActive(true);
+        gunSlots[slotNum].SetActive(true);
         gunStat.Add(stats);
         updateAmmoText();
     }
@@ -440,14 +443,14 @@ public class playerController : MonoBehaviour, IDamage
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectGun < gunStat.Count-1) 
             {
-                gunSlots[selectGun].SetActive(false);
+                gunSlots[slotNum].SetActive(false);
                 gunStat[selectGun].ammoTracker = ammoTracker;
                 selectGun++;
                 ammoTracker = gunStat[selectGun].ammoTracker;
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectGun > 0)
             {
-                gunSlots[selectGun].SetActive(false);
+                gunSlots[slotNum].SetActive(false);
                 gunStat[selectGun].ammoTracker = ammoTracker;
                 selectGun--;
                 ammoTracker = gunStat[selectGun].ammoTracker;

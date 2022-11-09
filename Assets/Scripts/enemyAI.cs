@@ -157,7 +157,8 @@ public class enemyAI : MonoBehaviour , IDamage
     {
         isShooting = true;
         anim.SetTrigger("Shoot");
-        Instantiate(bullet, shootPos.transform.position, transform.rotation);
+        Quaternion rotation = Quaternion.LookRotation(gameManager.instance.player.transform.position - transform.position);
+        Instantiate(bullet, shootPos.transform.position, rotation);
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
