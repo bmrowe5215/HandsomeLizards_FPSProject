@@ -127,7 +127,7 @@ public class gameManager : MonoBehaviour
         {
             isPaused = !isPaused;
             openedMenu = true;
-            Debug.Log($"Opened menu = {openedMenu}");
+            //Debug.Log($"Opened menu = {openedMenu}");
             pauseMenu.SetActive(isPaused);
 
             if (isPaused)

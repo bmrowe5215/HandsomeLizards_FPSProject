@@ -146,11 +146,11 @@ public class lavaRising : MonoBehaviour
     public void LavaReset()
     {
         //sets the position of the lava below the checkpoint.
-        Debug.Log("Lava Reset");
+        //Debug.Log("Lava Reset");
         if (lavaVariant != 0)
         {
             lavaPos.y = gameManager.instance.spawnPos.transform.position.y - resetValue;
         }
-        Debug.Log("Lava position is now: " + lavaPos);
+       // Debug.Log("Lava position is now: " + lavaPos);
     }
 }

@@ -101,7 +101,7 @@ public class enemyAI : MonoBehaviour , IDamage
         RaycastHit hit;
         if (Physics.Raycast(headPos.transform.position, playerDir, out hit, sightDist))
         {
-            Debug.DrawRay(headPos.transform.position, playerDir);
+            //Debug.DrawRay(headPos.transform.position, playerDir);
 
             if ((hit.collider.CompareTag("Player") && angle <= viewAngle) || aggro == true)
             {

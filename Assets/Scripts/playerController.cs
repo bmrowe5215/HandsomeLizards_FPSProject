@@ -194,7 +194,7 @@ public class playerController : MonoBehaviour, IDamage
 
             }
             //to make sure that i actually scripted this right
-            Debug.Log("ZOOM!");
+            //Debug.Log("ZOOM!");
             yield return new WaitForSeconds(2);
             //IT WORKS POGGERS
         }
@@ -268,7 +268,7 @@ public class playerController : MonoBehaviour, IDamage
                 aud.PlayOneShot(gunClip, playerGunAudVol);
                 muzzleFlash.Play();
                 --ammoTracker;
-                Debug.Log(ammoTracker);
+                //Debug.Log(ammoTracker);
 
                 Instantiate(bullet, shootPos.transform.position, shootPos.transform.rotation);
                 StartCoroutine(gunSlots[selectGun].GetComponent<recoil>().Recoil());
@@ -312,8 +312,8 @@ public class playerController : MonoBehaviour, IDamage
             aud.PlayOneShot(reloadClip, playerGunAudVol);           
             yield return new WaitForSeconds(reloadTime);
             ammoTracker = ammoCount;
-            Debug.Log("Reload");
-            Debug.Log(ammoTracker);
+            //Debug.Log("Reload");
+            //Debug.Log(ammoTracker);
             isReloading = false;
             updateAmmoText();
         }
@@ -374,7 +374,7 @@ public class playerController : MonoBehaviour, IDamage
             //this sends the player flying downward.
             playerVelocity.y = -jumpHeight * slamSpeed;
             //This only fires if crouch is pressed while in the air. or it should? idk its weird.
-            Debug.Log("GroundPound;");
+            //Debug.Log("GroundPound;");
             //
             //creates an array of colliders, we then filter through the colliders that contain the enemy tag, then apply physics to them.
             Collider[] enemyCol = Physics.OverlapSphere(gameObject.transform.position, 7.5f, LayerMask.GetMask("Enemy"), QueryTriggerInteraction.Ignore);
@@ -384,7 +384,7 @@ public class playerController : MonoBehaviour, IDamage
                 if (item.CompareTag("Enemy") && isFlying == false)
                 {
                     item.GetComponent<Animator>().SetBool("KnockUp", true);
-                    Debug.Log("Slam");
+                    //Debug.Log("Slam");
                     item.GetComponent<Rigidbody>().useGravity = true;
                     item.GetComponent<Rigidbody>().freezeRotation = true;
                     item.GetComponent<NavMeshAgent>().enabled = false;
@@ -528,7 +528,7 @@ public class playerController : MonoBehaviour, IDamage
     public void jumpPad(float jumpPadPower)
     {
         playerVelocity.y = jumpHeight * jumpPadPower;
-        Debug.Log("Jumppad() Triggered");
+        //Debug.Log("Jumppad() Triggered");
         timesJumped = 0;
         onGround = true;
         updateJumpHUD();

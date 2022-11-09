@@ -11,7 +11,7 @@ public class GPRadius : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("Enemy in Groundpound");
+            //Debug.Log("Enemy in Groundpound");
             foreach (var item in rbs)
             {
                 item.AddForce(0, 10, 0, ForceMode.Impulse);

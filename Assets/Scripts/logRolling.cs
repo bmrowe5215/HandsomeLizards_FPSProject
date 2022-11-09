@@ -34,7 +34,7 @@ public class logRolling : MonoBehaviour, IDamage
         HP -= dmg;
         if (HP <= 0)
         { 
-            Debug.Log("BOOM");
+            //Debug.Log("BOOM");
             Destroy(gameObject, 1.5f);
         }
     }

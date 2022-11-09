@@ -27,7 +27,7 @@ public class ExplosiveBarrel : MonoBehaviour, IDamage
             gameObject.GetComponent<MeshCollider>().enabled = false;
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             blowUp();
-            Debug.Log("BOOM");
+           //Debug.Log("BOOM");
             Destroy(gameObject,1.5f);
         }
     }
