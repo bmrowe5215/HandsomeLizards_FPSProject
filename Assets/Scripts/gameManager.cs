@@ -19,10 +19,10 @@ public class gameManager : MonoBehaviour
         //main menu is 0 since we want that to be the first thing the player sees.
         mainmenu = 0,
         tutorial,
-        stillBedroom,
-        lavarise,
+        still,
+        rising,
+        risefall,
         debug,
-        toybox,
 
     }
     
@@ -81,6 +81,7 @@ public class gameManager : MonoBehaviour
         timer = 0;
         instance = this;
         currentLevelID = SceneManager.GetActiveScene().buildIndex;
+      
         player = GameObject.FindGameObjectWithTag("Player");
         //playerScript = player.GetComponent<playerController>();
         spawnPos = GameObject.FindGameObjectWithTag("Spawn Position");
@@ -97,7 +98,7 @@ public class gameManager : MonoBehaviour
             playerScript = player.GetComponent<playerController>();
         }
 
-        if (victoryBanner.GetComponent<VictoryBannerScript>().flagCheckToggle == false)
+        if (victoryBanner == null)
         {
             killCheckToggle = true;
             gameManager.instance.enemyCount.enabled = killCheckToggle;

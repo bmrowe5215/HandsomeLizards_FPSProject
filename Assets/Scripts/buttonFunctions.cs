@@ -59,8 +59,17 @@ public class buttonFunctions : MonoBehaviour
 
     public void continueButton()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        gameManager.instance.cursorUnlockUnpause();
+        if (SceneManager.GetActiveScene().buildIndex != (int)gameManager.levelID.debug)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            gameManager.instance.cursorUnlockUnpause();
+
+        }
+        else
+        {
+            SceneManager.LoadScene((int)gameManager.levelID.mainmenu);
+            gameManager.instance.cursorUnlockUnpause();
+        }
     }
     
     public void levelSelect()
@@ -79,19 +88,19 @@ public class buttonFunctions : MonoBehaviour
 
     public void stillLevel()
     {
-        SceneManager.LoadScene((int)gameManager.levelID.stillBedroom);
+        SceneManager.LoadScene((int)gameManager.levelID.still);
         gameManager.instance.cursorUnlockUnpause();
     }
 
     public void riseLevel()
     {
-        SceneManager.LoadScene((int)gameManager.levelID.lavarise);
+        SceneManager.LoadScene((int)gameManager.levelID.rising);
         gameManager.instance.cursorUnlockUnpause();
     }
 
     public void risefallLevel()
     {
-        SceneManager.LoadScene((int)gameManager.levelID.tutorial);
+        SceneManager.LoadScene((int)gameManager.levelID.risefall);
         gameManager.instance.cursorUnlockUnpause();
     }
 

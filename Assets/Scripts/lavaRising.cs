@@ -6,10 +6,14 @@ public class lavaRising : MonoBehaviour
 {
     Vector3 lavaPos;
     Vector3 startPos;
+    Quaternion rotation;
+    float xRot;
+    float zRot;
     [SerializeField] float yPos;
     [SerializeField] float yPosMax;
     [SerializeField] float resetValue;
     [SerializeField] float riseRate;
+    [SerializeField] Quaternion lavaTilt;
     [Range(0, 2)][SerializeField] int lavaVariant;
     [Header("Toggles between the rise and fall and rise only modes.")]
     //[SerializeField] bool lavaToggle;
@@ -22,6 +26,9 @@ public class lavaRising : MonoBehaviour
 
     void Start()
     {
+        //xRot = gameObject.transform.rotation.x;
+        //zRot = gameObject.transform.rotation.z;
+        rotation = gameObject.transform.rotation;
         lavaPos = gameObject.transform.position;
         startPos = lavaPos;
         //true = lava rising 
@@ -48,10 +55,16 @@ public class lavaRising : MonoBehaviour
                 break;
             case 1:
                 lavaPos.y = Mathf.Lerp(lavaPos.y, yPosMax, riseRate * Time.deltaTime);
+                rotation = Quaternion.Lerp(rotation, lavaTilt, Time.deltaTime * riseRate);
+
+                gameObject.transform.rotation = rotation;
                 gameObject.transform.position = lavaPos;
                 break;
             case 2:
                 lavaPos.y = Mathf.Lerp(lrfStartPos, lrfMaxPos, Mathf.PingPong(Time.time * riseRate, 1));
+                rotation = Quaternion.Lerp(rotation, lavaTilt, Time.deltaTime * riseRate);
+
+                gameObject.transform.rotation = rotation;
                 gameObject.transform.position = lavaPos;
                 break;
         }

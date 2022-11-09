@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/FloorIsLava Parkour Template.unity
     guid: 81598c748818b0a4cb7cb1ea131eed60
   - enabled: 1
+    path: Assets/RiseFall.unity
+    guid: 30ec81e1315eeb24baa216419857ff5d
+  - enabled: 1
     path: Assets/Scenes/Debug.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
