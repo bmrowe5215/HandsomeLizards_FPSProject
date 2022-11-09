@@ -4,6 +4,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Animations;
 using UnityEngine.SceneManagement;
 
 public class playerController : MonoBehaviour, IDamage
@@ -269,27 +270,23 @@ public class playerController : MonoBehaviour, IDamage
                 muzzleFlash.Play();
                 --ammoTracker;
                 Debug.Log(ammoTracker);
-
-                Instantiate(bullet, shootPos.transform.position, shootPos.transform.rotation);
+                if (slotNum == 2)
+                {
+                    for(int i = 0; i < 6; i++)
+                    {
+                        Vector3 bloom = shootPos.transform.position + shootPos.transform.forward * 1000f;
+                        bloom += Random.Range(-50, 50) * shootPos.transform.up;
+                        bloom += Random.Range(-50, 50) * shootPos.transform.right;
+                        bloom -= shootPos.transform.position;
+                        bloom.Normalize();
+                        Instantiate(bullet, shootPos.transform.position, Quaternion.LookRotation(bloom));
+                    }
+                }
+                else
+                {
+                    Instantiate(bullet, shootPos.transform.position, shootPos.transform.rotation);
+                }
                 StartCoroutine(gunSlots[selectGun].GetComponent<recoil>().Recoil());
-                //if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
-                //{
-                //    //Instantiate(cube, hit.point, transform.rotation);
-                //    if (hit.collider.GetComponent<IDamage>() != null && !hit.collider.CompareTag("weakPoint"))
-                //    {
-                //        //raycast hits a collider, checks if it has IDamage, and if it ISNT a weakpoint, and if it is then do normal damage.
-                //        hit.collider.GetComponent<IDamage>().takeDamage(shootDmg);
-                //    }
-                //    else if (hit.collider.GetComponent<IDamage>() != null && hit.collider.CompareTag("weakPoint"))
-                //    {
-                //        //ok so this adjustment to the shoot code should allow us to implement weakpoints on ANY enemy, and allow us to check if we hit a collider
-                //        //listed as a weakPoint, and do double damage to it, and it scales off of weapon damage.
-                //        //raycast hits a collider, checks for idamage, then do critical damage.
-                //        //I want to add feedback to headshots, like a critical headshot kill makes their head explode or something.
-                //        hit.collider.GetComponent<IDamage>().takeDamage(shootDmg);
-                //    }
-                //}
-
                 yield return new WaitForSeconds(shootRate);
                 muzzleFlash.Stop();
                 

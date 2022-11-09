@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Gun - Shotgun
   m_EditorClassIdentifier: 
   shootRate: 0.5
-  shootDist: 35
+  shootDist: 40
   shootDmg: 1
-  ammoCount: 10
-  ammoTracker: 10
+  ammoCount: 8
+  ammoTracker: 8
   slotNum: 2
-  reloadTime: 0
+  reloadTime: 1.3
   gunFOV: 45
-  bullet: {fileID: 0}
-  gunModel: {fileID: 919132149155446097, guid: 726e329e1719c8f42949342e6a5b42e3, type: 3}
-  gunClip: {fileID: 0}
-  reloadClip: {fileID: 0}
+  bullet: {fileID: 8791136823394871425, guid: 026e4c79b3db6d446bb8079b2d058923, type: 3}
+  gunModel: {fileID: 919132149155446097, guid: fe86477315c1bec49883002ccfa744a4, type: 3}
+  gunClip: {fileID: 8300000, guid: ffa45816b43df074790e9986c5b85b3c, type: 3}
+  reloadClip: {fileID: 8300000, guid: c4f24bb3e1531b44796fc33c46287cea, type: 3}
   emptyClip: {fileID: 8300000, guid: 1ce7890406010c443a54576a00835e5a, type: 3}
   hitEffect: {fileID: 0}
   bulletEffect: {fileID: 0}
