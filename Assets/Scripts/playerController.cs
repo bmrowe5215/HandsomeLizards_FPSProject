@@ -4,6 +4,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Animations;
 using UnityEngine.SceneManagement;
 
 public class playerController : MonoBehaviour, IDamage
@@ -103,10 +104,10 @@ public class playerController : MonoBehaviour, IDamage
     void movement()
     {
         // Debug Level Loader
-        //if (Input.GetKeyDown("[+]"))
-        //{
-        //    SceneManager.LoadScene((int)gameManager.levelID.debug);
-        //}
+        if (Input.GetKeyDown("[+]"))
+        {
+            SceneManager.LoadScene((int)gameManager.levelID.debug);
+        }
 
 
 
@@ -194,7 +195,7 @@ public class playerController : MonoBehaviour, IDamage
 
             }
             //to make sure that i actually scripted this right
-            //Debug.Log("ZOOM!");
+            Debug.Log("ZOOM!");
             yield return new WaitForSeconds(2);
             //IT WORKS POGGERS
         }
@@ -268,28 +269,24 @@ public class playerController : MonoBehaviour, IDamage
                 aud.PlayOneShot(gunClip, playerGunAudVol);
                 muzzleFlash.Play();
                 --ammoTracker;
-                //Debug.Log(ammoTracker);
-
-                Instantiate(bullet, shootPos.transform.position, shootPos.transform.rotation);
+                Debug.Log(ammoTracker);
+                if (slotNum == 2)
+                {
+                    for(int i = 0; i < 6; i++)
+                    {
+                        Vector3 bloom = shootPos.transform.position + shootPos.transform.forward * 1000f;
+                        bloom += Random.Range(-50, 50) * shootPos.transform.up;
+                        bloom += Random.Range(-50, 50) * shootPos.transform.right;
+                        bloom -= shootPos.transform.position;
+                        bloom.Normalize();
+                        Instantiate(bullet, shootPos.transform.position, Quaternion.LookRotation(bloom));
+                    }
+                }
+                else
+                {
+                    Instantiate(bullet, shootPos.transform.position, shootPos.transform.rotation);
+                }
                 StartCoroutine(gunSlots[selectGun].GetComponent<recoil>().Recoil());
-                //if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
-                //{
-                //    //Instantiate(cube, hit.point, transform.rotation);
-                //    if (hit.collider.GetComponent<IDamage>() != null && !hit.collider.CompareTag("weakPoint"))
-                //    {
-                //        //raycast hits a collider, checks if it has IDamage, and if it ISNT a weakpoint, and if it is then do normal damage.
-                //        hit.collider.GetComponent<IDamage>().takeDamage(shootDmg);
-                //    }
-                //    else if (hit.collider.GetComponent<IDamage>() != null && hit.collider.CompareTag("weakPoint"))
-                //    {
-                //        //ok so this adjustment to the shoot code should allow us to implement weakpoints on ANY enemy, and allow us to check if we hit a collider
-                //        //listed as a weakPoint, and do double damage to it, and it scales off of weapon damage.
-                //        //raycast hits a collider, checks for idamage, then do critical damage.
-                //        //I want to add feedback to headshots, like a critical headshot kill makes their head explode or something.
-                //        hit.collider.GetComponent<IDamage>().takeDamage(shootDmg);
-                //    }
-                //}
-
                 yield return new WaitForSeconds(shootRate);
                 muzzleFlash.Stop();
                 
@@ -312,8 +309,8 @@ public class playerController : MonoBehaviour, IDamage
             aud.PlayOneShot(reloadClip, playerGunAudVol);           
             yield return new WaitForSeconds(reloadTime);
             ammoTracker = ammoCount;
-            //Debug.Log("Reload");
-            //Debug.Log(ammoTracker);
+            Debug.Log("Reload");
+            Debug.Log(ammoTracker);
             isReloading = false;
             updateAmmoText();
         }
@@ -374,7 +371,7 @@ public class playerController : MonoBehaviour, IDamage
             //this sends the player flying downward.
             playerVelocity.y = -jumpHeight * slamSpeed;
             //This only fires if crouch is pressed while in the air. or it should? idk its weird.
-            //Debug.Log("GroundPound;");
+            Debug.Log("GroundPound;");
             //
             //creates an array of colliders, we then filter through the colliders that contain the enemy tag, then apply physics to them.
             Collider[] enemyCol = Physics.OverlapSphere(gameObject.transform.position, 7.5f, LayerMask.GetMask("Enemy"), QueryTriggerInteraction.Ignore);
@@ -384,7 +381,7 @@ public class playerController : MonoBehaviour, IDamage
                 if (item.CompareTag("Enemy") && isFlying == false)
                 {
                     item.GetComponent<Animator>().SetBool("KnockUp", true);
-                    //Debug.Log("Slam");
+                    Debug.Log("Slam");
                     item.GetComponent<Rigidbody>().useGravity = true;
                     item.GetComponent<Rigidbody>().freezeRotation = true;
                     item.GetComponent<NavMeshAgent>().enabled = false;
@@ -528,7 +525,7 @@ public class playerController : MonoBehaviour, IDamage
     public void jumpPad(float jumpPadPower)
     {
         playerVelocity.y = jumpHeight * jumpPadPower;
-        //Debug.Log("Jumppad() Triggered");
+        Debug.Log("Jumppad() Triggered");
         timesJumped = 0;
         onGround = true;
         updateJumpHUD();

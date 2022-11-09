@@ -62,7 +62,7 @@ MonoBehaviour:
   head: {fileID: 4952444477627907489}
   HP: 5
   speedChase: 10
-  facePlayerSpeed: 8
+  facePlayerSpeed: 10
   animLerpSpeed: 2
   sightDist: 30
   roamDist: 40

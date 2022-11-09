@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class recoil : MonoBehaviour
 {
-    public Vector3 upRecoil;
-    public float recoilTime;
+    [SerializeField] Vector3 upRecoil;
+    [SerializeField] float recoilTime;
     Vector3 originalRotation;
 
     // Start is called before the first frame update
