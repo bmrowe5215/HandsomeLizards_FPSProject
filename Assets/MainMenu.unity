@@ -320,6 +320,51 @@ PrefabInstance:
       propertyPath: levelMusic.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: 5f89d963f9238684db25415d1fd790b4, type: 3}
+    - target: {fileID: 3182804401865018289, guid: 917f184d1b56b5d4f87203edffe7fe1d, type: 3}
+      propertyPath: m_text
+      value: 'Game by:
+
+        Bernardo San Germano & Brandon Rowe
+
+        Sound
+        Composer: Kevin Macleod (LEGEND)
+
+
+        Assets from Unity Asset Store:
+
+        Custom
+        Teleporter Pad by Damaged Grounds,
+
+        First Aid Set by GeeKay 3D,
+
+        Fog
+        of War Gun SFX Free by Into The Void Sound Design,
+
+        Retro Noisy Explosion
+        Sound Pack Lite by Hiro (hamstone),
+
+        Toon Soldiers Demo by Polygon
+        Blacksmith,
+
+        Low-poly Combat Drone by VoodooPlay
+
+        WorldSkies
+        Free Skybox Pack by Pulsar Bytes,
+
+        Big Furniture Pack by Vertex Studio,
+
+        Lava
+        Flowing Shader by Moonflower Carnivore,
+
+        Scifi Gun Pack by Quaternion
+
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520414913049662955, guid: 917f184d1b56b5d4f87203edffe7fe1d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4977661998567147615, guid: 917f184d1b56b5d4f87203edffe7fe1d, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
