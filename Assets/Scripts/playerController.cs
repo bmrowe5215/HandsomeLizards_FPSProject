@@ -103,10 +103,10 @@ public class playerController : MonoBehaviour, IDamage
     void movement()
     {
         // Debug Level Loader
-        if (Input.GetKeyDown("[+]"))
-        {
-            SceneManager.LoadScene((int)gameManager.levelID.debug);
-        }
+        //if (Input.GetKeyDown("[+]"))
+        //{
+        //    SceneManager.LoadScene((int)gameManager.levelID.debug);
+        //}
 
 
 
