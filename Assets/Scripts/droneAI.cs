@@ -9,12 +9,21 @@ public class droneAI : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] SphereCollider sightCollider;
+    //[SerializeField] GameObject headHitbox;
+    // ignore this this was cringe.
     [SerializeField] AudioSource enemyHurt;
+    [SerializeField] Collider col;
+    [SerializeField] Collider head;
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] int HP;
+    [SerializeField] float speedChase;
     [SerializeField] int facePlayerSpeed;
+    [SerializeField] int animLerpSpeed;
     [SerializeField] int sightDist;
+    [SerializeField] int roamDist;
+    [Range(0, 180)][SerializeField] int viewAngle;
+    [SerializeField] GameObject headPos;
     [Range(0, 3)][SerializeField] float damageFreeze;
 
     [Header("----- Gun Stats -----")]
@@ -23,45 +32,130 @@ public class droneAI : MonoBehaviour, IDamage
     [SerializeField] GameObject shootPos;
 
     bool isShooting;
+    bool isDamaged;
+    bool isDead;
     public bool playerInRange;
+    public bool aggro;
+    Vector3 playerDir;
+    Vector3 startingPos;
+    float stoppingDistOrig;
+    float angle;
+    float speedPatrol;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameManager.instance.enemyNum++;
-        gameManager.instance.enemyCount.text = gameManager.instance.enemyNum.ToString("F0");
-        sightCollider.radius = sightDist;
-
+        //gameManager.instance.enemyNum++;
+        //gameManager.instance.enemyCount.text = gameManager.instance.enemyNum.ToString("F0");
+        stoppingDistOrig = agent.stoppingDistance;
+        startingPos = transform.position;
+        speedPatrol = agent.speed;
+        roam();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (agent.enabled && playerInRange)
+        if (HP > 0)
         {
-            agent.SetDestination(gameManager.instance.player.transform.position);
 
-            if (!isShooting)
-                StartCoroutine(shoot());
+            //Debug.Log(angle);
+            if (agent.enabled)
+            {
+                if (playerInRange)
+                {
+                    playerDir = gameManager.instance.player.transform.position - headPos.transform.position;
+                    angle = Vector3.Angle(playerDir, transform.forward);
+                    canSeePlayer();
+                }
+                else
+                    aggro = false;
+                if (agent.remainingDistance < 0.1f && agent.destination != gameManager.instance.player.transform.position)
+                    roam();
+            }
         }
+    }
+
+    void roam()
+    {
+        agent.stoppingDistance = 0;
+        agent.speed = speedPatrol;
+
+        Vector3 randomDir = Random.insideUnitSphere * roamDist;
+        randomDir += startingPos;
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomDir, out hit, 1, 1))
+        {
+            NavMeshPath path = new NavMeshPath();
+
+            agent.CalculatePath(hit.position, path);
+            agent.SetPath(path);
+        }
+    }
+
+    void canSeePlayer()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(headPos.transform.position, playerDir, out hit, sightDist))
+        {
+            Debug.DrawRay(headPos.transform.position, playerDir);
+
+            if ((hit.collider.CompareTag("Player") && angle <= viewAngle) || aggro == true)
+            {
+                aggro = true;
+                agent.speed = speedChase;
+                agent.stoppingDistance = stoppingDistOrig;
+                agent.SetDestination(gameManager.instance.player.transform.position);
+
+                if (agent.remainingDistance < agent.stoppingDistance)
+                    facePlayer();
+
+                if (!isShooting)
+                    StartCoroutine(shoot());
+            }
+        }
+        else if (agent.remainingDistance < 0.1f && agent.destination != gameManager.instance.player.transform.position)
+            roam();
+    }
+
+    void facePlayer()
+    {
+        playerDir.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(playerDir);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * facePlayerSpeed);
     }
 
     public void takeDamage(int dmg)
     {
         HP -= dmg;
-        enemyHurt.PlayOneShot(enemyHurt.clip, 0.1f);
-        StartCoroutine(flashDamage());
-        if (HP <= 0)
+
+        if (HP <= 0 && isDead == false)
         {
+            //col.enabled = false;
+            agent.enabled = false;
+            head.enabled = false;
+            this.GetComponent<Rigidbody>().useGravity = true;
             gameManager.instance.checkEnemyTotal();
-            Destroy(gameObject);
+            isDead = true;
+            StartCoroutine(DespawnBody());
         }
+        else
+            if (!isDamaged)
+            StartCoroutine(flashDamage());
+    }
+
+    IEnumerator DespawnBody()
+    {
+        yield return new WaitForSeconds(10);
+        Destroy(gameObject);
     }
 
     IEnumerator shoot()
     {
         isShooting = true;
-        Instantiate(bullet, shootPos.transform.position, transform.rotation);
+        Quaternion rotation = Quaternion.LookRotation(gameManager.instance.player.transform.position - transform.position);
+        Instantiate(bullet, shootPos.transform.position, rotation);
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
@@ -70,11 +164,14 @@ public class droneAI : MonoBehaviour, IDamage
     {
         if (agent.isActiveAndEnabled)
         {
+            isDamaged = true;
             model.material.color = Color.red;
             agent.enabled = false;
             yield return new WaitForSeconds(damageFreeze);
             model.material.color = Color.white;
             agent.enabled = true;
+            agent.SetDestination(gameManager.instance.player.transform.position);
+            isDamaged = false;
         }
     }
 
@@ -91,6 +188,7 @@ public class droneAI : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            agent.stoppingDistance = 0;
         }
     }
 }

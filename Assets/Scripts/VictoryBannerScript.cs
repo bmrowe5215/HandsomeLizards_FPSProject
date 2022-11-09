@@ -8,7 +8,12 @@ public class VictoryBannerScript : MonoBehaviour
     private void Start()
     {
         Debug.Log($"{gameManager.instance.killCheckToggle}");
-        if (!flagCheckToggle) this.GetComponent<Collider>().enabled = false;
+        if (!flagCheckToggle)
+        {
+            this.GetComponent<MeshCollider>().enabled = false;
+            this.GetComponent<MeshRenderer>().enabled = false;
+        }
+            
     }
     private void OnTriggerEnter(Collider other)
     {
