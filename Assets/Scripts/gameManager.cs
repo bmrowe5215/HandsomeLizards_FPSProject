@@ -81,7 +81,10 @@ public class gameManager : MonoBehaviour
         timer = 0;
         instance = this;
         currentLevelID = SceneManager.GetActiveScene().buildIndex;
-      
+
+        
+        
+        
         player = GameObject.FindGameObjectWithTag("Player");
         //playerScript = player.GetComponent<playerController>();
         spawnPos = GameObject.FindGameObjectWithTag("Spawn Position");
@@ -112,7 +115,10 @@ public class gameManager : MonoBehaviour
         //Then find the song corresponding to the array's index in the level index.
         if (levelMusic[currentLevelID] != null)
         {
+            Debug.Log("Music Playing = " + levelMusic[currentLevelID]);
             menuMusicAudio.PlayOneShot(levelMusic[currentLevelID]);
+            
+            //menuMusicAudio.loop = true;
         }
     }
 

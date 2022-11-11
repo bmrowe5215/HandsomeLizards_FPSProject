@@ -192,6 +192,7 @@ MonoBehaviour:
   ammoCount: 0
   ammoTracker: 0
   reloadTime: 0
+  gunFOV: 0
   gunSlots:
   - {fileID: 5445849438038623218}
   - {fileID: 9035901509237622738}
@@ -228,6 +229,7 @@ MonoBehaviour:
   emptyClip: {fileID: 8300000, guid: d3bfc09906578ae4f97f0be75ae2cce8, type: 3}
   playerGunAudVol: 0.3
   timesJumped: 0
+  onGround: 0
 --- !u!143 &520859073099407139
 CharacterController:
   m_ObjectHideFlags: 0
@@ -269,7 +271,7 @@ AudioSource:
   m_GameObject: {fileID: 520859073099407137}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2898975968958154494, guid: 240c09603e4693244819d659bd9802dc, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -678,7 +680,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 1000
+  far clip plane: 2000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1434,7 +1436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4672585328169441608
 Transform:
   m_ObjectHideFlags: 0
@@ -1463,6 +1465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upRecoil: {x: 0.2, y: 0, z: 0}
+  recoilTime: 0
 --- !u!33 &8608490002746365677
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7452,7 +7455,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8515788067489324392
 Transform:
   m_ObjectHideFlags: 0
@@ -7481,6 +7484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upRecoil: {x: 0.2, y: 0, z: 0}
+  recoilTime: 0
 --- !u!33 &4720321846383809229
 MeshFilter:
   m_ObjectHideFlags: 0

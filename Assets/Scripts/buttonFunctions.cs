@@ -115,7 +115,8 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.menuCurrentlyOpen = gameManager.instance.creditsMenu;
         gameManager.instance.mainMenuSubmenu.SetActive(false);
         gameManager.instance.creditsMenu.SetActive(true);
-        
+        gameManager.instance.menuUIAudio.PlayOneShot(gameManager.instance.debugBruh);
+
     }
     public void respawn()
     {

@@ -308,22 +308,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1463112123, guid: 917f184d1b56b5d4f87203edffe7fe1d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2634704793075631674, guid: 917f184d1b56b5d4f87203edffe7fe1d, type: 3}
-      propertyPath: levelMusic.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2634704793075631674, guid: 917f184d1b56b5d4f87203edffe7fe1d, type: 3}
-      propertyPath: levelMusic.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 5f89d963f9238684db25415d1fd790b4, type: 3}
-    - target: {fileID: 4977661998567147615, guid: 917f184d1b56b5d4f87203edffe7fe1d, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8459959875542782951, guid: 917f184d1b56b5d4f87203edffe7fe1d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
