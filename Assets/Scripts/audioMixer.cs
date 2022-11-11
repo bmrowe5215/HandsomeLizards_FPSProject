@@ -62,4 +62,12 @@ public class audioMixer : MonoBehaviour
             gameManager.instance.menuUIAudio.Play();
         }
     }
+
+    //public void wakeupSetUP()
+    //{
+    //    MasterSlider.value = PlayerPrefs.GetFloat("Master", 1f);
+    //    MusicSlider.value = PlayerPrefs.GetFloat("Music", 1f);
+    //    SFXSlider.value = PlayerPrefs.GetFloat("Sound Effects", 1f);
+    //    UISlider.value = PlayerPrefs.GetFloat("UI", 1f);
+    //}
 }
