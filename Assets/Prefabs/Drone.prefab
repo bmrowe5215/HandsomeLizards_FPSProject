@@ -405,7 +405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headBone: {fileID: 4952444477627907488}
   critEffect: {fileID: 1663169470}
-  critSource: {fileID: 0}
+  critSource: {fileID: 4032240588603395399}
   critSound: {fileID: 8300000, guid: 2a9f468567f9c064f87a1059fd9d13aa, type: 3}
 --- !u!199 &1663169471
 ParticleSystemRenderer:

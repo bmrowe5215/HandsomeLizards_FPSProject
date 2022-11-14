@@ -1482,6 +1482,10 @@ PrefabInstance:
       propertyPath: levelMusic.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: fc6ef88df72f1234884ca66bc676d521, type: 3}
+    - target: {fileID: 6863576610698909962, guid: 378b0f7a48327bd4caa671b6f4e6f8bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7668306009739756999, guid: 378b0f7a48327bd4caa671b6f4e6f8bf, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2777,7 +2781,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 11769dcbd1ff2664f93a1c127f1c64e6, type: 3}
+  m_Mesh: {fileID: 4300080, guid: fde463d1640be964dad05cce1c744989, type: 3}
 --- !u!1001 &1518929099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3665,24 +3669,32 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4683107469847712790, guid: 576191bb06e0e73488fe91f3c703bcc4, type: 3}
       propertyPath: m_Size.x
-      value: 5
+      value: 4.246943
       objectReference: {fileID: 0}
     - target: {fileID: 4683107469847712790, guid: 576191bb06e0e73488fe91f3c703bcc4, type: 3}
       propertyPath: m_Size.y
-      value: 5
+      value: 1.6942005
       objectReference: {fileID: 0}
     - target: {fileID: 4683107469847712790, guid: 576191bb06e0e73488fe91f3c703bcc4, type: 3}
       propertyPath: m_Size.z
-      value: 5
+      value: 3.620459
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683107469847712790, guid: 576191bb06e0e73488fe91f3c703bcc4, type: 3}
+      propertyPath: m_Center.x
+      value: 0.04803734
       objectReference: {fileID: 0}
     - target: {fileID: 4683107469847712790, guid: 576191bb06e0e73488fe91f3c703bcc4, type: 3}
       propertyPath: m_Center.y
-      value: 2.51
+      value: 2.1071005
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683107469847712790, guid: 576191bb06e0e73488fe91f3c703bcc4, type: 3}
+      propertyPath: m_Center.z
+      value: 0.019226074
       objectReference: {fileID: 0}
     - target: {fileID: 4683107469847712808, guid: 576191bb06e0e73488fe91f3c703bcc4, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4300000, guid: 11769dcbd1ff2664f93a1c127f1c64e6, type: 3}
+      objectReference: {fileID: 4300080, guid: fde463d1640be964dad05cce1c744989, type: 3}
     - target: {fileID: 4683107469847712809, guid: 576191bb06e0e73488fe91f3c703bcc4, type: 3}
       propertyPath: m_RootOrder
       value: 14
