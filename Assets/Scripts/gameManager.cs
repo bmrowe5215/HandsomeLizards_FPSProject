@@ -45,6 +45,10 @@ public class gameManager : MonoBehaviour
     public AudioSource menuMusicAudio;
     public AudioClip debugBruh;
     public AudioClip debugGun;
+    public Slider masterSliderNav;
+    public Button menuButtonNav;
+    public Button levelSelectButtonNav;
+    public Button creditButtonNav;
    //
     public GameObject pauseMenu;
     public GameObject playerDeadMenu;
@@ -129,7 +133,7 @@ public class gameManager : MonoBehaviour
             timer += Time.deltaTime;
             speedruntimer(timer);
         }
-        if (Input.GetButtonDown("Cancel") && !playerDeadMenu.activeSelf && !winMenu.activeSelf)
+        if (Input.GetButtonDown("Cancel") && !playerDeadMenu.activeSelf && !winMenu.activeSelf && SceneManager.GetActiveScene().buildIndex != (int)levelID.mainmenu)
         {
             isPaused = !isPaused;
             openedMenu = true;

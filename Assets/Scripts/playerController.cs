@@ -132,7 +132,7 @@ public class playerController : MonoBehaviour, IDamage
         move = (transform.right * Input.GetAxis("Horizontal")) +
                        (transform.forward * Input.GetAxis("Vertical"));
 
-        if (Input.GetButtonDown("Jump") && timesJumped < jumpsMax)
+        if (Input.GetButtonDown("Jump") && timesJumped < jumpsMax && !gameManager.instance.pauseMenu.activeSelf)
         {
             StartCoroutine(playJump());
             timesJumped++;

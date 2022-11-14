@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class buttonFunctions : MonoBehaviour
+public class buttonFunctions : MonoBehaviour 
 {
+
+   
+   
+
     public void resume()
     {
         gameManager.instance.cursorUnlockUnpause();
@@ -24,6 +29,7 @@ public class buttonFunctions : MonoBehaviour
 
     public void options()
     {
+        gameManager.instance.masterSliderNav.Select();
         gameManager.instance.mainMenuSubmenu.SetActive(false);
         gameManager.instance.optionsMenu.SetActive(true);
         gameManager.instance.menuCurrentlyOpen = gameManager.instance.optionsMenu;
@@ -33,6 +39,7 @@ public class buttonFunctions : MonoBehaviour
 
     public void goBack()
     {
+        gameManager.instance.menuButtonNav.Select();
         gameManager.instance.menuCurrentlyOpen.SetActive(false);
         gameManager.instance.mainMenuSubmenu.SetActive(true);
         gameManager.instance.menuUIAudio.PlayOneShot(gameManager.instance.debugBruh);
@@ -74,6 +81,7 @@ public class buttonFunctions : MonoBehaviour
     
     public void levelSelect()
     {
+        gameManager.instance.levelSelectButtonNav.Select();
         gameManager.instance.mainMenuSubmenu.SetActive(false);
         gameManager.instance.levelselectMenu.SetActive(true);
         gameManager.instance.menuCurrentlyOpen = gameManager.instance.levelselectMenu;
@@ -112,6 +120,7 @@ public class buttonFunctions : MonoBehaviour
 
     public void credits()
     {
+        gameManager.instance.creditButtonNav.Select();
         gameManager.instance.menuCurrentlyOpen = gameManager.instance.creditsMenu;
         gameManager.instance.mainMenuSubmenu.SetActive(false);
         gameManager.instance.creditsMenu.SetActive(true);
