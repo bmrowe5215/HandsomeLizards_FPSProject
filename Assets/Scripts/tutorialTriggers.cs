@@ -35,12 +35,18 @@ public class tutorialTriggers : MonoBehaviour
         // check if player
         if (other.CompareTag("Player"))
         {
+            if (gameManager.instance.openTutorial == true)
+            {
+                yield return new WaitUntil(() => gameManager.instance.openTutorial == false);
+            }
             //Problem: If you hit multiple triggers in a row, it gets really messy.
             //Solution: Enter a trigger, if theres a message already being displayed then disable it.
 
             //stores which tutorial message is currently on screen.
             currentlyOpened = TutorialMessages[(int)triggerid];
-          
+
+            gameManager.instance.openTutorial = true;
+
             //Turns on Background
             textBackground.SetActive(true);
             //Fetches the selected enum, and the correspoding message
@@ -48,9 +54,11 @@ public class tutorialTriggers : MonoBehaviour
             //Because OnTriggerEnter can be a IEnumerator you can have a baked in timer, which is BALLER AS HELL.
             // making this whole thing possible. Absolutely Goated
             // it also allows for people to walk back into it if they want to re learn something. This method is goated and can be used universally in any level.
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(4f);
+
             textBackground.SetActive(false);
             TutorialMessages[(int)triggerid].SetActive(false);
+            gameManager.instance.openTutorial = false;
         }
     }
 

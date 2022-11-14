@@ -24,7 +24,7 @@ public class VictoryBannerScript : MonoBehaviour
         //and toggle between kill goal and "reach the flag" goal
         if (other.CompareTag("Player") && !hasWon && gameManager.instance.playerScript.HP > 0)
         {
-           gameManager.instance.winMenu.SetActive(true);
+            gameManager.instance.winMenu.SetActive(true);
             gameManager.instance.popUpAnim.SetBool("Win", true);
             gameManager.instance.menuSFXAudio.PlayOneShot(gameManager.instance.victorySound);
             hasWon = true;

@@ -17,6 +17,7 @@ public class audioMixer : MonoBehaviour
     public Slider SFXSlider;
     public Slider UISlider;
 
+    
     private void Start()
     {
         MasterSlider.value = PlayerPrefs.GetFloat("Master", 1f);

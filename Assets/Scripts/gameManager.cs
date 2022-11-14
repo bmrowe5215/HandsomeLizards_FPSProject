@@ -74,7 +74,7 @@ public class gameManager : MonoBehaviour
     public int currentLevelID;
     public bool isPaused;
     public bool openedMenu;
-
+    public bool openTutorial;
 
     void Awake()
     {
@@ -118,7 +118,7 @@ public class gameManager : MonoBehaviour
             Debug.Log("Music Playing = " + levelMusic[currentLevelID]);
             menuMusicAudio.PlayOneShot(levelMusic[currentLevelID]);
             
-            //menuMusicAudio.loop = true;
+            menuMusicAudio.loop = true;
         }
     }
 

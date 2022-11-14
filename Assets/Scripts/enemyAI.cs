@@ -149,7 +149,7 @@ public class enemyAI : MonoBehaviour , IDamage
 
     IEnumerator DespawnBody()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(8);
         Destroy(gameObject);
     }
 

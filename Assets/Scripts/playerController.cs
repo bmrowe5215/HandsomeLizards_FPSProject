@@ -495,7 +495,7 @@ public class playerController : MonoBehaviour, IDamage
         updatePlayerHUD();
         aud.PlayOneShot(playerHurtAud[Random.Range(0, playerHurtAud.Length - 1)], playerHurtAudVol);
         StartCoroutine(gameManager.instance.playerDamage());
-        if (HP <= 0)
+        if (HP <= 0 && gameManager.instance.winMenu.activeSelf == false)
         {
             gameManager.instance.playerDeadMenu.SetActive(true);
             gameManager.instance.cursorLockPause();
