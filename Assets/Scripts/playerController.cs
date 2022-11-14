@@ -385,7 +385,7 @@ public class playerController : MonoBehaviour, IDamage
                     item.GetComponent<Rigidbody>().useGravity = true;
                     item.GetComponent<Rigidbody>().freezeRotation = true;
                     item.GetComponent<NavMeshAgent>().enabled = false;
-                    item.GetComponent<Rigidbody>().AddForce(new Vector3(0, 10, 0),ForceMode.Impulse);
+                    item.GetComponent<Rigidbody>().AddForce(new Vector3(0, 10, 0),ForceMode.Impulse);                  
                     //enemyAnim.SetBool("KnockUp", true);
                 }
             }
@@ -400,7 +400,7 @@ public class playerController : MonoBehaviour, IDamage
                     item.GetComponent<Rigidbody>().useGravity = false;
                     item.GetComponent<NavMeshAgent>().enabled = true;
                     item.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                    
+
                 }
             }
         }
