@@ -32,7 +32,7 @@ public class audioMixer : MonoBehaviour
     {
         masterMixer.SetFloat("Master", Mathf.Log10(input) * 20);
         PlayerPrefs.SetFloat("Master", input);
-        if (!gameManager.instance.menuUIAudio.isPlaying)
+        if (!gameManager.instance.menuUIAudio.isPlaying && gameManager.instance.optionsMenu.activeSelf)
         {
             gameManager.instance.menuUIAudio.Play();
         }
@@ -48,7 +48,7 @@ public class audioMixer : MonoBehaviour
     {
         masterMixer.SetFloat("Sound Effects", Mathf.Log10(input) * 20);
         PlayerPrefs.SetFloat("Sound Effects", input);
-        if (!gameManager.instance.menuSFXAudio.isPlaying)
+        if (!gameManager.instance.menuSFXAudio.isPlaying && gameManager.instance.optionsMenu.activeSelf)
         {
             gameManager.instance.menuSFXAudio.PlayOneShot(gameManager.instance.debugGun);
         }
@@ -58,7 +58,7 @@ public class audioMixer : MonoBehaviour
     {
         masterMixer.SetFloat("UI", Mathf.Log10(input) * 20);
         PlayerPrefs.SetFloat("UI", input);
-        if (!gameManager.instance.menuUIAudio.isPlaying)
+        if (!gameManager.instance.menuUIAudio.isPlaying && gameManager.instance.optionsMenu.activeSelf)
         {
             gameManager.instance.menuUIAudio.Play();
         }
