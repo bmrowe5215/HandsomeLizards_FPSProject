@@ -44,7 +44,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -2898975968958154494, guid: 240c09603e4693244819d659bd9802dc, type: 2}
   m_audioClip: {fileID: 8300000, guid: 2a9f468567f9c064f87a1059fd9d13aa, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -88,7 +88,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.5
+      value: 0.51
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5981,6 +5981,7 @@ MonoBehaviour:
   model: {fileID: 1248391279952587278}
   sightCollider: {fileID: 5976822645440585664}
   enemyHurt: {fileID: 154896477}
+  hurt: {fileID: 8300000, guid: b7654065a515d844ca4ce7a9e7de0a9e, type: 3}
   anim: {fileID: 1248391279948403918}
   col: {fileID: 1248391279948403919}
   head: {fileID: 214465515}

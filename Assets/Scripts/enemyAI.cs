@@ -12,6 +12,7 @@ public class enemyAI : MonoBehaviour , IDamage
     //[SerializeField] GameObject headHitbox;
     // ignore this this was cringe.
     [SerializeField] AudioSource enemyHurt;
+    [SerializeField] AudioClip hurt;
     [SerializeField] Animator anim;
     [SerializeField] Collider col;
     [SerializeField] Collider head;
@@ -131,6 +132,8 @@ public class enemyAI : MonoBehaviour , IDamage
     public void takeDamage(int dmg)
     {
         HP -= dmg;
+        enemyHurt.pitch = 0.75f;
+        enemyHurt.PlayOneShot(hurt);
 
         if (HP <= 0 && isDead == false)
         {
