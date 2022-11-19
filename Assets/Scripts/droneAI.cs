@@ -134,8 +134,9 @@ public class droneAI : MonoBehaviour, IDamage
         {
             //col.enabled = false;
             agent.enabled = false;
+            agent.height = 1;
             head.enabled = false;
-            this.GetComponent<Rigidbody>().useGravity = true;
+            GetComponent<Rigidbody>().useGravity = true;
             gameManager.instance.checkEnemyTotal();
             isDead = true;
             StartCoroutine(DespawnBody());

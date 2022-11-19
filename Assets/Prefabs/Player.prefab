@@ -180,7 +180,7 @@ MonoBehaviour:
   jumpHeight: 6
   slamSpeed: 8.1
   slamHeight: 9.8
-  animLerpSpeed: 3
+  animLerpSpeed: 10
   sprintFOV: 75
   adsFOV: 20
   gravityValue: -9.81
